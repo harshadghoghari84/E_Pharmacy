@@ -1,0 +1,112 @@
+.small-header{
+    border-bottom: 1px solid #ccc;
+    padding: 5px 12px;
+}
+.header-social-ico{
+    display: flex;
+    align-items: center;
+}
+.header-social-ico a:not(:last-child),
+.header-social-text a:not(:last-child){
+    margin-right: 20px;
+}
+.header-social-text a{
+    font-size: 14px;
+    font-weight: 500;
+}
+header{
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    padding: 0 12px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: var(--white-color);
+}
+.header-col{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header .menu-list:not(:last-child){
+    margin-right: 25px;
+}
+header .menu-list{
+    position: relative;
+    transition: all 0.3s;
+}
+header .menu-list a{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 25px 0;
+}
+header .menu-list a i{
+    font-size: 20px;
+}
+.sub-menu{
+    top: 100px;
+    position: absolute;
+    background-color: var(--white-color);
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    width: max-content;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+}
+header .menu-list:hover .sub-menu{
+    top: 80px;
+    visibility: visible;
+    opacity: 1;
+}
+.sub-menu li a{
+    padding: 10px 15px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+}
+.sub-menu li a::after{
+    content: '';
+    background-color: var(--primary-color);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.3s;
+}
+.sub-menu li a:hover::after{
+    width: 100%;
+}
+.sub-menu li a:hover{
+    color: var(--white-color);
+}
+.authentication-list ul li a{
+    font-size: 16px;
+}
+.authentication-list ul li:not(:last-child){
+    margin-right: 30px;
+}
+.waviy {
+    position: relative;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+    font-size: 18px;
+  }
+  .waviy span {
+    font-family: 'Alfa Slab One', cursive;
+    position: relative;
+    display: inline-block;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    animation: waviy 1s infinite;
+    animation-delay: calc(.1s * var(--i));
+  }
+  @keyframes waviy {
+    0%,40%,100% {
+      transform: translateY(0)
+    }
+    20% {
+      transform: translateY(-20px)
+    }
+  }

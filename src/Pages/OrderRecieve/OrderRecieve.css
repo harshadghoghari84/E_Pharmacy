@@ -1,0 +1,30 @@
+.order-recieve-box{
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 25px 25px 15px;
+    width: max-content;
+}
+.order-recieve-box p{
+    font-weight: 700;
+    color: #155724;
+    font-size: 18px;
+}
+.order-recieve-wrap{
+    grid-gap: 20px;
+}
+.order-recieve-details{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+.order-recieve-table thead{
+    background-color: #ccc;
+}
+.order-recieve-table thead tr th,
+.order-recieve-table tbody tr td{
+    padding: 10px;
+    width: 50%;
+}
+.order-recieve-table tbody tr:nth-child(odd){
+    background-color: #eee;
+}
