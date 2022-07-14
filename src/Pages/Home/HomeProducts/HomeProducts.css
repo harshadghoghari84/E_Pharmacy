@@ -13,6 +13,10 @@
 .product-img {
     background-color: #f1f2ed;
 }
+.product-img img{
+    width: 100%;
+    height: 100%;
+}
 .product-details {
     padding: 20px 15px;
     background-color: #f9f9f9;

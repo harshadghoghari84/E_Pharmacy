@@ -14,6 +14,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import Blog from "./Pages/Blog/Blog";
 import "./App.css";
 import OrderRecieve from "./Pages/OrderRecieve/OrderRecieve";
+import CategoryProduct from "./Pages/CategoryProduct/CategoryProduct";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path={"/about-us"} element={<AboutUs />} />
         <Route path={"/blog"} element={<Blog />} />
         <Route path={"/order-recieve"} element={<OrderRecieve />} />
+        <Route path={"/category-product"} element={<CategoryProduct />} />
       </Routes>
     <Footer />
   </Router>
