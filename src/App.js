@@ -16,6 +16,7 @@ import "./App.css";
 import OrderRecieve from "./Pages/OrderRecieve/OrderRecieve";
 import CategoryProduct from "./Pages/CategoryProduct/CategoryProduct";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import Cart from "./Pages/Cart/Cart";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path={"/order-recieve"} element={<OrderRecieve />} />
         <Route path={"/category-product"} element={<CategoryProduct />} />
         <Route path={"/product-details"} element={<ProductDetails />} />
+        <Route path={"/cart"} element={<Cart />} />
       </Routes>
     <Footer />
   </Router>

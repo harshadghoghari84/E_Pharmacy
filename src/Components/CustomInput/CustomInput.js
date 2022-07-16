@@ -7,7 +7,7 @@ export default function CustomInput(props) {
                 <Form.Label>
                     {props.formLabel}
                 </Form.Label>
-                <Form.Control type={props.formType} name="" value="" className={`form-control cutom-input ${props.customInputClassName}`}></Form.Control>
+                <Form.Control type={props.formType} placeholder={props.placeholder} name="" value="" className={`form-control cutom-input ${props.customInputClassName}`}></Form.Control>
             </Form.Group>
         </>
     )

@@ -3,8 +3,8 @@ import { Col, Container, Dropdown, Form, Nav, Row } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import CustomInput from '../../Components/CustomInput/CustomInput';
-import "./ProductDetails.css";
 import ProductSlider from './ProductSlider/ProductSlider';
+import "./ProductDetails.css";
 export default function ProductDetails() {
     return(
         <>
