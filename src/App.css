@@ -336,3 +336,13 @@ input[type=number] {
 .border-bottom{
   border-bottom: 1px solid #dee2e6;
 }
+.custom-radio input,.custom-checkbox input{
+  position: relative;
+  top: 3px;
+}
+.custom-checkbox input{
+ padding: 0;
+}
+.custom-checkbox{
+  margin-right: 10px;
+}

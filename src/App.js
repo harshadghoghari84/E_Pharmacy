@@ -19,6 +19,7 @@ import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 import MyAccount from "./Pages/MyAccount/MyAccount";
 import MyAccountDetails from "./Pages/MyAccount/MyAccountDetails/MyAccountDetails";
+import Checkout from "./Pages/Checkout/Checkout";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path={"/cart"} element={<Cart />} />
         <Route path={"/my-account"} element={<MyAccount />} />
         <Route path={"/my-account-details"} element={<MyAccountDetails />} />
+        <Route path={"/checkout"} element={<Checkout />} />
       </Routes>
     <Footer />
   </Router>
