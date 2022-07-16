@@ -13,7 +13,7 @@ export default function ContactUs() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">Contact Us</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Contact</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Contact</span></p>
                         </Col>
                     </Row>
                 </Container>

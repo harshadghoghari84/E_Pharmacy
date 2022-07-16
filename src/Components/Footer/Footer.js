@@ -11,28 +11,28 @@ export default function Footer() {
                             <h4>Information</h4>
                             <Nav as="ul" className="nav-ul-block">
                                 <Nav.Item as="li">
-                                    <Link to="">My account</Link>
+                                    <Link to="my-account">My account</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Blog</Link>
+                                    <Link to="blog">Blog</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">About Us</Link>
+                                    <Link to="about-us">About Us</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Contact Us</Link>
+                                    <Link to="contact-us">Contact Us</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">FAQs</Link>
+                                    <Link to="faq">FAQs</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Privacy Policy</Link>
+                                    <Link to="privacy-policy">Privacy Policy</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Terms and conditions</Link>
+                                    <Link to="terms-conditions">Terms and conditions</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">How To Track Order</Link>
+                                    <Link to="/">How To Track Order</Link>
                                 </Nav.Item>
                             </Nav>
                         </div>
@@ -41,51 +41,51 @@ export default function Footer() {
                             <div className="d-flex inner-footer-ul">
                                 <Nav as="ul" className="nav-ul-block">
                                     <Nav.Item as="li">
-                                        <Link to="">Cenforce 100</Link>
+                                        <Link to="category-product">Cenforce 100</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Kamagra 100</Link>
+                                        <Link to="category-product">Kamagra 100</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Vidalista 20</Link>
+                                        <Link to="category-product">Vidalista 20</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Fildena</Link>
+                                        <Link to="category-product">Fildena</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Tadalista</Link>
+                                        <Link to="category-product">Tadalista</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Tadacip</Link>
+                                        <Link to="category-product">Tadacip</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Super P Force</Link>
+                                        <Link to="category-product">Super P Force</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Caverta 100</Link>
+                                        <Link to="category-product">Caverta 100</Link>
                                     </Nav.Item>
                                 </Nav>
                                 <Nav as="ul" className="nav-ul-block">
                                     <Nav.Item as="li">
-                                        <Link to="">Suhagra 100</Link>
+                                        <Link to="category-product">Suhagra 100</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Aurogra 100</Link>
+                                        <Link to="category-product">Aurogra 100</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Lovento (Generic Viagra)</Link>
+                                        <Link to="category-product">Lovento (Generic Viagra)</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Actilis (Generic Cialis)</Link>
+                                        <Link to="category-product">Actilis (Generic Cialis)</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Malegra 100</Link>
+                                        <Link to="category-product">Malegra 100</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Silagra</Link>
+                                        <Link to="category-product">Silagra</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">Lovegra Women Viagra</Link>
+                                        <Link to="category-product">Lovegra Women Viagra</Link>
                                     </Nav.Item>
                                 </Nav>
                             </div>
@@ -95,54 +95,54 @@ export default function Footer() {
                             <div className="d-flex inner-footer-ul">
                             <Nav as="ul" className="nav-ul-block">
                                 <Nav.Item as="li">
-                                    <Link to="">Suhagra 100</Link>
+                                    <Link to="category-product">Suhagra 100</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Vega 100</Link>
+                                    <Link to="category-product">Vega 100</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Valif 20</Link>
+                                    <Link to="category-product">Valif 20</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Tadfil</Link>
+                                    <Link to="category-product">Tadfil</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Tadora 20</Link>
+                                    <Link to="category-product">Tadora 20</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Tazzle 20</Link>
+                                    <Link to="category-product">Tazzle 20</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Silditop 100</Link>
+                                    <Link to="category-product">Silditop 100</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Cenforce D</Link>
+                                    <Link to="category-product">Cenforce D</Link>
                                 </Nav.Item>
                             </Nav>
                             <Nav as="ul" className="nav-ul-block">
                                 <Nav.Item as="li">
-                                    <Link to="">Super Vilitra</Link>
+                                    <Link to="category-product">Super Vilitra</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Filagra Oral Jelly</Link>
+                                    <Link to="category-product">Filagra Oral Jelly</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Poxet 60</Link>
+                                    <Link to="category-product">Poxet 60</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Vigora 100</Link>
+                                    <Link to="category-product">Vigora 100</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Pataday</Link>
+                                    <Link to="category-product">Pataday</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Generic latisse</Link>
+                                    <Link to="category-product">Generic latisse</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Zhewitra 20</Link>
+                                    <Link to="category-product">Zhewitra 20</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">Tadapox</Link>
+                                    <Link to="category-product">Tadapox</Link>
                                 </Nav.Item>
                             </Nav>
                             </div>
@@ -151,34 +151,34 @@ export default function Footer() {
                             <h4>Store Information</h4>
                             <Nav as="ul" className="nav-ul-block">
                                 <Nav.Item as="li">
-                                    <Link to="">+1 888-800-8358</Link>
+                                    <Link to="category-product">+1 888-800-8358</Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
-                                    <Link to="">info@genericvilla.com</Link>
+                                    <Link to="category-product">info@Epharmacy</Link>
                                 </Nav.Item>
                                 <span className="mb-3 d-block footer-hours-operation"><b>Hours of Operation</b></span>
                                 <div className="d-flex inner-footer-ul">
                                     <Nav.Item as="li">
-                                        <Link to="">
+                                        <Link to="category-product">
                                             Monday to Friday <br/>
                                             9:00am - 8:00pm (IST)
                                         </Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <Link to="">
+                                        <Link to="category-product">
                                             Saturday to Sunday <br/>
                                             9:00am - 12:00pm (IST)
                                         </Link>
                                     </Nav.Item>
                                 </div>
                                 <Nav.Item as="li">
-                                    <Link to="">Royal Plaza, Surat 395006</Link>
+                                    <Link to="category-product">Royal Plaza, Surat 395006</Link>
                                 </Nav.Item>
                             </Nav>
                         </div>
                     </div>
                 </Container>
-                <a href="javascript:void(0)" className="black-hover w-max-content d-block mx-auto text-light"><h6>Copyright &copy; 2022 GenericVilla.com All Rights Reserved.</h6></a>
+                <a href="javascript:void(0)" className="black-hover w-max-content d-block mx-auto text-light"><h6>Copyright &copy; 2022 Epharmacy All Rights Reserved.</h6></a>
             </footer>
         </>
     )

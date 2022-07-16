@@ -12,7 +12,7 @@ export default function Cart() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">Cart</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Cart</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Cart</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -21,7 +21,7 @@ export default function Cart() {
                 <Container>
                     <Row>
                         <Col xs="12">
-                        <Link to="#"><CustomButton text="Continue Shopping" formGroupClassName="form-group text-end w-100 mb-3 mb-0"/></Link>
+                        <Link to="category-product"><CustomButton text="Continue Shopping" formGroupClassName="form-group text-end w-100 mb-3 mb-0"/></Link>
                         <table className='product-detail-tbl'>
                                 <thead>
                                     <tr>
@@ -76,7 +76,7 @@ export default function Cart() {
                                     <CustomInput formGroupClassName="form-group" formLabel="" formType="text" customInputClassName="" placeholder="Apply Code"/>
                                     <Link to="/" className="ms-2"><b>Apply Cuppon</b></Link>
                                 </div>
-                                <Link to="/" className="ms-auto d-flex"><CustomButton text="Update card" formGroupClassName="form-group mb-0"/></Link>
+                                <Link to="#" className="ms-auto d-flex"><CustomButton text="Update card" formGroupClassName="form-group mb-0"/></Link>
                             </div>
                         </Col>
                         <Col xs="12" className="mt-4">
@@ -95,7 +95,7 @@ export default function Cart() {
                                     <span><b className="p-0 bg-transparent">$125.00</b></span>
                                 </Nav.Item>
                             </Nav>
-                            <Link to="/" className="ms-auto d-flex"><CustomButton text="Process to Chekout" formGroupClassName="form-group mb-0 mt-3"/></Link>
+                            <Link to="/checkout" className="ms-auto d-flex"><CustomButton text="Process to Chekout" formGroupClassName="form-group mb-0 mt-3"/></Link>
                         </Col>
                     </Row>
                 </Container>

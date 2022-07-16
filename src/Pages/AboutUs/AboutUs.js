@@ -10,7 +10,7 @@ export default function AboutUs() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">About-us</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>About-us</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>About-us</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -22,7 +22,7 @@ export default function AboutUs() {
                             <Image src={pharmacy} fluid alt=""/>
                         </Col>
                         <Col xs="6">
-                            <p>We, GenericVilla.com, are the world's most trusted <b>generic Drugs pharmacy</b>. We are offering best-value <b>generic ed</b>, skin care, men's health, women health drugs, without ever compromising on quality. We are only supplying non-restricted medicines that we sourced from <b>FDA approved</b> manufacturers. <b>Generic Villa</b> an <Link to="/" className="highlight-link-txt">online pharmacy</Link> store has strived to be The Very Best in each of the health sectors.</p>
+                            <p>We, Epharmacy, are the world's most trusted <b>generic Drugs pharmacy</b>. We are offering best-value <b>generic ed</b>, skin care, men's health, women health drugs, without ever compromising on quality. We are only supplying non-restricted medicines that we sourced from <b>FDA approved</b> manufacturers. <b>Generic Villa</b> an <Link to="/" className="highlight-link-txt">online pharmacy</Link> store has strived to be The Very Best in each of the health sectors.</p>
                             <p>Leading well-known pharmaceutical companies like: manufacture the products we are offering</p>
                             <Nav as="ul" className="mb-4 about-products-list">
                                 <Nav.Item as="li">
@@ -53,7 +53,7 @@ export default function AboutUs() {
                                     <b>Dr. Reddy etc.</b>
                                 </Nav.Item>
                             </Nav>
-                            <p>GenericVilla.com is <b>managing by qualified Pharmacist team</b>. All contents of GenericVilla is written by certified Physicians team.</p>
+                            <p>Epharmacy is <b>managing by qualified Pharmacist team</b>. All contents of GenericVilla is written by certified Physicians team.</p>
                             <p>All medicines we are offering have a standard quality at the lowest affordable price.</p>
                         </Col>
                     </Row>
@@ -98,7 +98,7 @@ export default function AboutUs() {
                                     <p>All the listed medicines on <Link to="/" className="highlight-link-txt">Generic Villa</Link> is directly purchasing from the reputable manufacturer or their respected wholesaler.</p>
                                     <p>Generic alternatives are clearly stated and only sourced from FDA approved manufacturing facilities. We offer these in addition to the branded products as a more affordable alternative if this is important to you.</p>
                                     <p>At Generic Villa, you are our top priority. We uphold the highest quality and safety standards to help you take care of your family’s health. We focus on quality to not only make your life healthier, but we want you to be happy and have great tomorrows!</p>
-                                    <p>When you fill a prescription online at genericvilla.com or by phone or by mail, our team of pharmacists, technicians, physicians, and other staff take pride in making sure you receive the right products and qualitative services for your health needs. Whether you are filling a prescription or purchasing over-the-counter health products, we want to make your experience at Generic Villa as quick and easy as possible because we care about your health.</p>
+                                    <p>When you fill a prescription online at Epharmacy or by phone or by mail, our team of pharmacists, technicians, physicians, and other staff take pride in making sure you receive the right products and qualitative services for your health needs. Whether you are filling a prescription or purchasing over-the-counter health products, we want to make your experience at Generic Villa as quick and easy as possible because we care about your health.</p>
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>OUR SERVICE STANDARD</b></h5>
@@ -112,7 +112,7 @@ export default function AboutUs() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>FREE SHIPPING</b></h5>
-                                    <p>GenericVilla.com is the only pharmacy offering free shipping. We offer free worldwide shipping without any minimum order value.</p>
+                                    <p>Epharmacy is the only pharmacy offering free shipping. We offer free worldwide shipping without any minimum order value.</p>
                                     <p>Our free shipping helps the buyer to procure their expensive prescription medicines and OTC medicines from overseas without any shipping charges, which allows the buyer to save more money.</p>
                                 </div>
                                 <div className="faq-content-list">

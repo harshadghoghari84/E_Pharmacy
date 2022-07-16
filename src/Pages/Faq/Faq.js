@@ -9,7 +9,7 @@ export default function Faq() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">Faq</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Faq</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Faq</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -26,7 +26,7 @@ export default function Faq() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>What is your credit card explanation in my credit card statement?</b></h5>
-                                    <p>Before charge your card, we always suggest our credit card explanation label. So, still, make sure that our charge appears in your card documents as per our information and facts in the mail, so, during your cc statement, you should make sure it is from <Link to="/" className="highlight-link-txt">GenericVilla.com</Link> please note that the information and facts are submitted via SSL protected, encrypted site and that there is no risk of fraud.</p>
+                                    <p>Before charge your card, we always suggest our credit card explanation label. So, still, make sure that our charge appears in your card documents as per our information and facts in the mail, so, during your cc statement, you should make sure it is from <Link to="/" className="highlight-link-txt">Epharmacy</Link> please note that the information and facts are submitted via SSL protected, encrypted site and that there is no risk of fraud.</p>
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>How to pay credit card if special payment?</b></h5>
@@ -44,7 +44,7 @@ export default function Faq() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Why is my order on “dispensing”?</b></h5>
-                                    <p>Before charge your card, we always inform our credit card description name. So, make sure that our charge appears in your card statements as per our information in the mail, so, during your credit card statement, make sure that it's from genericvilla.com, please note that the detail is submitted via SSL secured, encrypted page and that there is no hazard of fraud.</p>
+                                    <p>Before charge your card, we always inform our credit card description name. So, make sure that our charge appears in your card statements as per our information in the mail, so, during your credit card statement, make sure that it's from Epharmacy, please note that the detail is submitted via SSL secured, encrypted page and that there is no hazard of fraud.</p>
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Why is my order on “hold order”?</b></h5>

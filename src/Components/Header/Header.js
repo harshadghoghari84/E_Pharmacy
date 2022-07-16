@@ -60,7 +60,7 @@ export default function Header() {
                                         <Link to="">Men's Health <i className="ri-arrow-drop-down-line ms-2"></i></Link>
                                         <Nav as="ul" className="sub-menu">
                                             {menuOption0.map((item) => 
-                                                <Nav.Item as="li"><Link to="">{item.subMenuOption0}</Link></Nav.Item>
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
                                             )}
                                         </Nav>
                                     </Nav.Item>
@@ -68,7 +68,7 @@ export default function Header() {
                                         <Link to="">Life Saving Drugs <i className="ri-arrow-drop-down-line ms-2"></i></Link>
                                         <Nav as="ul" className="sub-menu">
                                             {menuOption0.map((item) => 
-                                                <Nav.Item as="li"><Link to="">{item.subMenuOption0}</Link></Nav.Item>
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
                                             )}
                                         </Nav>
                                     </Nav.Item>
@@ -76,7 +76,7 @@ export default function Header() {
                                         <Link to="">Skin Care <i className="ri-arrow-drop-down-line ms-2"></i></Link>
                                         <Nav as="ul" className="sub-menu">
                                             {menuOption0.map((item) => 
-                                                <Nav.Item as="li"><Link to="">{item.subMenuOption0}</Link></Nav.Item>
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
                                             )}
                                         </Nav>
                                     </Nav.Item>
@@ -84,7 +84,7 @@ export default function Header() {
                                         <Link to="">Viral Care <i className="ri-arrow-drop-down-line ms-2"></i></Link>
                                         <Nav as="ul" className="sub-menu">
                                             {menuOption0.map((item) => 
-                                                <Nav.Item as="li"><Link to="">{item.subMenuOption0}</Link></Nav.Item>
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
                                             )}
                                         </Nav>
                                     </Nav.Item>

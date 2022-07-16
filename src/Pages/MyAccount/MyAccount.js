@@ -11,7 +11,7 @@ export default function MyAccount() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">My Account</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>My Account</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>My Account</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -20,7 +20,7 @@ export default function MyAccount() {
                 <Container>
                     <Row>
                         <Col xs="12">
-                           <p>If you already have am account with as, please login at the <Link to="#" className=""><b>Login page</b></Link></p>
+                           <p>If you already have am account with as, please login at the <Link to="/login" className=""><b>Login page</b></Link></p>
                            <Form className="mt-4">
                                 <Row>
                                     <Col xs="6">
@@ -41,7 +41,7 @@ export default function MyAccount() {
                                     <Col xs="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Confirm Password" formType="password" customInputClassName=""/>
                                     </Col>
-                                    <Link to="/" className="w-max-content"><CustomButton text="Register" formGroupClassName="form-group text-start mb-0"/></Link>
+                                    <Link to="/my-account-details" className="w-max-content"><CustomButton text="Register" formGroupClassName="form-group text-start mb-0"/></Link>
                                 </Row>
                             </Form>
                         </Col>

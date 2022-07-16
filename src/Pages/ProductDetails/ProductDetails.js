@@ -162,7 +162,7 @@ export default function ProductDetails() {
                                         Comments
                                     </Form.Label>
                                     <Form.Control as="textarea" rows={3} />
-                                    <Link to="#"><CustomButton text="Login" formGroupClassName="form-group mt-4 mb-0"/></Link>
+                                    <Link to="#"><CustomButton text="Submit" formGroupClassName="form-group mt-4 mb-0"/></Link>
                                 </Form>
                             </div>
                         </Col>

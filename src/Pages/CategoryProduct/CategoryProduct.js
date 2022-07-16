@@ -44,7 +44,7 @@ export default function CategoryProduct() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">Category Product</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Category Product</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Category Product</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -68,7 +68,7 @@ export default function CategoryProduct() {
                                     <div className="mt-4 related-product-category-wrap">
                                         {CategoryProductDetails.map((item) =>
                                             <div>
-                                                    <Link to="/">
+                                                    <Link to="/product-details">
                                                         <div className="related-product-category-box d-flex align-items-start">
                                                             <div className="related-product-category-img">
                                                                 <Image src={item.CategoryProductImg} fluid alt="" className="img-cover w-100 h-100"/>

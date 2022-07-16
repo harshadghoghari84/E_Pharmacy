@@ -9,7 +9,7 @@ export default function TermsConditions() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">Terms Conditions</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Terms Conditions</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>Terms Conditions</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -26,7 +26,7 @@ export default function TermsConditions() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Security</b></h5>
-                                    <p>Whenever an order is placed online, your private information is being in code using SSL encryptions technology before they are being sent through the Internet. This makes it very difficult for your data to be intercepted or stolen while it is being transferred to GenericVilla.com. Your credit card data is kept in codes in a remote databank, so it is not connected to the internet, and therefore, it is safe.</p>
+                                    <p>Whenever an order is placed online, your private information is being in code using SSL encryptions technology before they are being sent through the Internet. This makes it very difficult for your data to be intercepted or stolen while it is being transferred to Epharmacy. Your credit card data is kept in codes in a remote databank, so it is not connected to the internet, and therefore, it is safe.</p>
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Your Consent</b></h5>
@@ -34,7 +34,7 @@ export default function TermsConditions() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Your comments</b></h5>
-                                    <p>We always appreciate your response. If you have comments or questions about any of our privacy policy, be free to drop an email at support@GenericVilla.com</p>
+                                    <p>We always appreciate your response. If you have comments or questions about any of our privacy policy, be free to drop an email at support@Epharmacy</p>
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Shipping Policies for Order</b></h5>
@@ -48,7 +48,7 @@ export default function TermsConditions() {
                                 </div>
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>Drug Policy</b></h5>
-                                    <p>GenericVilla.com will not ship narcotics or a controlled substance like the Benzodiazepines to any of pharmaceutical clients.</p>
+                                    <p>Epharmacy will not ship narcotics or a controlled substance like the Benzodiazepines to any of pharmaceutical clients.</p>
                                 </div>
                             </div>
                         </Col>

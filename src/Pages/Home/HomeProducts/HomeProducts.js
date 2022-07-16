@@ -25,7 +25,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export default function HomeProducts() {
                         <div className='product-details'>
                             <p>Kamagra 100mg (Sildenafil Citrate)</p>
                             <span>Just $0.83 /Piece</span>
-                            <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
+                            <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4"/></Link>
                         </div>
                     </div>
                 </div>

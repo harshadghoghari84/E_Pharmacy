@@ -13,7 +13,7 @@ export default function MyAccountDetails() {
                     <Row>
                         <Col xs="12 text-center">
                             <h1 className="page-head">My Account</h1>
-                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to=""><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>My Account Details</span></p>
+                            <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center"><Link to="/"><span className="d-flex align-items-center"><i class="ri-home-smile-2-line me-1"></i> Home</span></Link> <b className="mx-3">::</b> <span>My Account Details</span></p>
                         </Col>
                     </Row>
                 </Container>
@@ -50,7 +50,7 @@ export default function MyAccountDetails() {
                                 <Col sm={9}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="Dashboard">
-                                        <p>Hello <b>Test</b> (not <b>Test</b>? <Link to="#" className="primary-color"><b>Log out</b></Link>)</p>
+                                        <p>Hello <b>Test</b> (not <b>Test</b>? <Link to="/login" className="primary-color"><b>Log out</b></Link>)</p>
                                         <p>From your account dashboard you can view your <Link to="#" className="primary-color">recent orders</Link>, manage your <Link to="#" className="primary-color">shipping and billing addresses</Link>, and <Link to="#" className="primary-color">edit your password and account details</Link>.</p>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="Orders">
@@ -63,7 +63,7 @@ export default function MyAccountDetails() {
                                                     <div className='product-details'>
                                                         <p>Kamagra 100mg (Sildenafil Citrate)</p>
                                                         <span>Just $0.83 /Piece</span>
-                                                        <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
+                                                        <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
                                                     </div>
                                                 </div>
                                             </Col>
@@ -75,7 +75,7 @@ export default function MyAccountDetails() {
                                                     <div className='product-details'>
                                                         <p>Kamagra 100mg (Sildenafil Citrate)</p>
                                                         <span>Just $0.83 /Piece</span>
-                                                        <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
+                                                        <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
                                                     </div>
                                                 </div>
                                             </Col>
@@ -87,7 +87,7 @@ export default function MyAccountDetails() {
                                                     <div className='product-details'>
                                                         <p>Kamagra 100mg (Sildenafil Citrate)</p>
                                                         <span>Just $0.83 /Piece</span>
-                                                        <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
+                                                        <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
                                                     </div>
                                                 </div>
                                             </Col>
@@ -99,7 +99,7 @@ export default function MyAccountDetails() {
                                                     <div className='product-details'>
                                                         <p>Kamagra 100mg (Sildenafil Citrate)</p>
                                                         <span>Just $0.83 /Piece</span>
-                                                        <Link to="/"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
+                                                        <Link to="/product-details"><CustomButton text="View Details" formGroupClassName="form-group text-center w-100 mt-4 mb-0"/></Link>
                                                     </div>
                                                 </div>
                                             </Col>
@@ -149,7 +149,7 @@ export default function MyAccountDetails() {
                                                             <Col xs="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
-                                                            <Link to="/" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
+                                                            <Link to="#" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
                                                         </Row>
                                                     </Form>
                                                 </Accordion.Body>
@@ -195,7 +195,7 @@ export default function MyAccountDetails() {
                                                             <Col xs="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
-                                                            <Link to="/" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
+                                                            <Link to="#" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
                                                         </Row>
                                                     </Form>
                                                 </Accordion.Body>
@@ -227,7 +227,7 @@ export default function MyAccountDetails() {
                                                             <Col xs="12">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Confirm new password" formType="password" customInputClassName=""/>
                                                             </Col>
-                                                            <Link to="/" className="w-max-content"><CustomButton text="Save Change" formGroupClassName="form-group text-start mb-0"/></Link>
+                                                            <Link to="#" className="w-max-content"><CustomButton text="Save Change" formGroupClassName="form-group text-start mb-0"/></Link>
                                                         </Row>
                                                     </Form>
                                     </Tab.Pane>
