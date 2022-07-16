@@ -1,0 +1,11 @@
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: var(--primary-color);
+}
+.nav-pills .nav-link{
+    color: var(--primary-color);
+}
+.my-account-details-section .nav-pills{
+    position: sticky;
+    top: 100px;
+    height: max-content;
+}

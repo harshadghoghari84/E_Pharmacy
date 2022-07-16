@@ -17,6 +17,8 @@ import OrderRecieve from "./Pages/OrderRecieve/OrderRecieve";
 import CategoryProduct from "./Pages/CategoryProduct/CategoryProduct";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
+import MyAccount from "./Pages/MyAccount/MyAccount";
+import MyAccountDetails from "./Pages/MyAccount/MyAccountDetails/MyAccountDetails";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path={"/category-product"} element={<CategoryProduct />} />
         <Route path={"/product-details"} element={<ProductDetails />} />
         <Route path={"/cart"} element={<Cart />} />
+        <Route path={"/my-account"} element={<MyAccount />} />
+        <Route path={"/my-account-details"} element={<MyAccountDetails />} />
       </Routes>
     <Footer />
   </Router>

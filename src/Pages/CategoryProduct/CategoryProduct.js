@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import HomeProducts from "../Home/HomeProducts/HomeProducts";
 import product0 from "../../../src/Assets/Images/products/product0.jpg";
 import "./CategoryProduct.css";
+import AboutCompanyNote from "../../Components/AboutCompanyNote/AboutCompanyNote";
 export default function CategoryProduct() {
     const CategoryProductDetails = [
         {
@@ -103,34 +104,8 @@ export default function CategoryProduct() {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs="4">
-                            <div className="about-company-note">
-                                <div className="about-company-note-ico">
-                                    <i class="ri-truck-line"></i>
-                                </div>
-                             <h5>Free Delivery</h5> 
-                             <p>Delivery to Dor</p>             
-                            </div>
-                        </Col>
-                        <Col xs="4">
-                            <div className="about-company-note">
-                                <div className="about-company-note-ico">
-                                    <i class="ri-command-fill"></i>
-                                </div>
-                                <h5>30 Day Return</h5> 
-                                <p>Easy to Retutn</p>             
-                            </div>
-                        </Col>
-                        <Col xs="4">
-                            <div className="about-company-note">
-                            <div className="about-company-note-ico">
-                                    <i class="ri-24-hours-fill"></i>
-                            </div>
-                             <h5>24/7 Support</h5> 
-                             <p>In Safe Hand</p>             
-                            </div>
-                        </Col>
                     </Row>
+                    <AboutCompanyNote/>
                 </Container>
             </section>
         </>

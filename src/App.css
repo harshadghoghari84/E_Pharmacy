@@ -327,3 +327,12 @@ input[type=number] {
 .custom-dropdown button{
   border: 1px solid #ccc;
 }
+.text-underline{
+  text-decoration: underline;
+}
+.color-red{
+  color: red;
+}
+.border-bottom{
+  border-bottom: 1px solid #dee2e6;
+}
