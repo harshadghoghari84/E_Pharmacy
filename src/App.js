@@ -15,6 +15,7 @@ import Blog from "./Pages/Blog/Blog";
 import "./App.css";
 import OrderRecieve from "./Pages/OrderRecieve/OrderRecieve";
 import CategoryProduct from "./Pages/CategoryProduct/CategoryProduct";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path={"/blog"} element={<Blog />} />
         <Route path={"/order-recieve"} element={<OrderRecieve />} />
         <Route path={"/category-product"} element={<CategoryProduct />} />
+        <Route path={"/product-details"} element={<ProductDetails />} />
       </Routes>
     <Footer />
   </Router>

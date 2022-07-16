@@ -30,3 +30,55 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.about-company-note{
+    margin-top: 100px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+    background-color: var(--white-color);
+    padding: 55px 35px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    transition: all 0.3s;
+}
+.about-company-note:hover{
+    background-color: var(--primary-color);
+}
+.about-company-note-ico{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: -30px;
+}
+.about-company-note:hover .about-company-note-ico{
+    background-color: var(--white-color);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.about-company-note i{
+    font-size: 35px;
+    color: var(--white-color);
+}
+.about-company-note:hover .about-company-note-ico i{
+    color: var(--primary-color);
+}
+.about-company-note h5{
+    font-weight: 600;
+}
+.about-company-note p{
+    text-transform: capitalize;
+    color:var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.about-company-note:hover h5,
+.about-company-note:hover p,
+.about-company-note:hover i{
+    color: var(--white-color);
+}

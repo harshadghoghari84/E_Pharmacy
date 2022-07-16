@@ -166,6 +166,9 @@ p {
   color: var(--text-color);
   letter-spacing: 0.03em;
 }
+.primary-color{
+  color: var(--primary-color);
+}
 /* BUTTONS */
 .custom-btn {
   padding: 12px 14px;
@@ -320,4 +323,7 @@ input[type=number] {
 .highlight-link-txt{
   color: var(--primary-color);
   font-weight: 700;
+}
+.custom-dropdown button{
+  border: 1px solid #ccc;
 }
