@@ -36,3 +36,9 @@
 .about-products-col:hover a{
     color: var(--white-color);
 }
+/* responsive css */
+@media (max-width:1799px){
+    .about-products-col{
+        min-height: 85px;
+    }
+}

@@ -61,7 +61,7 @@ export default function ContactUs() {
                     </Row>
                 </Container>
             </section>
-            <section className="mt-5 contact-us-form-section">
+            <section className="contact-us-form-section">
                 <Container>
                     <Row className="align-items-center">
                         <Col xs="5">

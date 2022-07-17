@@ -82,3 +82,12 @@
 .about-company-note:hover i{
     color: var(--white-color);
 }
+/* responsive css */
+@media (max-width: 1799px){
+    .product-category-right-col{
+        width: 350px;
+    }
+    .product-category-left-col {
+        width: calc(100% - 350px);
+    }
+}

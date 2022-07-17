@@ -53,7 +53,7 @@ export default function Header() {
                 <Container>
                     <Row>
                         <Col xs="12" className="header-col">
-                            <Link to="/"><Image src={Headerlogo} fluid alt="" /></Link>
+                            <Link to="/"><Image src={Headerlogo} fluid alt="" className="header-logo" /></Link>
                             <div className="menu">
                                 <Nav as="ul" className="align-items-center">
                                     <Nav.Item as="li" className="menu-list">

@@ -73,9 +73,9 @@ export default function Blog() {
                     </Row>
                 </Container>
             </section>
-            <section className="faq-section mt-5">
+            <section className="blog-section mt-5">
                 <Container>
-                    <Row>
+                    <Row className="blog-content-row">
                         {blogDetails.map((item) => 
                         <Col md="4">
                                 <div className="blog-box">

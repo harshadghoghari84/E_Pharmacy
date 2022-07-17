@@ -64,3 +64,9 @@
     overflow: hidden;
     border-radius: 30px;
 }
+/* responsive css */
+@media (max-width: 1799px){
+    .page-head-section{
+        padding: 80px 12px;
+    }
+}

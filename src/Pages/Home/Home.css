@@ -79,3 +79,12 @@
 .home-product-right-col-img{
     margin-top: 50px;
 }
+/* responsive css */
+@media (max-width: 1439px){
+    .hero-section h3{
+      font-size: 34px;
+    }
+    .hero-section p{
+        font-size: 16px;
+    }
+}

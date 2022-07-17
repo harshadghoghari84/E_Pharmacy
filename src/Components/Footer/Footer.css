@@ -8,7 +8,7 @@ footer h4{
     color: var(--white-color);
     margin-bottom: 30px;
 }
-footer ul li:not(:last-child){
+footer ul li{
     padding-bottom: 15px;
 }
 footer ul li a{
@@ -27,6 +27,7 @@ footer ul li a::before{
     grid-gap: 30px 50px;
 }
 .inner-footer-ul{
+    display: flex;
     grid-gap: 15px 30px;
 }
 .inner-footer-ul ul {
@@ -38,3 +39,47 @@ footer ul li a:hover{
 .footer-hours-operation{
     padding-left: 13px;
 }
+.footer-container{
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+/* responsive css */
+@media (max-width: 1799px){
+    .footer-grid{
+      grid-gap: 30px;
+    }
+    footer{
+      padding: 70px 12px 30px;
+    }
+    .footer-container{
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+    }
+    .inner-footer-ul{
+      display: block;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+    .inner-footer-ul ul {
+        width: 100%;
+    }
+    footer h4{
+      font-size: 18px;
+    }
+    .inner-footer-ul::-webkit-scrollbar{
+        width: 5px;
+      }
+    .inner-footer-ul::-webkit-scrollbar-track{
+        background-color: var(--black-color);
+        border-radius: 10px;
+      }
+    .inner-footer-ul::-webkit-scrollbar-thumb{
+        background-color: var(--white-color);
+        border-radius: 10px;
+      }
+  }
+ @media (max-width: 1365px){
+    footer h4 {
+        font-size: 16px;
+    }
+ }

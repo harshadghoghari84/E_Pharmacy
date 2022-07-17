@@ -9,3 +9,7 @@
     top: 100px;
     height: max-content;
 }
+.my-acc-product-detail-grid{
+    gap: 40px 0;
+}
+/* responsive css */

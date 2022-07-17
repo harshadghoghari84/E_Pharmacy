@@ -13,6 +13,26 @@ export default function HomeProducts() {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1799,
+              settings: {
+                slidesToShow: 3,
+              }
+            },
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 2,
+              }
+            },
+            {
+              breakpoint: 575,
+              settings: {
+                slidesToShow: 1,
+              }
+            }
+          ]
       };
     return(
         <>

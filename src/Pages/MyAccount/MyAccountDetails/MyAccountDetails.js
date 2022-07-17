@@ -54,8 +54,8 @@ export default function MyAccountDetails() {
                                         <p>From your account dashboard you can view your <Link to="#" className="primary-color">recent orders</Link>, manage your <Link to="#" className="primary-color">shipping and billing addresses</Link>, and <Link to="#" className="primary-color">edit your password and account details</Link>.</p>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="Orders">
-                                        <Row>
-                                            <Col xs="3">
+                                        <Row className="my-acc-product-detail-grid">
+                                            <Col xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -67,7 +67,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xs="3">
+                                            <Col xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -79,7 +79,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xs="3">
+                                            <Col xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -91,7 +91,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xs="3">
+                                            <Col xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>

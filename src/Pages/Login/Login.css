@@ -10,6 +10,7 @@
     justify-content: center;
     position: relative;
     z-index: 1;
+    min-height: 500px;
 }
 .authentication-section::before{
     content: '';

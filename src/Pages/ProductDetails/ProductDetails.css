@@ -42,3 +42,9 @@
 .product-review-form{
     max-width: 700px;
 }
+/* responsive css */
+@media (max-width: 1279px){
+    .product-wrap p{
+      font-size: 14px;
+    }
+}

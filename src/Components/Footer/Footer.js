@@ -5,7 +5,7 @@ export default function Footer() {
     return(
         <>
             <footer>
-                <Container className="mb-5 pb-5">
+                <Container className="footer-container">
                     <div className="footer-grid">
                         <div className="footer-col">
                             <h4>Information</h4>
@@ -38,7 +38,7 @@ export default function Footer() {
                         </div>
                         <div className="footer-col">
                             <h4>Treatable Medicines for ED and PE</h4>
-                            <div className="d-flex inner-footer-ul">
+                            <div className="inner-footer-ul">
                                 <Nav as="ul" className="nav-ul-block">
                                     <Nav.Item as="li">
                                         <Link to="category-product">Cenforce 100</Link>
@@ -92,7 +92,7 @@ export default function Footer() {
                         </div>
                         <div className="footer-col">
                             <h4>New Medicines</h4>
-                            <div className="d-flex inner-footer-ul">
+                            <div className="inner-footer-ul">
                             <Nav as="ul" className="nav-ul-block">
                                 <Nav.Item as="li">
                                     <Link to="category-product">Suhagra 100</Link>
@@ -157,7 +157,7 @@ export default function Footer() {
                                     <Link to="category-product">info@Epharmacy</Link>
                                 </Nav.Item>
                                 <span className="mb-3 d-block footer-hours-operation"><b>Hours of Operation</b></span>
-                                <div className="d-flex inner-footer-ul">
+                                <div className="inner-footer-ul">
                                     <Nav.Item as="li">
                                         <Link to="category-product">
                                             Monday to Friday <br/>

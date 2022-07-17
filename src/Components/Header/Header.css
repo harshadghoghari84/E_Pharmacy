@@ -110,3 +110,12 @@ header .menu-list:hover .sub-menu{
       transform: translateY(-20px)
     }
   }
+  /* responsive css */
+  @media (max-width:1365px){
+    header .menu-list:not(:last-child) {
+      margin-right: 16px;
+    }
+    .header-logo{
+      max-width: 180px;
+    }
+  }
