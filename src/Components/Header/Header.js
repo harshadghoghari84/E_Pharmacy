@@ -119,10 +119,10 @@ export default function Header() {
                                     <Nav.Item as="li">
                                         <Link to="/login">Login</Link>
                                     </Nav.Item>
-                                    <Nav.Item as="li">
+                                    <Nav.Item as="li" className="me-0">
                                         <Link to="/register">Register</Link>
                                     </Nav.Item>
-                                    <Nav.Item as="li">
+                                    <Nav.Item as="li" className="d-xl-none ms-3">
                                         <div onClick={() => setmobileSidebarOpen(true)}>
                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3v2H3V3h9zm4 16v2H3v-2h13zm6-8v2H3v-2h19z"/></svg>
                                         </div>
@@ -137,8 +137,7 @@ export default function Header() {
           mobileSidebarOpen && "mobile-sidebar-show"
         }`}>
                 <div className="w-100 d-flex justify-content-end">
-             <i class="ri-close-circle-line close-sidebar" onClick={() => setmobileSidebarOpen(false)}></i>
-
+                   <i class="ri-close-circle-line close-sidebar" onClick={() => setmobileSidebarOpen(false)}></i>
                 </div>
                                 <Nav as="ul" className="d-block mt-3">
                                     <Nav.Item as="li" className="menu-list">
