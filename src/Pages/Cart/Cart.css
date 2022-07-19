@@ -6,3 +6,17 @@
 .card-total-box{
     max-width: 700px;
 }
+.apply-code b{
+    white-space: nowrap;
+}
+/* responsive css */
+@media (max-width: 575px){
+    .apply-code .custom-btn{
+        font-size: 13px;
+        padding: 10px;
+    }
+    .apply-cuppon-txt{
+        font-size: 12px;
+        white-space: nowrap;
+    }
+}

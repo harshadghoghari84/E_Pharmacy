@@ -22,9 +22,9 @@ export default function MyAccountDetails() {
                 <Container>
                     <Row>
                         <Tab.Container id="left-tabs-example" defaultActiveKey="Dashboard">
-                            <Row>
-                                <Col sm={3} className="border-end">
-                                <Nav variant="pills" className="flex-column">
+                            <Row className="justify-content-center">
+                                <Col md={3} className="custom-border-end">
+                                <Nav variant="pills" className="flex-md-column">
                                     <Nav.Item>
                                         <Nav.Link eventKey="Dashboard" href="#">
                                             Dashboard
@@ -47,7 +47,7 @@ export default function MyAccountDetails() {
                                     </Nav.Item>
                                 </Nav>
                                 </Col>
-                                <Col sm={9}>
+                                <Col md={9} className="mt-4 mt-sm-5 mt-md-0">
                                 <Tab.Content>
                                     <Tab.Pane eventKey="Dashboard">
                                         <p>Hello <b>Test</b> (not <b>Test</b>? <Link to="/login" className="primary-color"><b>Log out</b></Link>)</p>
@@ -55,7 +55,7 @@ export default function MyAccountDetails() {
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="Orders">
                                         <Row className="my-acc-product-detail-grid">
-                                            <Col xl="4" xxl="3">
+                                            <Col sm="6" xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -67,7 +67,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xl="4" xxl="3">
+                                            <Col sm="6" xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -79,7 +79,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xl="4" xxl="3">
+                                            <Col sm="6" xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -91,7 +91,7 @@ export default function MyAccountDetails() {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xl="4" xxl="3">
+                                            <Col sm="6" xl="4" xxl="3">
                                                 <div className='product-wrap'>
                                                     <div className='product-img'>
                                                         <Image src={product0} fluid alt=""/>
@@ -113,16 +113,16 @@ export default function MyAccountDetails() {
                                                 <Accordion.Body>
                                                     <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="First Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Last Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Company Name" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Country / Region <span className="color-red">*</span></Form.Label>
                                                                 <Form.Select aria-label="Default select example" className="form-control cutom-input">
                                                                     <option>Open this select menu</option>
@@ -131,22 +131,22 @@ export default function MyAccountDetails() {
                                                                     <option value="3">Three</option>
                                                                 </Form.Select>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6" className="mt-4 mt-md-0">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Street address" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Town / City" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Country" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Postcode" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Mobile Number" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
                                                             <Link to="#" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
@@ -159,16 +159,16 @@ export default function MyAccountDetails() {
                                                 <Accordion.Body>
                                                 <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="First Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Last Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Company Name" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Country / Region <span className="color-red">*</span></Form.Label>
                                                                 <Form.Select aria-label="Default select example" className="form-control cutom-input">
                                                                     <option>Open this select menu</option>
@@ -177,22 +177,22 @@ export default function MyAccountDetails() {
                                                                     <option value="3">Three</option>
                                                                 </Form.Select>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6" className="mt-4 mt-md-0">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Street address" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Town / City" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Country" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Postcode" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Mobile Number" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
                                                             <Link to="#" className="w-max-content"><CustomButton text="Save Address" formGroupClassName="form-group text-start mb-0"/></Link>
@@ -205,16 +205,16 @@ export default function MyAccountDetails() {
                                     <Tab.Pane eventKey="AddressDetails">
                                                     <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="First Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Last Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Display Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
                                                             <h4 className="mb-3"><b>Password Change</b></h4>

@@ -119,3 +119,16 @@ header .menu-list:hover .sub-menu{
       max-width: 180px;
     }
   }
+  @media (max-width:575px){
+    .header-logo{
+      max-width: 130px;
+    }
+    .authentication-list ul li:not(:last-child) {
+        margin-right: 15px;
+    }
+  }
+  @media (max-width:349px){
+    .header-logo{
+      max-width: 110px;
+    } 
+  }

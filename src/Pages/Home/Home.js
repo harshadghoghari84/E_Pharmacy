@@ -122,17 +122,19 @@ return(
                   </div>
                </div>
             </div>
-            <div className="home-product-col-right">
+            <div className="home-product-col-right mt-5 mt-xl-0">
                <h2>Our Promise</h2>
                <p className="mt-4">To free families from the sianancial burden of high prescription drug cost</p>
-               <div className="home-product-right-col-img">
-                  <Image src={cuponCode} fluid alt="" className="d-block coupon-cede-img"/>
-               </div>
-               <div className="home-product-right-col-img">
-                  <Image src={guranteeCode} fluid alt="" className="d-block"/>
-               </div>
-               <div className="home-product-right-col-img">
-                  <Image src={sslSequreCode} fluid alt="" className="d-block"/>
+               <div className="d-flex d-xl-block align-items-center flex-wrap justify-content-between">
+                  <div className="home-product-right-col-img">
+                     <Image src={cuponCode} fluid alt="" className="d-block coupon-cede-img"/>
+                  </div>
+                  <div className="home-product-right-col-img">
+                     <Image src={guranteeCode} fluid alt="" className="d-block"/>
+                  </div>
+                  <div className="home-product-right-col-img">
+                     <Image src={sslSequreCode} fluid alt="" className="d-block"/>
+                  </div>
                </div>
             </div>
          </div>

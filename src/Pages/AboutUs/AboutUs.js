@@ -18,10 +18,10 @@ export default function AboutUs() {
             <section className="mt-5">
                 <Container>
                     <Row className="mt-5 align-items-center">
-                        <Col xs="6">
+                        <Col xl="6">
                             <Image src={pharmacy} fluid alt=""/>
                         </Col>
-                        <Col xs="6">
+                        <Col xl="6" className="mt-3 mt-xl-0">
                             <p>We, Epharmacy, are the world's most trusted <b>generic Drugs pharmacy</b>. We are offering best-value <b>generic ed</b>, skin care, men's health, women health drugs, without ever compromising on quality. We are only supplying non-restricted medicines that we sourced from <b>FDA approved</b> manufacturers. <b>Generic Villa</b> an <Link to="/" className="highlight-link-txt">online pharmacy</Link> store has strived to be The Very Best in each of the health sectors.</p>
                             <p>Leading well-known pharmaceutical companies like: manufacture the products we are offering</p>
                             <Nav as="ul" className="mb-4 about-products-list">
@@ -91,7 +91,7 @@ export default function AboutUs() {
                                 <Link to="/"><span>Dr. Reddy etc.</span></Link>
                             </div>
                         </Col>
-                        <Col xs="12" className="mt-5">
+                        <Col xs="12" className="mt-4 mt-md-5">
                                 <div className="faq-content-list">
                                     <h5 className="mb-3"><b>OUR QUALITY STANDARD</b></h5>
                                     <p>To offer high quality to our customers is our motto.</p>

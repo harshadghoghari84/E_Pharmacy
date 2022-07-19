@@ -25,7 +25,7 @@ export default function ContactUs() {
                             <span className="mb-1 d-block inner-page-small-title">Come Visit Us At</span>
                             <h1 className="inner-page-big-title">Our Address</h1>
                         </Col>
-                        <Col xs="4">
+                        <Col md="4" className="mt-5 pt-4">
                             <Link to="#">
                                 <div className="our-addressBox">
                                     <div className="add-roundBox">
@@ -36,7 +36,7 @@ export default function ContactUs() {
                                 </div>
                             </Link>
                         </Col>
-                        <Col xs="4">
+                        <Col md="4" className="mt-5 pt-4">
                             <Link to="#">
                                 <div className="our-addressBox">
                                     <div className="add-roundBox">
@@ -47,7 +47,7 @@ export default function ContactUs() {
                                 </div>
                             </Link>
                         </Col>
-                        <Col xs="4">
+                        <Col md="4" className="mt-5 pt-4">
                             <Link to="#">
                                 <div className="our-addressBox">
                                     <div className="add-roundBox">
@@ -64,7 +64,7 @@ export default function ContactUs() {
             <section className="contact-us-form-section">
                 <Container>
                     <Row className="align-items-center">
-                        <Col xs="5">
+                        <Col md="5" className="order-2 order-md-1 mt-4 mt-md-0">
                             <span className="mb-1 d-block inner-page-small-title">Come Visit Us At</span>
                             <h1 className="inner-page-big-title">Get in Touch</h1>
 
@@ -75,7 +75,7 @@ export default function ContactUs() {
                                 <Link to="/"><CustomButton text="Submit" formGroupClassName="form-group text-start w-100 mt-5 mb-0"/></Link>
                             </Form>
                         </Col>
-                        <Col xs="7">
+                        <Col md="7" className="order-1 order-md-2">
                             <Image src={contactUsImg} fluid alt="" />
                         </Col>
                     </Row>

@@ -22,6 +22,8 @@ export default function Cart() {
                     <Row>
                         <Col xs="12">
                         <Link to="category-product"><CustomButton text="Continue Shopping" formGroupClassName="form-group text-end w-100 mb-3 mb-0"/></Link>
+                        <div className="table-responsive">
+
                         <table className='product-detail-tbl'>
                                 <thead>
                                     <tr>
@@ -71,10 +73,11 @@ export default function Cart() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <div className="apply-code d-flex align-items-center w-100">
-                                <div className="d-flex align-items-center">
+                        </div>
+                            <div className="apply-code d-flex align-items-center flex-wrap w-100">
+                                <div className="d-flex align-items-center me-2">
                                     <CustomInput formGroupClassName="form-group" formLabel="" formType="text" customInputClassName="" placeholder="Apply Code"/>
-                                    <Link to="/" className="ms-2"><b>Apply Cuppon</b></Link>
+                                    <Link to="/" className="ms-2 apply-cuppon-txt"><b>Apply Cuppon</b></Link>
                                 </div>
                                 <Link to="#" className="ms-auto d-flex"><CustomButton text="Update card" formGroupClassName="form-group mb-0"/></Link>
                             </div>

@@ -17,13 +17,13 @@ export default function OrderRecieve() {
             <section className="faq-section mt-5">
                 <Container>
                     <Row>
-                       <Col xs="12" className="order-recieve-wrap d-flex align-items-center">
+                       <Col xs="12" className="order-recieve-wrap d-xl-flex align-items-center">
                             <div className="order-recieve-box">
                                 <p>Thank you. Your order has been received.</p>
                                 <p>Please check your email for payment process.</p>
                                 <p>If you do not receive email, Kindly check your spam folder.</p>
                             </div>
-                            <div className="order-recieve-details">
+                            <div className="order-recieve-details mt-5 mt-xl-0">
                                 <div className="oc-detail">
                                     <h6><b>Order Number</b>:</h6>
                                     <p>2502524763</p>

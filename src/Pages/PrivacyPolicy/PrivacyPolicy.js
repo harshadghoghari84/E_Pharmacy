@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
                     </Row>
                 </Container>
             </section>
-            <section className="faq-section mt-5">
+            <section className="faq-section mt-3 mt-sm-5">
                 <Container>
                     <Row>
                         <Col xs="12">

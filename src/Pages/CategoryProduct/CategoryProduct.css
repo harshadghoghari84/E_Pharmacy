@@ -91,3 +91,19 @@
         width: calc(100% - 350px);
     }
 }
+@media (max-width: 1199px){
+    .product-category-row{
+        display: block;
+    }
+    .product-category-right-col {
+        width: 100%;
+        position: unset;
+    }
+    .related-product-category-wrap {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .product-category-left-col{
+        width: 100%;
+    }
+}

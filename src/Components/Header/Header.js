@@ -29,7 +29,7 @@ const menuOption0 = [
 export default function Header() {
     return(
         <>
-            <section className="small-header">
+            <section className="small-header d-none d-md-block">
                 <Container>
                     <Row className="align-items-center">
                         <Col md="6">
@@ -52,9 +52,9 @@ export default function Header() {
             <header>
                 <Container>
                     <Row>
-                        <Col xs="12" className="header-col">
+                        <Col xs="12" className="header-col py-3 py-xl-0">
                             <Link to="/"><Image src={Headerlogo} fluid alt="" className="header-logo" /></Link>
-                            <div className="menu">
+                            <div className="menu d-none d-xl-block">
                                 <Nav as="ul" className="align-items-center">
                                     <Nav.Item as="li" className="menu-list">
                                         <Link to="">Men's Health <i className="ri-arrow-drop-down-line ms-2"></i></Link>
@@ -113,6 +113,9 @@ export default function Header() {
                                     </Nav.Item>
                                     <Nav.Item as="li">
                                         <Link to="/register">Register</Link>
+                                    </Nav.Item>
+                                    <Nav.Item as="li">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3v2H3V3h9zm4 16v2H3v-2h13zm6-8v2H3v-2h19z"/></svg>
                                     </Nav.Item>
                                 </Nav>
                             </div>

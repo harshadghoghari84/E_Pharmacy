@@ -175,10 +175,16 @@ export default function Footer() {
                                     <Link to="category-product">Royal Plaza, Surat 395006</Link>
                                 </Nav.Item>
                             </Nav>
+                            <div className="header-social-ico d-md-none">
+                                <Link to="/"><i className="ri-facebook-fill"></i></Link>
+                                <Link to="/"><i className="ri-instagram-line"></i></Link>
+                                <Link to="/"><i className="ri-twitter-fill"></i></Link>
+                                <Link to="/"><i className="ri-mail-send-line"></i></Link>
+                            </div>
                         </div>
                     </div>
                 </Container>
-                <a href="javascript:void(0)" className="black-hover w-max-content d-block mx-auto text-light"><h6>Copyright &copy; 2022 Epharmacy All Rights Reserved.</h6></a>
+                <a href="javascript:void(0)" className="black-hover d-flex justify-content-center text-center text-light"><h6>Copyright &copy; 2022 Epharmacy All Rights Reserved.</h6></a>
             </footer>
         </>
     )

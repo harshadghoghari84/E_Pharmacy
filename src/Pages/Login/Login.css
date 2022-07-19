@@ -64,3 +64,10 @@
 .authentication-box-wrap .register-form .form-group{
     margin-bottom: 20px;
 }
+/* reponsive css */
+@media  (max-width: 1199px){
+    .authentication-section{
+        height: auto;
+        padding: 50px 12px;
+    }
+}
