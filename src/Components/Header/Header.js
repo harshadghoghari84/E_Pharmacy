@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container, Row, Col, Image, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Headerlogo from "./../../Assets/Images/logo-wide.png";
@@ -27,6 +28,13 @@ const menuOption0 = [
     },
 ]
 export default function Header() {
+      // add remove class on scroll start
+  const [isScroll, setIsScroll] = useState(false);
+  const [options, setOptions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  //
+  const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
     return(
         <>
             <section className="small-header d-none d-md-block">
@@ -115,7 +123,9 @@ export default function Header() {
                                         <Link to="/register">Register</Link>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3v2H3V3h9zm4 16v2H3v-2h13zm6-8v2H3v-2h19z"/></svg>
+                                        <div onClick={() => setmobileSidebarOpen(true)}>
+                                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3v2H3V3h9zm4 16v2H3v-2h13zm6-8v2H3v-2h19z"/></svg>
+                                        </div>
                                     </Nav.Item>
                                 </Nav>
                             </div>
@@ -123,6 +133,65 @@ export default function Header() {
                     </Row>
                 </Container>
             </header>
+            <div  className={`mobile-sidebar d-xl-none ${
+          mobileSidebarOpen && "mobile-sidebar-show"
+        }`}>
+                <div className="w-100 d-flex justify-content-end">
+             <i class="ri-close-circle-line close-sidebar" onClick={() => setmobileSidebarOpen(false)}></i>
+
+                </div>
+                                <Nav as="ul" className="d-block mt-3">
+                                    <Nav.Item as="li" className="menu-list">
+                                        <Link to="">Men's Health <i className="ri-arrow-drop-down-line ms-2"></i></Link>
+                                        <Nav as="ul" className="sub-menu">
+                                            {menuOption0.map((item) => 
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
+                                            )}
+                                        </Nav>
+                                    </Nav.Item>
+                                    <Nav.Item as="li" className="menu-list">
+                                        <Link to="">Life Saving Drugs <i className="ri-arrow-drop-down-line ms-2"></i></Link>
+                                        <Nav as="ul" className="sub-menu">
+                                            {menuOption0.map((item) => 
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
+                                            )}
+                                        </Nav>
+                                    </Nav.Item>
+                                    <Nav.Item as="li" className="menu-list">
+                                        <Link to="">Skin Care <i className="ri-arrow-drop-down-line ms-2"></i></Link>
+                                        <Nav as="ul" className="sub-menu">
+                                            {menuOption0.map((item) => 
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
+                                            )}
+                                        </Nav>
+                                    </Nav.Item>
+                                    <Nav.Item as="li" className="menu-list">
+                                        <Link to="">Viral Care <i className="ri-arrow-drop-down-line ms-2"></i></Link>
+                                        <Nav as="ul" className="sub-menu">
+                                            {menuOption0.map((item) => 
+                                                <Nav.Item as="li"><Link to="/category-product">{item.subMenuOption0}</Link></Nav.Item>
+                                            )}
+                                        </Nav>
+                                    </Nav.Item>
+                                    <Nav.Item as="li" className="menu-list">
+                                        <Link to="">
+                                            <div className="waviy mt-5">
+                                                <span style={{color: "--i:1"}}>O</span>
+                                                <span style={{color: "--i:2"}}>F</span>
+                                                <span style={{color: "--i:3"}}>F</span>
+                                                <span style={{color: "--i:4"}}>E</span>
+                                                <span style={{color: "--i:5"}}>R</span>
+                                                <span style={{color: "--i:6"}}>_V</span>
+                                                <span style={{color: "--i:7"}}>I</span>
+                                                <span style={{color: "--i:8"}}>L</span>
+                                                <span style={{color: "--i:9"}}>L</span>
+                                                <span style={{color: "--i:10"}}>A</span>
+                                            </div>                                  
+                                        </Link>
+                                    </Nav.Item>
+                                </Nav>
+                          
+            </div>
         </>
     )
 }
