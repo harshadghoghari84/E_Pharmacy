@@ -1,0 +1,26 @@
+@media screen and (min-width: 1280px) {
+    .container {
+      max-width: 1270px;
+    }
+  }
+  @media screen and (min-width: 1400px) {
+    .container {
+      max-width: 1300px;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .container {
+      max-width: 1420px;
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .container {
+      max-width: 1620px;
+    }
+  } 
+@media (max-width: 1799px){
+  .head-title{
+    font-size: 20px;
+  }
+}

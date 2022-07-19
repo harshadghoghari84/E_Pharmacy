@@ -1,0 +1,348 @@
+/* <!--// Designed by: Brijesh V.; // --> */
+
+/* FONTS */
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-Bold.eot");
+  src: url("./Assets/Fonts/Gilroy-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-Bold.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-Bold.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-Medium.eot");
+  src: url("./Assets/Fonts/Gilroy-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-Medium.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-Medium.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-ExtraBold.eot");
+  src: url("./Assets/Fonts/Gilroy-ExtraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-ExtraBold.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-ExtraBold.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-ExtraBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-Light.eot");
+  src: url("./Assets/Fonts/Gilroy-Light.eot?#iefix") format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-Light.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-Light.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-Thin.eot");
+  src: url("./Assets/Fonts/Gilroy-Thin.eot?#iefix") format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-Thin.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-Thin.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-SemiBold.eot");
+  src: url("./Assets/Fonts/Gilroy-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-SemiBold.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-SemiBold.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./Assets/Fonts/Gilroy-Regular.eot");
+  src: url("./Assets/Fonts/Gilroy-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/Fonts/Gilroy-Regular.woff2") format("woff2"),
+    url("./Assets/Fonts/Gilroy-Regular.woff") format("woff"),
+    url("./Assets/Fonts/Gilroy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+/* FONTS END */
+
+/* RESET START */
+:root {
+  --primary-font: "Gilroy", sans-serif;
+  --primary-color: #00a3c8;
+  --secondary-color: #5663C1;
+  --orange-color: #FF6501;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --text-color: #121123;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  font-family: var(--primary-font);
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+input:focus,
+.form-control:focus,
+.form-control:active,
+.custom-select-dropdown:focus,
+.custom-select-dropdown:active {
+  box-shadow: none;
+  outline: none;
+  border-color: transparent;
+}
+
+.form-control::placeholder {
+  color: var(--black-color);
+}
+/* RESET END */
+/* GENERAL */
+.img-contain {
+  object-fit: contain;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+p.big {
+  font-size: 18px;
+}
+p {
+  font-family: var(--font-gilroy);
+  font-size: 16px;
+  color: var(--text-color);
+  letter-spacing: 0.03em;
+}
+.primary-color{
+  color: var(--primary-color);
+}
+/* BUTTONS */
+.custom-btn {
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px 0 10px 0;
+  border: 1px solid var(--primary-color);
+  font-weight: 500;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  min-width: 100px;
+}
+
+.custom-btn:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.custom-btn:active{
+  transform: scale(0.95);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+.custom-btn:focus{
+  box-shadow: none;
+}
+/* BUTTONS END */
+
+/* FORMS */
+.form-control,
+input {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black-color);
+  font-family: var(--primary-font);
+}
+
+.form-control:focus{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white-color);
+}
+.authentication-box-wrap form {
+  margin-top: 50px;
+}
+label {
+  font-size: 18px;
+}
+.form-group {
+  margin-bottom: 30px;
+}
+/* FORMS END */
+.nav-ul-block {
+  display: block;
+  flex-wrap: unset;
+}
+.flex-wrap-unset {
+  flex-wrap: unset;
+}
+li a {
+  text-decoration: unset;
+}
+a,.hover-text {
+  transition: all 0.3s;
+}
+a:hover,.hover-text:hover {
+  color: var(--primary-color);
+}
+.hover-white-text:hover {
+  color: var(--white-color);
+}
+.black-hover:hover{
+  color: var(--black-color);
+}
+.font-gilory {
+  font-family: var(--font-gilroy);
+}
+::selection {
+  color: var(--white-color);
+  background: var(--primary-color);
+}
+.img-border-radius {
+  border-radius: 10px;
+  border: 1px solid #b4b9bc;
+}
+.d-align {
+  display: flex;
+  align-items: center;
+}
+.inherit-line-height {
+  line-height: inherit;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.w-inherit {
+  width: inherit;
+}
+.h-inherit {
+  height: inherit;
+}
+.word-break {
+  word-break: break-all;
+}
+::-webkit-scrollbar{
+  width: 7px;
+}
+::-webkit-scrollbar-track{
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* GENERAL END */
+.w-max-content{
+  width: max-content;
+}
+.head-title {
+  font-size: 24px;
+  font-weight: 500;
+  width: max-content;
+  padding: 7px 25px;
+  color: var(--white-color);
+}
+.animated-title{position: relative;}
+.animated-title::after {
+  content: '';
+  position: absolute;
+  background-color: var(--primary-color);
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 8px 0 8px 0;
+}
+.highlight-link-txt{
+  color: var(--primary-color);
+  font-weight: 700;
+}
+.custom-dropdown button{
+  border: 1px solid #ccc;
+}
+.text-underline{
+  text-decoration: underline;
+}
+.color-red{
+  color: red;
+}
+.border-bottom{
+  border-bottom: 1px solid #dee2e6;
+}
+.custom-radio input,.custom-checkbox input{
+  position: relative;
+  top: 3px;
+}
+.custom-checkbox input{
+ padding: 0;
+}
+.custom-checkbox{
+  margin-right: 10px;
+}
