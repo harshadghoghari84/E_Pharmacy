@@ -20,14 +20,26 @@ import Cart from "./Pages/Cart/Cart";
 import MyAccount from "./Pages/MyAccount/MyAccount";
 import MyAccountDetails from "./Pages/MyAccount/MyAccountDetails/MyAccountDetails";
 import Checkout from "./Pages/Checkout/Checkout";
+import { ApolloProvider, useQuery } from "@apollo/client";
+import Query from "../src/graphql/Query";
+import { Provider } from "mobx-react";
+import UserStore from "../src/mobx/UserStore";
+import GlobalStore from "../src/mobx/GlobalStore";
+import client from "../src/utils/ApolloClient";
 
-function App() {
+function AppWrapper() {
+  const { loading, error, data } = useQuery(Query.userDetail);
+
+  const isUser = !!data?.userDetail;
+
+  console.log("isUser", isUser);
+
   return (
     <Router>
       <Header />
       <ScrollToTop />
       <Routes>
-        <Route path={"/"} element={<Home />} />
+        <Route path={"/"} element={isUser ? <Home /> : <Login />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/register"} element={<Register />} />
         <Route path={"/contact-us"} element={<ContactUs />} />
@@ -44,9 +56,21 @@ function App() {
         <Route path={"/my-account-details"} element={<MyAccountDetails />} />
         <Route path={"/checkout"} element={<Checkout />} />
       </Routes>
-    <Footer />
-  </Router>
+      <Footer />
+    </Router>
   );
 }
+
+const App = () => {
+  return (
+    <>
+      <Provider userStore={UserStore} globalStore={GlobalStore}>
+        <ApolloProvider client={client}>
+          <AppWrapper />
+        </ApolloProvider>
+      </Provider>
+    </>
+  );
+};
 
 export default App;
