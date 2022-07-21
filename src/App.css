@@ -347,3 +347,10 @@ input[type=number] {
 .custom-checkbox{
   margin-right: 10px;
 }
+.error-msg-txt{
+  color: red;
+  font-size: 14px;
+}
+.error-msg-txt.d-block{
+  display: block !important;
+}

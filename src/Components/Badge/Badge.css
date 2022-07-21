@@ -1,0 +1,35 @@
+.custom-badge{
+    position: fixed;
+    right: 20px;
+    top: 50px;
+    min-width: 300px;
+    max-width: 280px;
+    min-height: 50px;
+    padding: 10px;
+    background-color: #ccc;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.custom-badge.active-badge{
+    background-color: green;
+}
+.custom-badge.danger-badge{
+    background-color: red;
+}
+.custom-badge p{
+    color: var(--white-color);
+    text-align: end;
+    margin-bottom: 0;
+}
+/* responsive css */
+@media (max-width: 1199px){
+    .custom-badge{
+        min-height: auto;
+        right: 10px;
+    }
+}

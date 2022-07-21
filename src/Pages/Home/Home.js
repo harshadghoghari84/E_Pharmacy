@@ -7,10 +7,12 @@ import safetySequrityImg3 from "./../../Assets/Images/logo/DMCA_logo.png";
 import cuponCode from "./../../Assets/Images/logo/cupon-code.png";
 import guranteeCode from "./../../Assets/Images/logo/100-Guarantee-Seal.png";
 import sslSequreCode from "./../../Assets/Images/logo/SSL-Secure-Connection.png";
+import Badge from "../../Components/Badge/Badge";
 import "./Home.css";
 export default function Home() {
 return(
 <>
+<Badge text="Your Profile is Accepted" customBadgeName="active-badge"/>
 <HeroSlider/>
 <div className="home-product-section">
    <Container>
