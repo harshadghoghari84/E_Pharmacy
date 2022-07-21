@@ -82,7 +82,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -103,7 +103,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -124,7 +124,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -143,7 +143,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                 </tbody>
