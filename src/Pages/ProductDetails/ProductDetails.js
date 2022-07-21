@@ -11,10 +11,10 @@ export default function ProductDetails() {
             <section className='mt-5'>
                 <Container>
                     <Row>
-                        <Col xs="4" className='text-center'>
+                        <Col lg="5" xl="4" className='text-center'>
                             <ProductSlider/>
                         </Col>
-                        <Col xs="8">
+                        <Col lg="7" xl="8" className='mt-4 mt-lg-0'>
                             <h5><b>Da Sutra 30 X</b></h5>
                             <h5 className='primary-color'><b>Rs.150</b></h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
@@ -42,6 +42,7 @@ export default function ProductDetails() {
                             <div className='product-detail-tbl-highlight'>
                                 <h6 className='text-center mb-0'>Da Sutra 30 X - 50mg</h6>
                             </div>
+                            <div className="table-responsive">
                             <table className='product-detail-tbl'>
                                 <thead>
                                     <tr>
@@ -81,7 +82,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -102,7 +103,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -123,7 +124,7 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                     <tr>
@@ -142,11 +143,13 @@ export default function ProductDetails() {
                                         </Form.Select>
                                         </td>
                                         <td>
-                                        <Link to="#">Add to Cart</Link>
+                                        <Link to="/cart">Add to Cart</Link>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+
+                            </div>
                         </Col>
                         <Col xs="12" className='mt-5'>
                             <span className="mb-1 d-block inner-page-small-title">Customer Review</span>

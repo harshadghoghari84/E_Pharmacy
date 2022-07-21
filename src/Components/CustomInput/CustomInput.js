@@ -9,6 +9,7 @@ export default function CustomInput(props) {
                     <span className="color-red ms-2">{props.compulsoryLabel}</span>
                 </Form.Label>
                 <Form.Control type={props.formType} placeholder={props.placeholder} name="" value="" className={`form-control cutom-input ${props.customInputClassName}`}></Form.Control>
+                <span className={`error-msg-txt d-none ${props?.inputErrorClass}`}>{props.errorMsg}</span>
             </Form.Group>
         </>
     )

@@ -23,22 +23,22 @@ export default function MyAccount() {
                            <p>If you already have am account with as, please login at the <Link to="/login" className=""><b>Login page</b></Link></p>
                            <Form className="mt-4">
                                 <Row>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="First Name" formType="text" customInputClassName=""/>
                                     </Col>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Last Name" formType="text" customInputClassName=""/>
                                     </Col>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Mobile Number" formType="number" customInputClassName=""/>
                                     </Col>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Email Address" formType="email" customInputClassName=""/>
                                     </Col>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Password" formType="password" customInputClassName=""/>
                                     </Col>
-                                    <Col xs="6">
+                                    <Col md="6">
                                         <CustomInput formGroupClassName="form-group" formLabel="Confirm Password" formType="password" customInputClassName=""/>
                                     </Col>
                                     <Link to="/my-account-details" className="w-max-content"><CustomButton text="Register" formGroupClassName="form-group text-start mb-0"/></Link>

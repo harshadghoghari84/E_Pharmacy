@@ -40,3 +40,11 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+@media (max-width:1199px){
+    .order-recieve-box,.order-recieve-details{
+        width: 100%;
+    }
+    .order-recieve-table thead tr th, .order-recieve-table tbody tr td{
+        font-size: 14px;
+    }
+}

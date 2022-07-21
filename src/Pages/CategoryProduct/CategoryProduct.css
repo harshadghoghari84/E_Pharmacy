@@ -14,6 +14,8 @@
 .related-product-category-wrap{
     border: 1px solid #ccc;
     padding: 15px;
+    height: calc(100vh - 170px);
+    overflow-y: auto;
 }
 .related-product-category-img{
     width: 70px;
@@ -89,5 +91,21 @@
     }
     .product-category-left-col {
         width: calc(100% - 350px);
+    }
+}
+@media (max-width: 1199px){
+    .product-category-row{
+        display: block;
+    }
+    .product-category-right-col {
+        width: 100%;
+        position: unset;
+    }
+    .related-product-category-wrap {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .product-category-left-col{
+        width: 100%;
     }
 }

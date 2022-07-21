@@ -77,7 +77,7 @@ export default function Blog() {
                 <Container>
                     <Row className="blog-content-row">
                         {blogDetails.map((item) => 
-                        <Col md="4">
+                        <Col md="6" xl="4">
                                 <div className="blog-box">
                                     <div className="blog-img">
                                         <Image src={item.blogImage} fluid alt="" className="w-100 h-100 img-cover"/>

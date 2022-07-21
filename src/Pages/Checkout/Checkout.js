@@ -24,27 +24,27 @@ export default function Checkout() {
                             <div>
                                 <div className="d-flex align-items-center">
                                     <CustomInput formGroupClassName="form-group" formLabel="Have a coupon?" formType="text" customInputClassName="" placeholder="Apply Code"/>
-                                    <Link to="/" className="ms-2"><b>Apply Cuppon</b></Link>
+                                    <Link to="/" className="ms-2 apply-cuppon-txt"><b>Apply Cuppon</b></Link>
                                 </div>
                             </div>
                         </Col>
-                        <Col xs="6" className="mt-4">
+                        <Col xl="6" className="mt-4">
                             <Accordion defaultActiveKey="checkoutA0">
                                             <Accordion.Item eventKey="checkoutA0">
                                                 <Accordion.Header><b>Billing details:</b></Accordion.Header>
                                                 <Accordion.Body>
                                                     <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="First Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Last Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Company Name" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Country / Region <span className="color-red">*</span></Form.Label>
                                                                 <Form.Select aria-label="Default select example" className="form-control cutom-input">
                                                                     <option>Open this select menu</option>
@@ -53,22 +53,22 @@ export default function Checkout() {
                                                                     <option value="3">Three</option>
                                                                 </Form.Select>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6" className="mt-4 mt-md-0">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Street address" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Town / City" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Country" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Postcode" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Mobile Number" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Email Address" compulsoryLabel="*" formType="email" customInputClassName=""/>
                                                             </Col>
                                                         </Row>
@@ -80,10 +80,10 @@ export default function Checkout() {
                                                 <Accordion.Body>
                                                 <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Create account password " compulsoryLabel="*" formType="password" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Confirm password" compulsoryLabel="*" formType="password" customInputClassName=""/>
                                                             </Col>
                                                         </Row>
@@ -92,23 +92,23 @@ export default function Checkout() {
                                             </Accordion.Item>
                                             </Accordion>
                         </Col>
-                        <Col xs="6" className="mt-4">
+                        <Col xl="6" className="mt-4">
                         <Accordion defaultActiveKey="checkoutB0">
                                             <Accordion.Item eventKey="checkoutB0">
                                                 <Accordion.Header><b>Ship to a different address?:</b></Accordion.Header>
                                                 <Accordion.Body>
                                                     <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="First Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Last Name" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Company Name" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Country / Region <span className="color-red">*</span></Form.Label>
                                                                 <Form.Select aria-label="Default select example" className="form-control cutom-input">
                                                                     <option>Open this select menu</option>
@@ -117,16 +117,16 @@ export default function Checkout() {
                                                                     <option value="3">Three</option>
                                                                 </Form.Select>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Street address" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Town / City" compulsoryLabel="*" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Country" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Postcode" compulsoryLabel="*" formType="number" customInputClassName=""/>
                                                             </Col>
                                                             <Col xs="12">
@@ -144,22 +144,22 @@ export default function Checkout() {
                                                 <Accordion.Body>
                                                 <Form className="">
                                                         <Row>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Medical Condition" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Physician's Telephone No" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Drug Allergies" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Current Medications:" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <CustomInput formGroupClassName="form-group" formLabel="Current Treatments:" formType="text" customInputClassName=""/>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Do you Smoke?:</Form.Label>
                                                                 <div className="d-flex align-items-center">
                                                                     <Form.Check 
@@ -178,7 +178,7 @@ export default function Checkout() {
                                                                         />
                                                                 </div>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6" className="mt-4 mt-md-0">
                                                                 <Form.Label>Do you drink Alcohol?:</Form.Label>
                                                                 <div className="d-flex align-items-center">
                                                                     <Form.Check 
@@ -200,7 +200,7 @@ export default function Checkout() {
                                                             <Col xs="12" className="mt-4">
                                                                 <p>I certify that I am 'over 18 years' and that I am under the supervision of a doctor. The ordered medication is for my own personal use and is strictly not meant for a re-sale. I also accept that I am taking the medicine /s at my own risk and that I am duly aware of all the effects / side effects of the medicine / s. If my order contain Tadalafil, I confirm that the same is not meant for consumption in the USA. I acknowledge that the drugs are as per the norms of the country of destination.</p>
                                                             </Col>
-                                                            <Col xs="6">
+                                                            <Col md="6">
                                                                 <Form.Label>Upload Prescription:</Form.Label>
                                                                 <Form.Control type="file" />
                                                             </Col>
@@ -211,6 +211,7 @@ export default function Checkout() {
                                             </Accordion>
                         </Col>
                         <Col xs="12">
+                        <div className="table-responsive">
                         <table className='product-detail-tbl mt-4 cart-table-tbl'>
                                 <thead>
                                     <tr>
@@ -263,6 +264,8 @@ export default function Checkout() {
                                     </tr>
                                 </tbody>
                             </table>
+
+                        </div>
                         </Col>
                         <Col xs="12" className="mt-4">
                             <div className="checkout-card-details-wrap">

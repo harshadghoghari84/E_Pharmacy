@@ -276,6 +276,7 @@ a:hover,.hover-text:hover {
 }
 ::-webkit-scrollbar{
   width: 7px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track{
   background-color: var(--secondary-color);
@@ -345,4 +346,11 @@ input[type=number] {
 }
 .custom-checkbox{
   margin-right: 10px;
+}
+.error-msg-txt{
+  color: red;
+  font-size: 14px;
+}
+.error-msg-txt.d-block{
+  display: block !important;
 }

@@ -63,7 +63,7 @@ export default function CategoryProduct() {
                         </Col>
                         <Col xs="12">
                             <div className="product-category-row">
-                                <div className="product-category-right-col mt-5">
+                                <div className="product-category-right-col mt-3 mt-xl-5">
                                     <h4>Related Product Category</h4>
                                     <div className="mt-4 related-product-category-wrap">
                                         {CategoryProductDetails.map((item) =>

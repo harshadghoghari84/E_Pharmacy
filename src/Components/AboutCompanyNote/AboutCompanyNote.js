@@ -4,7 +4,7 @@ export default function AboutCompanyNote() {
     return(
         <>
             <Row>
-                    <Col xs="4">
+                    <Col md="4">
                             <div className="about-company-note">
                                 <div className="about-company-note-ico">
                                     <i class="ri-truck-line"></i>
@@ -13,7 +13,7 @@ export default function AboutCompanyNote() {
                              <p>Delivery to Dor</p>             
                             </div>
                         </Col>
-                        <Col xs="4">
+                        <Col md="4">
                             <div className="about-company-note">
                                 <div className="about-company-note-ico">
                                     <i class="ri-command-fill"></i>
@@ -22,7 +22,7 @@ export default function AboutCompanyNote() {
                                 <p>Easy to Retutn</p>             
                             </div>
                         </Col>
-                        <Col xs="4">
+                        <Col md="4">
                             <div className="about-company-note">
                             <div className="about-company-note-ico">
                                     <i class="ri-24-hours-fill"></i>

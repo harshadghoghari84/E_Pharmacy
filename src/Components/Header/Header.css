@@ -54,7 +54,7 @@ header .menu-list a i{
     opacity: 0;
     transition: all 0.3s;
 }
-header .menu-list:hover .sub-menu{
+.menu-list:hover .sub-menu{
     top: 80px;
     visibility: visible;
     opacity: 1;
@@ -110,6 +110,64 @@ header .menu-list:hover .sub-menu{
       transform: translateY(-20px)
     }
   }
+  .mobile-sidebar{
+    min-width: 280px;
+    max-width: 280px;
+    height: 100%;
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    right: -1000px;
+    z-index: 9999;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    overflow-y: auto;
+    padding: 20px;
+    transition: all 1s;
+  }
+  .mobile-sidebar-show {
+    transition: all 1s;
+    right: 0;
+}
+.mobile-sidebar li:not(:last-child){
+    margin-bottom: 20px;
+}
+.mobile-sidebar li a{
+    color: var(--white-color);
+}
+.mobile-sidebar .close-sidebar{
+    color: var(--white-color);
+    font-size: 28px;
+}
+.mobile-sidebar .waviy span{
+    color: var(--white-color);
+}
+.mobile-sidebar .sub-menu {
+    padding: 30px 0;
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.mobile-sidebar .sub-menu a{
+    color: var(--primary-color);
+}
+.mobile-sidebar  li{
+    position: relative;
+}
+.mobile-sidebar .menu-list:hover .sub-menu {
+    top: 40px;
+   
+    display: block;
+}
+.mobile-sidebar::-webkit-scrollbar{
+    width: 4px;
+    height: 4px;
+  }
+.mobile-sidebar::-webkit-scrollbar-track{
+    background-color: var(--white-color);
+  }
+  .mobile-sidebar::-webkit-scrollbar-thumb{
+    background-color: var(--black-color);
+  }
   /* responsive css */
   @media (max-width:1365px){
     header .menu-list:not(:last-child) {
@@ -118,4 +176,20 @@ header .menu-list:hover .sub-menu{
     .header-logo{
       max-width: 180px;
     }
+  }
+  @media (max-width:575px){
+    .header-logo{
+      max-width: 130px;
+    }
+    .authentication-list ul li:not(:last-child) {
+        margin-right: 15px;
+    }
+    header{
+        padding: 0;
+    }
+  }
+  @media (max-width:349px){
+    .header-logo{
+      max-width: 110px;
+    } 
   }

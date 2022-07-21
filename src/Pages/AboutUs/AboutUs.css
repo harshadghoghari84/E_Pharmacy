@@ -42,3 +42,24 @@
         min-height: 85px;
     }
 }
+@media  (max-width: 1199px){
+    .about-products-wrap {
+        grid-template-columns: repeat(3,1fr);
+    }
+    .about-us-products{
+        margin-top: 50px;
+    }
+}
+@media  (max-width: 1199px){
+    .about-products-wrap {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .about-us-products{
+        margin-top: 30px;
+    }
+}
+@media  (max-width: 575px){
+    .about-products-wrap {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
