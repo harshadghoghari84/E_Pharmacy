@@ -16,9 +16,15 @@ export default function CustomInput(props) {
           onChange={props.onChange}
           className={`form-control cutom-input ${props.customInputClassName}`}
         ></Form.Control>
-        <span className={`error-msg-txt d-none ${props?.inputErrorClass}`}>
-          {props.errorMsg}
-        </span>
+        {props.isError && (
+          <span
+            className={`error-msg-txt ${props.isError ? "d-block" : "d-none"} ${
+              props?.inputErrorClass
+            }`}
+          >
+            {props.errorMsg}
+          </span>
+        )}
       </Form.Group>
     </>
   );

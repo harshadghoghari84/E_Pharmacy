@@ -30,13 +30,15 @@ import client from "../src/utils/ApolloClient";
 function AppWrapper() {
   const { loading, error, data } = useQuery(Query.userDetail);
 
-  const isUser = !!data?.userDetail;
+  const user = UserStore.user;
+  const isUser = user || !!data?.userDetail;
 
+  console.log("user", user);
   console.log("isUser", isUser);
 
   return (
     <Router>
-      <Header />
+      <Header user={data?.userDetail} />
       <ScrollToTop />
       <Routes>
         <Route path={"/"} element={isUser ? <Home /> : <Login />} />

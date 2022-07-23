@@ -98,6 +98,7 @@
   --orange-color: #FF6501;
   --white-color: #ffffff;
   --black-color: #000000;
+  --grey-color: #808080;
   --text-color: #121123;
 }
 * {
@@ -177,6 +178,16 @@ p {
   border: 1px solid var(--primary-color);
   font-weight: 500;
   background-color: var(--primary-color);
+  color: var(--white-color);
+  min-width: 100px;
+}
+.custom-diseble-btn {
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px 0 10px 0;
+  border: 1px solid var(--grey-color);
+  font-weight: 500;
+  background-color: var(--grey-color);
   color: var(--white-color);
   min-width: 100px;
 }
