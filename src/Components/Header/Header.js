@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import constant from "../../utils/constant";
 import Headerlogo from "./../../Assets/Images/logo-wide.png";
 import "./Header.css";
 import { inject, observer } from "mobx-react";
+import { toJS } from "mobx";
+import common from "../../utils/common";
 
 const menuOption0 = [
   {
@@ -29,7 +31,7 @@ const menuOption0 = [
     subMenuOption0: "Male Infertility",
   },
 ];
-const Header = ({ user, userStore }) => {
+const Header = ({ user, userStore, globalStore }) => {
   // add remove class on scroll start
   const [isScroll, setIsScroll] = useState(false);
   const [options, setOptions] = useState(false);
@@ -37,8 +39,17 @@ const Header = ({ user, userStore }) => {
 
   //
   const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
+  const isMountedRef = common.useIsMountedRef();
+  useEffect(() => {
+    if (isMountedRef.current) {
+      globalStore.loadAllCatagory();
+    }
+  }, []);
 
+  const catagoryLoading = toJS(globalStore.catLoading);
+  const catagory = toJS(globalStore.AllCatagory);
   console.log("header user", user);
+  console.log("catagoryr", catagory);
 
   const onClickLogout = () => {
     localStorage.removeItem(constant.prfUserToken);
@@ -90,14 +101,16 @@ const Header = ({ user, userStore }) => {
                 <Nav as="ul" className="align-items-center">
                   <Nav.Item as="li" className="menu-list">
                     <Link to="">
-                      Men's Health{" "}
+                      {catagory[0]?.name}
                       <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {menuOption0.map((item) => (
+                      {catagory[0]?.sub_categories.map((item) => (
                         <Nav.Item as="li">
-                          <Link to="/category-product">
-                            {item.subMenuOption0}
+                          <Link
+                            to={`/category-product/${catagory[0]?.id}/${item.id}`}
+                          >
+                            {item.name}
                           </Link>
                         </Nav.Item>
                       ))}
@@ -105,14 +118,16 @@ const Header = ({ user, userStore }) => {
                   </Nav.Item>
                   <Nav.Item as="li" className="menu-list">
                     <Link to="">
-                      Life Saving Drugs{" "}
+                      {catagory[1]?.name}
                       <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {menuOption0.map((item) => (
+                      {catagory[1]?.sub_categories.map((item) => (
                         <Nav.Item as="li">
-                          <Link to="/category-product">
-                            {item.subMenuOption0}
+                          <Link
+                            to={`/category-product/${catagory[1]?.id}/${item.id}`}
+                          >
+                            {item.name}
                           </Link>
                         </Nav.Item>
                       ))}
@@ -282,4 +297,4 @@ const Header = ({ user, userStore }) => {
     </>
   );
 };
-export default inject("userStore")(observer(Header));
+export default inject("userStore", "globalStore")(observer(Header));

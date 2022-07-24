@@ -22,19 +22,19 @@ export default function Home() {
                   <h2 className="head-title text-start mb-0 animated-title">
                     Trendings Products
                   </h2>
-                  <HomeProducts />
+                  {/* <HomeProducts /> */}
                 </div>
                 <div className="home-product-slides">
                   <h2 className="head-title text-start mb-0 animated-title">
                     Buy Generic Cialis online (Tadalafil)
                   </h2>
-                  <HomeProducts />
+                  {/* <HomeProducts /> */}
                 </div>
                 <div className="home-product-slides">
                   <h2 className="head-title text-start mb-0 animated-title">
                     Safest Generic Viagra(Sildenafil Citrate)
                   </h2>
-                  <HomeProducts />
+                  {/* <HomeProducts /> */}
                 </div>
                 <div className="home-product-slides">
                   <h2 className="head-title text-start mb-0 animated-title">

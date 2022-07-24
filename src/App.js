@@ -26,6 +26,7 @@ import { Provider } from "mobx-react";
 import UserStore from "../src/mobx/UserStore";
 import GlobalStore from "../src/mobx/GlobalStore";
 import client from "../src/utils/ApolloClient";
+import common from "./utils/common";
 
 function AppWrapper() {
   const { loading, error, data } = useQuery(Query.userDetail);
@@ -51,8 +52,14 @@ function AppWrapper() {
         <Route path={"/about-us"} element={<AboutUs />} />
         <Route path={"/blog"} element={<Blog />} />
         <Route path={"/order-recieve"} element={<OrderRecieve />} />
-        <Route path={"/category-product"} element={<CategoryProduct />} />
-        <Route path={"/product-details"} element={<ProductDetails />} />
+        <Route
+          path={"/category-product/:mainId/:subId"}
+          element={<CategoryProduct />}
+        />
+        <Route
+          path={"/product-details/:productId"}
+          element={<ProductDetails />}
+        />
         <Route path={"/cart"} element={<Cart />} />
         <Route path={"/my-account"} element={<MyAccount />} />
         <Route path={"/my-account-details"} element={<MyAccountDetails />} />
