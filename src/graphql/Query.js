@@ -115,4 +115,30 @@ export default {
       }
     }
   `,
+  viewCart: gql`
+    query ViewCart {
+      viewCart {
+        cartItems {
+          id
+          sku
+          title
+          medicine_detail {
+            id
+            price
+            cart_master {
+              id
+              qty
+              subtotal
+            }
+          }
+        }
+        countryList {
+          country
+          currency
+          id
+          shipping_charge
+        }
+      }
+    }
+  `,
 };

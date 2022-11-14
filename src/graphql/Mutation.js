@@ -32,4 +32,76 @@ export default {
       }
     }
   `,
+  addToCart: gql`
+    mutation AddToCart($medicineId: Int!, $qty: Int!) {
+      addToCart(medicineId: $medicineId, qty: $qty) {
+        cartItems {
+          id
+          sku
+          title
+          medicine_detail {
+            id
+            price
+            cart_master {
+              id
+              qty
+              subtotal
+            }
+          }
+        }
+        countryList {
+          country
+          currency
+          id
+          shipping_charge
+        }
+      }
+    }
+  `,
+  removeCartItem: gql`
+    mutation RemoveCartItem($removeCartItemId: Int!) {
+      removeCartItem(id: $removeCartItemId)
+    }
+  `,
+  checkoutOrder: gql`
+    mutation CheckOutOrder(
+      $fName: String!
+      $lName: String!
+      $address: String!
+      $city: String!
+      $postcode: Int!
+      $state: String!
+      $country: String!
+      $phoneNo: String!
+      $email: String!
+      $orderItems: [orderItem]!
+    ) {
+      checkOutOrder(
+        fName: $fName
+        lName: $lName
+        address: $address
+        city: $city
+        postcode: $postcode
+        state: $state
+        country: $country
+        phoneNo: $phoneNo
+        email: $email
+        orderItems: $orderItems
+      ) {
+        create_time
+        id
+        links {
+          href
+          method
+          rel
+        }
+        transactions {
+          amount {
+            currency
+            total
+          }
+        }
+      }
+    }
+  `,
 };

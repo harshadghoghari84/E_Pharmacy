@@ -16,6 +16,7 @@ export default function CategoryProduct() {
     Querys.productByCatogary,
     {
       fetchPolicy: "no-cache",
+      errorPolicy: "all",
     }
   );
 
@@ -168,7 +169,8 @@ export default function CategoryProduct() {
                         <h2 className="head-title text-start mb-0 animated-title">
                           {data?.getCategoryProduct[0]?.brand}
                         </h2>
-                        <HomeProducts data={data?.getCategoryProduct} />
+
+                        <HomeProducts data={data} />
                       </div>
 
                       {/* <div className="home-product-slides">

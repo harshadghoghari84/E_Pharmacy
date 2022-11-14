@@ -18,6 +18,7 @@ const Login = ({ userStore }) => {
   const [message, setMessage] = React.useState({ message: "", type: "" });
   const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
     errorPolicy: "all",
+    fetchPolicy: "no-cache",
   });
 
   useEffect(() => {

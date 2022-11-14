@@ -37,30 +37,36 @@ const HomeProducts = ({ data }) => {
   };
   return (
     <>
-      <Slider {...homeProductSlider} className="product-slider-wrap">
-        {data?.map((item) => {
-          return (
-            <div>
-              <div className="product-wrap">
-                <div className="product-img">
-                  <Image src={item.img_url} fluid alt="" />
-                </div>
-                <div className="product-details">
-                  <p>{item.title}</p>
-                  <span>Just {item?.medicine_details[0]?.price} /Piece</span>
-                  <Link to={`/product-details/${item.id}`}>
-                    <CustomButton
-                      text="View Details"
-                      formGroupClassName="form-group text-center w-100 mt-4"
-                    />
-                  </Link>
+      {data?.getCategoryProduct.length > 0 ? (
+        <Slider {...homeProductSlider} className="product-slider-wrap">
+          {data.getCategoryProduct.map((item) => {
+            return (
+              <div>
+                <div className="product-wrap">
+                  <div className="product-img">
+                    <Image src={item.img_url} fluid alt="" />
+                  </div>
+                  <div className="product-details">
+                    <p>{item.title}</p>
+                    {item?.medicine_details !== null &&
+                    item?.medicine_details.length > 0 ? (
+                      <span>
+                        Just {item?.medicine_details[0]?.price} /Piece
+                      </span>
+                    ) : null}
+                    <Link to={`/product-details/${item.id}`}>
+                      <CustomButton
+                        text="View Details"
+                        formGroupClassName="form-group text-center w-100 mt-4"
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
-        {/* <div>
+          {/* <div>
           <div className="product-wrap">
             <div className="product-img">
               <Image src={product0} fluid alt="" />
@@ -145,7 +151,8 @@ const HomeProducts = ({ data }) => {
             </div>
           </div>
         </div> */}
-      </Slider>
+        </Slider>
+      ) : null}
     </>
   );
 };

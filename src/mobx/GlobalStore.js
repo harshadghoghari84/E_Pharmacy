@@ -6,6 +6,10 @@ class GlobalStore {
   AllCatagory = [];
   subCatagoryId = null;
   catLoading = false;
+  selectedProductQty = [];
+  cartData = [];
+  checkOutData = [];
+  countryList = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -32,6 +36,29 @@ class GlobalStore {
   setSubCatagoryId = (id) => {
     console.log("ID--", id);
     this.subCatagoryId = id;
+  };
+  setSelectProductQty = (id, qty) => {
+    if (this.selectedProductQty.length > 0) {
+      const filterArray = this.selectedProductQty.filter(
+        (ele) => ele.medicineId !== id
+      );
+      this.selectedProductQty = [...filterArray, { medicineId: id, qty: qty }];
+    } else {
+      this.selectedProductQty = [
+        ...this.selectedProductQty,
+        { medicineId: id, qty: qty },
+      ];
+    }
+  };
+
+  setCartData = (data) => {
+    this.cartData = [...this.cartData, data];
+  };
+  setCheckOutData = (data) => {
+    this.checkOutData = data;
+  };
+  setCountryList = (data) => {
+    this.countryList = data;
   };
 }
 

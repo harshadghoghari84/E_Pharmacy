@@ -45,7 +45,7 @@ const Header = ({ user, userStore, globalStore }) => {
       globalStore.loadAllCatagory();
     }
   }, []);
-
+  const checkOutData = toJS(globalStore.cartData);
   const catagoryLoading = toJS(globalStore.catLoading);
   const catagory = toJS(globalStore.AllCatagory);
   console.log("header user", user);
@@ -183,9 +183,16 @@ const Header = ({ user, userStore, globalStore }) => {
               <div className="authentication-list">
                 <Nav as="ul">
                   {user ? (
-                    <Nav.Item as="li" onClick={onClickLogout}>
-                      <Link to="/login">Logout</Link>
-                    </Nav.Item>
+                    <>
+                      <Nav.Item as="li" onClick={onClickLogout}>
+                        <Link to="/login">Logout</Link>
+                      </Nav.Item>
+                      {checkOutData.length > 0 && (
+                        <Nav.Item as="li">
+                          <Link to="/cart">View Cart</Link>
+                        </Nav.Item>
+                      )}
+                    </>
                   ) : (
                     <>
                       <Nav.Item as="li">

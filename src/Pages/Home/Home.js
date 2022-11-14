@@ -1,13 +1,11 @@
-import HeroSlider from "./HeroSlider/HeroSlider";
-import HomeProducts from "./HomeProducts/HomeProducts";
 import React from "react";
-import { Container, Row, Image } from "react-bootstrap";
-import safetySequrityImg2 from "./../../Assets/Images/logo/copyscape-banner-blue.png";
-import safetySequrityImg3 from "./../../Assets/Images/logo/DMCA_logo.png";
-import cuponCode from "./../../Assets/Images/logo/cupon-code.png";
+import { Container, Image, Row } from "react-bootstrap";
 import guranteeCode from "./../../Assets/Images/logo/100-Guarantee-Seal.png";
+import safetySequrityImg2 from "./../../Assets/Images/logo/copyscape-banner-blue.png";
+import cuponCode from "./../../Assets/Images/logo/cupon-code.png";
+import safetySequrityImg3 from "./../../Assets/Images/logo/DMCA_logo.png";
 import sslSequreCode from "./../../Assets/Images/logo/SSL-Secure-Connection.png";
-import Badge from "../../Components/Badge/Badge";
+import HeroSlider from "./HeroSlider/HeroSlider";
 import "./Home.css";
 export default function Home() {
   return (
