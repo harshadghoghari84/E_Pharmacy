@@ -10,8 +10,8 @@ import Querys from "../../graphql/Query";
 export default function CategoryProduct() {
   const { mainId, subId } = useParams();
 
-  console.log("-----mainId----", mainId);
-  console.log("-----subId----", subId);
+  // console.log("-----mainId----", mainId);
+  // console.log("-----subId----", subId);
   const [products, { data, loading, error }] = useLazyQuery(
     Querys.productByCatogary,
     {
@@ -28,8 +28,8 @@ export default function CategoryProduct() {
     }
   }, [mainId, subId]);
 
-  console.log("category error--->", error);
-  console.log("category data--->", data);
+  // console.log("category error--->", error);
+  // console.log("category data--->", data);
 
   const CategoryProductDetails = [
     {
@@ -83,7 +83,7 @@ export default function CategoryProduct() {
                   <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center">
                     <Link to="/">
                       <span className="d-flex align-items-center">
-                        <i class="ri-home-smile-2-line me-1"></i> Home
+                        <i className="ri-home-smile-2-line me-1"></i> Home
                       </span>
                     </Link>{" "}
                     <b className="mx-3">::</b> <span>Category Product</span>
@@ -169,7 +169,6 @@ export default function CategoryProduct() {
                         <h2 className="head-title text-start mb-0 animated-title">
                           {data?.getCategoryProduct[0]?.brand}
                         </h2>
-
                         <HomeProducts data={data} />
                       </div>
 

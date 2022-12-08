@@ -104,4 +104,27 @@ export default {
       }
     }
   `,
+  updateCart: gql`mutation UpdateCart($updateCartId: Int!, $qty: Int) {
+    updateCart(id: $updateCartId, qty: $qty)
+  }`,
+  confirmPayment: gql`mutation ConfirmPayment($paymentId: String!, $total: String!, $currency: String!, $href: String!, $rel: String!) {
+    confirmPayment(paymentId: $paymentId, total: $total, currency: $currency, href: $href, rel: $rel)
+  }`
+  // checkoutOrder:gql`mutation CheckOutOrder($fName: String!, $lName: String!, $address: String!, $city: String!, $postcode: Int!, $state: String!, $country: String!, $phoneNo: String!, $email: String!, $orderItems: [orderItem]!) {
+  //   checkOutOrder(fName: $fName, lName: $lName, address: $address, city: $city, postcode: $postcode, state: $state, country: $country, phoneNo: $phoneNo, email: $email, orderItems: $orderItems) {
+  //     id
+  //     create_time
+  //     transactions {
+  //       amount {
+  //         total
+  //         currency
+  //       }
+  //     }
+  //     links {
+  //       href
+  //       rel
+  //       method
+  //     }
+  //   }
+  // }`
 };

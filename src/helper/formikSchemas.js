@@ -23,9 +23,10 @@ export const billingDetailsSchema = Yup.object().shape({
     .email("Invalid email address")
     .required("Email is required"),
   city: Yup.string().required("City is required"),
-  postcode: Yup.string().required("Postcode is required"),
+  postcode: Yup.number().required("Postcode is required"),
   state: Yup.string().required("State is required"),
   country: Yup.string().required("Country is required"),
-  phoneNo: Yup.string().required("Phone number is required"),
-  companyName: Yup.string().required("companyName is required"),
+  phoneNo: Yup.string().required("Phone number is required")
+    .min(10, 'Must be exactly 10 digits')
+    .max(10, 'Must be exactly 10 digits')// companyName: Yup.string().required("companyName is required"),
 });

@@ -11,16 +11,15 @@ import Mutation from "../../graphql/Mutation";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 
-const ProductDetails = ({ globalStore }) => {
+const ProductDetails = () => {
   const { productId } = useParams();
-  console.log("productId", productId);
 
-  const productQty = toJS(globalStore.selectedProductQty);
-  const checkOutData = toJS(globalStore.cartData);
+  const [productData, setProductData] = useState()
+  const [medicineData, setMedicineData] = useState()
 
-  const [quantity, setQuantity] = useState(1);
+  // const productQty = toJS(globalStore.selectedProductQty);
 
-  const [selectedProduct, { data }] = useLazyQuery(Querys.getSelectedProduct, {
+  const [selectedProduct, { data: productInfo }] = useLazyQuery(Querys.getSelectedProduct, {
     fetchPolicy: "no-cache",
   });
 
@@ -32,15 +31,6 @@ const ProductDetails = ({ globalStore }) => {
   );
 
   useEffect(() => {
-    if (error) {
-      console.log("cart error ", error);
-    }
-    if (cartData) {
-      console.log("cartData ", cartData);
-    }
-  }, [cartData, error]);
-
-  useEffect(() => {
     if (productId) {
       selectedProduct({
         variables: { productId: parseInt(productId) },
@@ -48,75 +38,95 @@ const ProductDetails = ({ globalStore }) => {
     }
   }, [productId]);
 
-  console.log("selected product data", data);
-  console.log("checkOutData", checkOutData);
+  // console.log("medicineData", medicineData)
 
-  const selectedProductData = data?.getSelectedProduct?.selectedProduct;
+  useEffect(() => {
+    if (productInfo) {
+      setProductData(productInfo?.getSelectedProduct?.relatedProduct[0])
+
+      let medicineInfo = []
+      productInfo?.getSelectedProduct?.selectedProduct?.medicine_details?.forEach((data) => {
+        medicineInfo.push({ ...data, qty: 1 })
+      })
+      setMedicineData(medicineInfo)
+    }
+  }, [productInfo])
 
   const handleAddToCart = (id) => {
-    console.log("productQty ,", productQty);
+    let product = medicineData.find((ele) => ele?.id === id);
 
-    let product = productQty.find((ele) => ele.medicineId === id);
-    console.log("product---", product);
     if (product) {
-      addToCart({ variables: product }).then((res) => {
-        console.log("res", res);
-        globalStore.setCartData(res.data.addToCart.cartItems);
+      addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
+        // globalStore.setCartData(res.data.addToCart.cartItems);
       });
     } else {
       addToCart({ variables: { medicineId: id, qty: 1 } }).then((res) => {
-        globalStore.setCartData(res.data.addToCart.cartItems);
+        // globalStore.setCartData(res.data.addToCart.cartItems);
       });
     }
   };
-  console.log("quantity", quantity);
+
+  const handleSelectMedicine = (qty, id) => {
+    const tempMedicineData = [...medicineData]
+
+    let item = tempMedicineData.find(item => item.id === id)
+    if (item) {
+      item.qty = Number(qty)
+    }
+
+    setMedicineData(tempMedicineData)
+  }
+
   return (
     <>
       <section className="mt-5">
         <Container>
           <Row>
-            <Col lg="5" xl="4" className="text-center">
-              <ProductSlider image={selectedProductData?.img_url} />
-            </Col>
-            <Col lg="7" xl="8" className="mt-4 mt-lg-0">
-              <h5>
-                <b>{selectedProductData?.title}</b>
-              </h5>
-              {/* <h5 className="primary-color">
+            {productData && <>
+              <Col lg="5" xl="4" className="text-center">
+                <ProductSlider image={productData.img_url} />
+              </Col>
+              <Col lg="7" xl="8" className="mt-4 mt-lg-0">
+                <h5>
+                  <b>{productData?.title}</b>
+                </h5>
+                {/* <h5 className="primary-color">
                 <b>Rs.150</b>
               </h5> */}
-              <p>{selectedProductData?.indication}</p>
-              <Nav as="ul" className="nav-ul-block product-detail-content">
-                <Nav.Item as="li">
-                  <b>Active Ingredient(Generic Name):</b>
-                  <span>{selectedProductData?.ingredient}</span>
-                </Nav.Item>
-                <Nav.Item as="li">
-                  <b>Indication:</b>
-                  <span>{selectedProductData?.indication}</span>
-                </Nav.Item>
-                <Nav.Item as="li">
-                  <b>Packaging:</b>
-                  <span>4 Tablets in strip</span>
-                </Nav.Item>
-                <Nav.Item as="li">
-                  <b>Manufacturer:</b>
-                  <span>{selectedProductData?.manufacturer}</span>
-                </Nav.Item>
-              </Nav>
-              <h6 className="mt-4">
-                Delivery Time :{" "}
-                <span className="primary-color">
-                  {selectedProductData?.delivery_time_min} to{" "}
-                  {selectedProductData?.delivery_time_max} days
-                </span>
-              </h6>
-            </Col>
-            {selectedProductData?.medicine_details?.length > 0 ? (
+                <p>{productData?.indication}</p>
+                <Nav as="ul" className="nav-ul-block product-detail-content">
+                  <Nav.Item as="li">
+                    <b>Active Ingredient(Generic Name):</b>
+                    <span>{productData?.ingredient}</span>
+                  </Nav.Item>
+                  <Nav.Item as="li">
+                    <b>Indication:</b>
+                    <span>{productData?.indication}</span>
+                  </Nav.Item>
+                  <Nav.Item as="li">
+                    <b>Packaging:</b>
+                    <span>4 Tablets in strip</span>
+                  </Nav.Item>
+                  <Nav.Item as="li">
+                    <b>Manufacturer:</b>
+                    <span>{productData?.manufacturer}</span>
+                  </Nav.Item>
+                </Nav>
+                <h6 className="mt-4">
+                  Delivery Time :{" "}
+                  <span className="primary-color">
+                    {productData?.delivery_time_min} to{" "}
+                    {productData?.delivery_time_max} days
+                  </span>
+                </h6>
+              </Col>
+            </>
+            }
+            {medicineData?.length > 0 ? (
               <Col xs="12" className="mt-5">
                 <div className="product-detail-tbl-highlight">
                   <h6 className="text-center mb-0">
-                    {selectedProductData?.title}
+                    {productData?.title}
                   </h6>
                 </div>
                 <div className="table-responsive">
@@ -131,7 +141,7 @@ const ProductDetails = ({ globalStore }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {selectedProductData?.medicine_details?.map((item) => {
+                      {medicineData?.map((item) => {
                         return (
                           <tr>
                             <td>{item.piece} Tablet/s</td>
@@ -140,18 +150,13 @@ const ProductDetails = ({ globalStore }) => {
                             <td>
                               <Form.Select
                                 as="select"
-                                onChange={(e) => {
-                                  globalStore.setSelectProductQty(
-                                    item.id,
-                                    parseInt(e.target.value)
-                                  );
-                                  setQuantity(e.target.value);
-                                }}
+                                value={item.qty}
+                                onChange={(e) => { handleSelectMedicine(e.target.value, item.id) }}
                               >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                               </Form.Select>
                             </td>
                             <td>
@@ -170,16 +175,16 @@ const ProductDetails = ({ globalStore }) => {
                 </div>
               </Col>
             ) : null}
-            {checkOutData.length > 0 && (
-              <div className="view-cart">
-                <Link to="/cart">
-                  <CustomButton
-                    text="View Cart"
-                    formGroupClassName="form-group mt-4 mb-0"
-                  />
-                </Link>
-              </div>
-            )}
+            {/* {checkOutData.length > 0 && ( */}
+            <div className="view-cart">
+              <Link to="/cart">
+                <CustomButton
+                  text="View Cart"
+                  formGroupClassName="form-group mt-4 mb-0"
+                />
+              </Link>
+            </div>
+            {/* )} */}
             <Col xs="12" className="mt-5">
               <span className="mb-1 d-block inner-page-small-title">
                 Customer Review

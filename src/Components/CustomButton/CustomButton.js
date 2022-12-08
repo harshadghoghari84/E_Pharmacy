@@ -11,6 +11,7 @@ export default function CustomButton(props) {
           className={`${props.disabled ? "custom-diseble-btn" : "custom-btn"} ${
             props.customBtnClassName
           }`}
+          onClick={props.onClick}
         >
           {props.loading ? <Spinner animation="grow" size="sm" /> : props.text}
         </Button>

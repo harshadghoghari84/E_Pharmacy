@@ -13,7 +13,6 @@ import { inject, observer } from "mobx-react";
 const Cart = ({ globalStore }) => {
   const [cartData, setCartData] = useState([]);
   const [countryList, setCountryList] = useState([]);
-  const [quantity, setQuantity] = useState([]);
   const [subTotal, setSubTotal] = useState(null);
   const [shippingCharge, setShippingCharge] = useState(null);
 
@@ -27,53 +26,73 @@ const Cart = ({ globalStore }) => {
     errorPolicy: "all",
   });
 
+  const [updateCart] = useMutation(Mutation.updateCart, {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  });
+
   useEffect(() => {
     viewCart();
   }, []);
 
   useEffect(() => {
     if (data) {
-      console.log("CART DATA", data);
-      setCartData(data.viewCart.cartItems);
-      globalStore.setCartData(data.viewCart.cartItems);
-      globalStore.setCheckOutData(data.viewCart.cartItems);
-      globalStore.setCountryList(data.viewCart.countryList);
-      setCountryList(data.viewCart.countryList);
+      // console.log("CART DATA", data.viewCart.cartItems);
+      setCartData(data?.viewCart?.cartItems);
+      setCountryList(data?.viewCart?.countryList);
+
+      // globalStore.setCartData(data.viewCart.cartItems);
+      globalStore.setCheckOutData(data?.viewCart?.cartItems);
+      globalStore.setCountryList(data?.viewCart?.countryList);
     }
   }, [data]);
 
   useEffect(() => {
     if (cartData?.length > 0) {
-      console.log("cartData----------", cartData);
       const subTotalPrice = cartData?.reduce(
         (previousValue, currentValue) =>
-          previousValue + currentValue.medicine_detail.cart_master.subtotal,
+          previousValue + currentValue.medicine_detail.price * currentValue.medicine_detail.cart_master.qty,
         0
       );
-      console.log("subTotalPrice", subTotalPrice);
+
       setSubTotal(subTotalPrice);
-      let productQty = [];
-      cartData.map((ele) => {
-        productQty.push(ele.medicine_detail.cart_master.qty);
-      });
-      console.log("productQty", productQty);
-      setQuantity(productQty);
     }
   }, [cartData]);
 
   useEffect(() => {
     if (countryList?.length > 0) {
       const charge = countryList.find((ele) => ele.country === "USA");
-
-      console.log("charge", charge);
+      // console.log("charge", charge);
       setShippingCharge(charge.shipping_charge);
     }
   }, [countryList]);
 
+  const handleQuantityChange = (qty, id, items) => {
+
+    // const tempCartData = [...cartData]
+    // let item = tempCartData.find(item => item.medicine_detail.cart_master.id === id)
+
+    // if (item) {
+    //   item.medicine_detail.cart_master.qty = qty
+    //   // item.medicine_detail.cart_master.subtotal = item.medicine_detail.price * qty
+    // }
+    // setCartData(tempCartData)
+
+    // console.log("id", id, qty)
+    updateCart({ variables: { updateCartId:  Number(id), qty: Number(qty) } })
+      .then((res) => {
+        if (res) {
+          viewCart()
+        }
+      })
+      .catch((err) => {
+        console.log("updateCart -------", err);
+      });
+  }
+
   const removeItem = (id) => {
     removeCart({ variables: { removeCartItemId: id } })
       .then((res) => {
-        console.log("res", res);
         if (res) {
           viewCart();
         }
@@ -83,9 +102,12 @@ const Cart = ({ globalStore }) => {
       });
   };
 
-  console.log("cartData", cartData);
-  console.log("countryList", countryList);
-  console.log("quantity", quantity);
+  // const handleCheckout = () => {
+  //   // globalStore.setCartData(cartData);
+  //   globalStore.setCheckOutData(cartData);
+  //   globalStore.setCountryList(countryList);
+  // }
+
   return (
     <>
       <section className="page-head-section">
@@ -96,7 +118,7 @@ const Cart = ({ globalStore }) => {
               <p className="broadcast-title mb-0 d-flex align-items-center justify-content-center">
                 <Link to="/">
                   <span className="d-flex align-items-center">
-                    <i class="ri-home-smile-2-line me-1"></i> Home
+                    <i className="ri-home-smile-2-line me-1"></i> Home
                   </span>
                 </Link>{" "}
                 <b className="mx-3">::</b> <span>Cart</span>
@@ -129,25 +151,17 @@ const Cart = ({ globalStore }) => {
                   <tbody>
                     {cartData.length > 0 &&
                       cartData.map((item, index) => {
-                        console.log(
-                          "item.medicine_detail.cart_master.qty",
-                          item.medicine_detail.cart_master.qty
-                        );
-
+                        // { console.log("items", item) }
                         return (
                           <tr>
                             <td className="">
                               <div className="d-flex align-items-center">
                                 <Link
-                                  onClick={() =>
-                                    removeItem(
-                                      item.medicine_detail.cart_master.id
-                                    )
-                                  }
+                                  onClick={() => removeItem(item.medicine_detail.cart_master.id)}
                                   to=""
                                 >
                                   <div className="delete-cart-product me-3">
-                                    <i class="ri-delete-bin-line"></i>
+                                    <i className="ri-delete-bin-line"></i>
                                   </div>
                                 </Link>
                                 <div className="cart-product-img">
@@ -167,7 +181,7 @@ const Cart = ({ globalStore }) => {
                             <td>
                               <Form.Select
                                 value={item.medicine_detail.cart_master.qty}
-                                onChange={(e) => setQuantity(e.target.value)}
+                                onChange={(e) => handleQuantityChange(e.target.value, item.medicine_detail.cart_master.id, item)}
                               >
                                 {[...Array(50).keys()].map((ele) => {
                                   return <option value={ele}>{ele}</option>;
@@ -175,7 +189,7 @@ const Cart = ({ globalStore }) => {
                               </Form.Select>
                             </td>
                             <td>
-                              ${item.medicine_detail.cart_master.subtotal}
+                              ${item.medicine_detail.price * item.medicine_detail.cart_master.qty}
                             </td>
                           </tr>
                         );
@@ -183,14 +197,14 @@ const Cart = ({ globalStore }) => {
                   </tbody>
                 </table>
               </div>
-              <div className="apply-code d-flex align-items-center flex-wrap w-100">
+              {/* <div className="apply-code d-flex align-items-center flex-wrap w-100">
                 <Link to="#" className="ms-auto d-flex">
                   <CustomButton
                     text="Update cart"
                     formGroupClassName="form-group mb-0"
                   />
                 </Link>
-              </div>
+              </div> */}
             </Col>
             <Col xs="12" className="mt-4">
               <h6>Card Totals</h6>
@@ -212,7 +226,7 @@ const Cart = ({ globalStore }) => {
                 <Nav.Item as="li">
                   <b>Total:</b>
                   <span>
-                    <b className="p-0 bg-transparent">${subTotal}</b>
+                    <b className="p-0 bg-transparent">${subTotal + shippingCharge}</b>
                   </span>
                 </Nav.Item>
               </Nav>
@@ -220,6 +234,7 @@ const Cart = ({ globalStore }) => {
                 <CustomButton
                   text="Process to Chekout"
                   formGroupClassName="form-group mb-0 mt-3"
+                  // onClick={handleCheckout}
                 />
               </Link>
             </Col>

@@ -1,9 +1,10 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import constant from "../utils/constant";
 import Constant from "../utils/constant";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_API_URL,
+  uri: constant.serverUrl,
 });
 
 const authLink = setContext(async (_, { headers }) => {

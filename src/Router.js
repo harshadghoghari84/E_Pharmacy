@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Query from "../src/graphql/Query";
 import UserStore from "../src/mobx/UserStore";
@@ -26,56 +26,53 @@ import TermsConditions from "./Pages/TermsConditions/TermsConditions";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 
-const AppWrapper = ({ userStore }) => {
-  const { loading, error, data } = useQuery(Query.userDetail);
+const AppWrapper = ({ globalStore, userStore }) => {
 
-  const user = toJS(userStore.user);
-  console.log("user", user);
-
-  const isUser = user || !!data?.userDetail;
-
-  console.log("isUser", isUser);
+  useEffect(() => {
+    globalStore.loadAllCatagory();
+    userStore.loadUserBillingDetails()
+  }, [userStore.user])
 
   return (
     <Router>
-      {loading ? (
+      {/* {loading ? (
         <div>Loading...</div>
-      ) : (
-        <>
-          {isUser && <Header user={data?.userDetail} />}
-          <ScrollToTop />
-          <Routes>
-            <Route path={"/"} element={isUser ? <Home /> : <Login />} />
-            <Route path={"/login"} element={<Login />} />
-            <Route path={"/register"} element={<Register />} />
-            <Route path={"/contact-us"} element={<ContactUs />} />
-            <Route path={"/faq"} element={<Faq />} />
-            <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
-            <Route path={"/terms-conditions"} element={<TermsConditions />} />
-            <Route path={"/about-us"} element={<AboutUs />} />
-            <Route path={"/blog"} element={<Blog />} />
-            <Route path={"/order-recieve"} element={<OrderRecieve />} />
-            <Route
-              path={"/category-product/:mainId/:subId"}
-              element={<CategoryProduct />}
-            />
-            <Route
-              path={"/product-details/:productId"}
-              element={<ProductDetails />}
-            />
-            <Route path={"/cart"} element={<Cart />} />
-            <Route path={"/my-account"} element={<MyAccount />} />
-            <Route
-              path={"/my-account-details"}
-              element={<MyAccountDetails />}
-            />
-            <Route path={"/checkout"} element={<Checkout />} />
-          </Routes>
-          <Footer />
-        </>
-      )}
+      ) : ( */}
+      <>
+        <Header />
+        <ScrollToTop />
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/register"} element={<Register />} />
+          <Route path={"/contact-us"} element={<ContactUs />} />
+          <Route path={"/faq"} element={<Faq />} />
+          <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
+          <Route path={"/terms-conditions"} element={<TermsConditions />} />
+          <Route path={"/about-us"} element={<AboutUs />} />
+          <Route path={"/blog"} element={<Blog />} />
+          <Route path={"/order-recieve"} element={<OrderRecieve />} />
+          <Route
+            path={"/category-product/:mainId/:subId"}
+            element={<CategoryProduct />}
+          />
+          <Route
+            path={"/product-details/:productId"}
+            element={<ProductDetails />}
+          />
+          <Route path={"/cart"} element={<Cart />} />
+          <Route path={"/my-account"} element={<MyAccount />} />
+          <Route
+            path={"/my-account-details"}
+            element={<MyAccountDetails />}
+          />
+          <Route path={"/checkout"} element={<Checkout />} />
+        </Routes>
+        <Footer />
+      </>
+      {/* )} */}
     </Router>
   );
 };
 
-export default inject("userStore")(observer(AppWrapper));
+export default inject("userStore", "globalStore")(observer(AppWrapper));

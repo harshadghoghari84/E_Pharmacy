@@ -13,6 +13,7 @@ class GlobalStore {
   constructor() {
     makeAutoObservable(this);
   }
+  
   loadAllCatagory = () => {
     this.catLoading = true;
     ApolloClient.query({
@@ -34,9 +35,9 @@ class GlobalStore {
   };
 
   setSubCatagoryId = (id) => {
-    console.log("ID--", id);
     this.subCatagoryId = id;
   };
+
   setSelectProductQty = (id, qty) => {
     if (this.selectedProductQty.length > 0) {
       const filterArray = this.selectedProductQty.filter(

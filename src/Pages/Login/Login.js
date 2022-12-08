@@ -36,7 +36,7 @@ const Login = ({ userStore }) => {
     },
     validationSchema: loginSchema,
     onSubmit: ({ mobile, password }) => {
-      console.log("called submit");
+      // console.log("called submit");
       userSignIn({
         variables: {
           mobile,
@@ -44,8 +44,8 @@ const Login = ({ userStore }) => {
         },
       })
         .then(async ({ data, errors }) => {
-          console.log("data--", data);
-          console.log("errors--", errors);
+          // console.log("data--", data);
+          // console.log("errors--", errors);
           if (data) {
             localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
             userStore.setUser(data.userSingIn.user);
@@ -55,7 +55,7 @@ const Login = ({ userStore }) => {
             });
             handleClick();
             setTimeout(() => {
-              console.log("navigate");
+              // console.log("navigate");
               navigate("/");
             }, 1000);
           }
@@ -89,7 +89,7 @@ const Login = ({ userStore }) => {
               placeholder="Mobile Number"
               value={formik.values.mobile}
               onChange={formik.handleChange("mobile")}
-              isError={formik.errors.mobile && Boolean(formik.errors.mobile)}
+              isError={formik.errors.mobile && formik.touched.mobile && Boolean(formik.errors.mobile)}
               errorMsg={formik.errors.mobile}
               formGroupClassName="form-group"
               formLabel="Mobile"
@@ -101,7 +101,7 @@ const Login = ({ userStore }) => {
               value={formik.values.password}
               onChange={formik.handleChange("password")}
               isError={
-                formik.errors.password && Boolean(formik.errors.password)
+                formik.errors.password && formik.touched.password && Boolean(formik.errors.password)
               }
               errorMsg={formik.errors.password}
               formGroupClassName="form-group"

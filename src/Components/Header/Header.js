@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import Query from "../../graphql/Query";
+import { Link, useLocation } from "react-router-dom";
 import constant from "../../utils/constant";
 import Headerlogo from "./../../Assets/Images/logo-wide.png";
 import "./Header.css";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 import common from "../../utils/common";
+import UserStore from "../../mobx/UserStore";
 
 const menuOption0 = [
   {
@@ -31,30 +34,29 @@ const menuOption0 = [
     subMenuOption0: "Male Infertility",
   },
 ];
-const Header = ({ user, userStore, globalStore }) => {
-  // add remove class on scroll start
-  const [isScroll, setIsScroll] = useState(false);
-  const [options, setOptions] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  //
+const Header = ({ userStore, globalStore }) => {
+  const location = useLocation()
   const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
-  const isMountedRef = common.useIsMountedRef();
-  useEffect(() => {
-    if (isMountedRef.current) {
-      globalStore.loadAllCatagory();
-    }
-  }, []);
-  const checkOutData = toJS(globalStore.cartData);
-  const catagoryLoading = toJS(globalStore.catLoading);
   const catagory = toJS(globalStore.AllCatagory);
-  console.log("header user", user);
-  console.log("catagoryr", catagory);
+  
+  const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken)
+  // console.log("category", catagory)
+
+  // const isMountedRef = common.useIsMountedRef();
+  // // useEffect(() => {
+  // //   if (isMountedRef.current) {
+  // //     globalStore.loadAllCatagory();
+  // //   }
+  // // }, []);
 
   const onClickLogout = () => {
     localStorage.removeItem(constant.prfUserToken);
     userStore.setUser(null);
   };
+
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return null;
+  }
 
   return (
     <>
@@ -80,7 +82,7 @@ const Header = ({ user, userStore, globalStore }) => {
             <Col md="6">
               <div className="d-flex align-items-center justify-content-end header-social-text">
                 <Link to="/" className="d-flex align-items-center">
-                  <i class="ri-phone-fill me-2"></i> +91 9232651519
+                  <i className="ri-phone-fill me-2"></i> +91 9232651519
                 </Link>
                 <Link to="/" className="d-flex align-items-center">
                   <i className="ri-mail-send-line me-2"></i> admin@gmail.com
@@ -101,14 +103,14 @@ const Header = ({ user, userStore, globalStore }) => {
                 <Nav as="ul" className="align-items-center">
                   <Nav.Item as="li" className="menu-list">
                     <Link to="">
-                      {catagory[0]?.name}
+                      {catagory?.[0]?.name}
                       <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {catagory[0]?.sub_categories.map((item) => (
+                      {catagory?.[0]?.sub_categories.map((item) => (
                         <Nav.Item as="li">
                           <Link
-                            to={`/category-product/${catagory[0]?.id}/${item.id}`}
+                            to={`/category-product/${catagory?.[0]?.id}/${item.id}`}
                           >
                             {item.name}
                           </Link>
@@ -118,14 +120,14 @@ const Header = ({ user, userStore, globalStore }) => {
                   </Nav.Item>
                   <Nav.Item as="li" className="menu-list">
                     <Link to="">
-                      {catagory[1]?.name}
+                      {catagory?.[1]?.name}
                       <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {catagory[1]?.sub_categories.map((item) => (
+                      {catagory?.[1]?.sub_categories.map((item) => (
                         <Nav.Item as="li">
                           <Link
-                            to={`/category-product/${catagory[1]?.id}/${item.id}`}
+                            to={`/category-product/${catagory?.[1]?.id}/${item.id}`}
                           >
                             {item.name}
                           </Link>
@@ -185,13 +187,13 @@ const Header = ({ user, userStore, globalStore }) => {
                   {user ? (
                     <>
                       <Nav.Item as="li" onClick={onClickLogout}>
-                        <Link to="/login">Logout</Link>
+                        <Link to="/">Logout</Link>
                       </Nav.Item>
-                      {checkOutData.length > 0 && (
-                        <Nav.Item as="li">
-                          <Link to="/cart">View Cart</Link>
-                        </Nav.Item>
-                      )}
+                      {/* {checkOutData.length > 0 && ( */}
+                      <Nav.Item as="li">
+                        <Link to="/cart">View Cart</Link>
+                      </Nav.Item>
+                      {/* )} */}
                     </>
                   ) : (
                     <>
@@ -224,13 +226,12 @@ const Header = ({ user, userStore, globalStore }) => {
         </Container>
       </header>
       <div
-        className={`mobile-sidebar d-xl-none ${
-          mobileSidebarOpen && "mobile-sidebar-show"
-        }`}
+        className={`mobile-sidebar d-xl-none ${mobileSidebarOpen && "mobile-sidebar-show"
+          }`}
       >
         <div className="w-100 d-flex justify-content-end">
           <i
-            class="ri-close-circle-line close-sidebar"
+            className="ri-close-circle-line close-sidebar"
             onClick={() => setmobileSidebarOpen(false)}
           ></i>
         </div>

@@ -2,14 +2,28 @@ import { gql } from "@apollo/client";
 
 export default {
   userDetail: gql`
-    query UserDetail {
-      userDetail {
-        email
-        fName
-        lName
-        mobile
-      }
+   query UserDetail {
+  userDetail {
+    billing_detail {
+      id
+      userId
+      fName
+      lName
+      companyName
+      address
+      city
+      postcode
+      state
+      country
+      phoneNo
+      email
     }
+    email
+    mobile
+    lName
+    fName
+  }
+}
   `,
   navBarCatagory: gql`
     query AllCategories {
