@@ -1,43 +1,43 @@
+import { useFormik } from "formik";
 import { toJS } from "mobx";
 import { inject, observer } from "mobx-react";
+import Querys from "../../graphql/Query";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
-import { useMutation } from "@apollo/client";
-import constant from "../../utils/constant";
 import Mutation from "../../graphql/Mutation";
-import { billingDetailsSchema } from "../../helper/formikSchemas";
+import { billingDetailsSchema, loginSchema } from "../../helper/formikSchemas";
+import constant from "../../utils/constant";
 import "./Checkout.css";
-import { useFormik } from "formik";
 
 const Checkout = ({ globalStore, userStore }) => {
-  const checkOutData = toJS(globalStore.checkOutData);
-  const countryListData = toJS(globalStore.countryList);
-  const billingAddress = toJS(userStore.userBillingData);
-  const isLogin = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken)
 
-  const [userDetail, setUserDetail] = useState({
-    fName: billingAddress?.fName,
-    lName: billingAddress?.lName,
-    address: billingAddress?.address,
-    city: billingAddress?.city,
-    postcode: billingAddress?.postcode,
-    state: billingAddress?.state,
-    country: billingAddress?.country,
-    phoneNo: billingAddress?.phoneNo,
-    email: billingAddress?.email,
-    companyName: billingAddress?.companyName,
-  })
+  // const checkOutData = toJS(globalStore.checkOutData);
+  // const countryListData = toJS(globalStore.countryList);
+  const billingAddress = toJS(userStore.userBillingData);
+  const isLogin = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken);
+
+  const [countryListData, setCountryListData] = useState();
+  const [checkOutData, setCheckOutData] = useState([])
   const [subTotal, setSubTotal] = useState("");
   const [shippingCharge, setShippingCharge] = useState("");
   const [tAndC, setTAndC] = useState(true);
-  const [shipToOtherAdd, setShipToOtherAdd] = useState(false);
+  // const [shipToOtherAdd, setShipToOtherAdd] = useState(false);
   const [checkOutError, setCheckOutError] = useState(null);
-  const [checkOutLoading, setCheckOutLoading] = useState(false)
-  const [paymentLink, setPaymentLink] = useState(null)
+  const [checkOutLoading, setCheckOutLoading] = useState(false);
+  const [paymentLink, setPaymentLink] = useState(null);
 
+  const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
+    errorPolicy: "all",
+    fetchPolicy: "no-cache",
+  });
+  const [viewCart, { data: apiCartData, loading: apiCartDataLoading }] = useLazyQuery(Querys.viewCart, {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  });
   const [checkoutOrder] = useMutation(Mutation.checkoutOrder, {
     fetchPolicy: "no-cache",
     errorPolicy: "all",
@@ -46,6 +46,20 @@ const Checkout = ({ globalStore, userStore }) => {
     fetchPolicy: "no-cache",
     errorPolicy: "all",
   });
+
+  // console.log("billingAddress", billingAddress)
+  useEffect(() => {
+    userStore.loadUserBillingDetails();
+    viewCart();
+  }, [])
+
+  useEffect(() => {
+    if (apiCartData) {
+      // console.log("apiCartData", apiCartData)
+      setCountryListData(apiCartData?.viewCart?.countryList)
+      setCheckOutData(apiCartData?.viewCart?.cartItems);
+    }
+  }, [apiCartData]);
 
   useEffect(() => {
     if (checkOutData?.length > 0) {
@@ -67,34 +81,48 @@ const Checkout = ({ globalStore, userStore }) => {
   }, [countryListData]);
 
   const handleCheckOut = (values) => {
+    console.log("values", values)
+
     setCheckOutLoading(true);
     setCheckOutError(null)
 
     const orderItems = []
     checkOutData.forEach((data) => {
       orderItems.push({
-        cartId: data.medicine_detail.cart_master.id,
-        price: data.medicine_detail.price,
-        productId: data.medicine_detail.id,
+        cartId: data?.medicine_detail.cart_master.id,
+        price: data?.medicine_detail.price,
+        productId: data?.medicine_detail.id,
         shipping_charge: shippingCharge,
-        subtotal: data.medicine_detail.price * data.medicine_detail.cart_master.qty
+        subtotal: data?.medicine_detail.price * data?.medicine_detail.cart_master.qty
       })
     })
 
     const checkOutVariable = {
-      fName: values.fName,
-      lName: values.lName,
-      address: values.address,
-      city: values.city,
-      postcode: values.postcode,
-      state: values.state,
-      country: values.country,
-      phoneNo: String(values.phoneNo),
-      email: values.email,
-      orderItems: orderItems
+      fName: values?.fName,
+      lName: values?.lName,
+      address: values?.address,
+      city: values?.city,
+      postcode: values?.postcode,
+      state: values?.state,
+      country: values?.country,
+      phoneNo: String(values?.phoneNo),
+      email: values?.email,
+      companyName: values?.companyName,
+      orderItems: orderItems,
+      ...(values?.shipToOtherAdd &&
+      {
+        fName2: values?.fName2,
+        lName2: values?.lName2,
+        companyName2: values?.companyName2,
+        address2: values?.address2,
+        city2: values?.city2,
+        postcode2: values?.postcode2,
+        state2: values?.state2,
+        country2: values?.country2,
+        orderNotes: values?.orderNotes
+      }
+      )
     }
-
-    console.log("checkOutVariable", checkOutVariable)
 
     checkoutOrder({ variables: checkOutVariable })
       .then((res) => {
@@ -107,7 +135,6 @@ const Checkout = ({ globalStore, userStore }) => {
         setCheckOutLoading(false)
         console.log("checkOutVariable -------", err);
       });
-
   }
 
   const handleConfirmOrder = () => {
@@ -129,9 +156,60 @@ const Checkout = ({ globalStore, userStore }) => {
   }
 
   const formik = useFormik({
-    initialValues: userDetail,
+    enableReinitialize: true,
+    initialValues: {
+      fName: "" || billingAddress?.fName,
+      lName: "" || billingAddress?.lName,
+      address: "" || billingAddress?.address,
+      city: "" || billingAddress?.city,
+      postcode: "" || billingAddress?.postcode,
+      state: "" || billingAddress?.state,
+      country: "" || billingAddress?.country,
+      phoneNo: "" || billingAddress?.phoneNo,
+      email: "" || billingAddress?.email,
+      companyName: "" || billingAddress?.companyName,
+      shipToOtherAdd: false,
+      fName2: "",
+      lName2: "",
+      companyName2: "",
+      address2: "",
+      city2: "",
+      postcode2: "",
+      state2: "",
+      country2: "",
+      orderNotes: ""
+    },
     validationSchema: billingDetailsSchema,
     onSubmit: handleCheckOut
+  });
+
+  const loginFormik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      mobile: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: ({ mobile, password }) => {
+      userSignIn({
+        variables: {
+          mobile,
+          password,
+        },
+      })
+        .then(async ({ data, errors }) => {
+          if (data) {
+            userStore.loadUserBillingDetails()
+            localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
+            userStore.setUser(data.userSingIn.user);
+          }
+          if (errors !== undefined) {
+          }
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    },
   });
 
   return (
@@ -153,6 +231,7 @@ const Checkout = ({ globalStore, userStore }) => {
           </Row>
         </Container>
       </section>
+
       <section>
         <Container>
           <Row>
@@ -162,6 +241,11 @@ const Checkout = ({ globalStore, userStore }) => {
               </li>
             </Col>
             <Col xs="12">
+            {apiCartDataLoading ? 
+              <div className="text-center">
+                Loading Cart Data.......
+              </div>
+              :
               <div className="table-responsive">
                 <table className="product-detail-tbl mt-4 cart-table-tbl">
                   <thead>
@@ -174,8 +258,8 @@ const Checkout = ({ globalStore, userStore }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {checkOutData.length > 0 &&
-                      checkOutData.map((item) => {
+                    {checkOutData?.length > 0 &&
+                      checkOutData?.map((item) => {
                         return (
                           <tr>
                             <td>{item.title}</td>
@@ -215,7 +299,7 @@ const Checkout = ({ globalStore, userStore }) => {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div>}
             </Col>
           </Row>
         </Container>
@@ -410,14 +494,16 @@ const Checkout = ({ globalStore, userStore }) => {
                     <Form.Group className="mb-0" controlId="formBasicCheckbox">
                       <Form.Check
                         id="otherAdress"
-                        type="radio"
-                        checked={shipToOtherAdd}
+                        type="checkbox"
+                        name="shipToOtherAdd"
+                        value={formik.values.shipToOtherAdd}
+                        checked={formik.values.shipToOtherAdd === true}
                         label={<b>Ship to a differenet address ?</b>}
                         className="custom-checkbox"
-                        onChange={() => setShipToOtherAdd(!shipToOtherAdd)}
+                        onChange={formik.handleChange("shipToOtherAdd")}
                       />
                     </Form.Group>
-                    {shipToOtherAdd && <Accordion defaultActiveKey="checkoutB0">
+                    {formik.values.shipToOtherAdd && <Accordion defaultActiveKey="checkoutB0" className="mt-3">
                       <Accordion.Item eventKey="checkoutB0">
                         <Accordion.Header>
                           <b>Shipping address:</b>
@@ -431,6 +517,12 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("fName2")}
+                                isError={
+                                  formik.touched.fName2 && formik.errors.fName2 &&
+                                  Boolean(formik.errors.fName2)
+                                }
+                                errorMsg={formik.errors.fName2}
                               />
                             </Col>
                             <Col md="6">
@@ -440,6 +532,12 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("lName2")}
+                                isError={
+                                  formik.touched.lName2 && formik.errors.lName2 &&
+                                  Boolean(formik.errors.lName2)
+                                }
+                                errorMsg={formik.errors.lName2}
                               />
                             </Col>
                             <Col md="6">
@@ -448,6 +546,12 @@ const Checkout = ({ globalStore, userStore }) => {
                                 formLabel="Company Name"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("companyName2")}
+                                isError={
+                                  formik.touched.companyName2 && formik.errors.companyName2 &&
+                                  Boolean(formik.errors.companyName2)
+                                }
+                                errorMsg={formik.errors.companyName2}
                               />
                             </Col>
                             <Col md="6">
@@ -457,6 +561,12 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("address2")}
+                                isError={
+                                  formik.touched.address2 && formik.errors.address2 &&
+                                  Boolean(formik.errors.address2)
+                                }
+                                errorMsg={formik.errors.address2}
                               />
                             </Col>
                             <Col md="6">
@@ -466,6 +576,28 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("city2")}
+                                isError={
+                                  formik.touched.city2 && formik.errors.city2 &&
+                                  Boolean(formik.errors.city2)
+                                }
+                                errorMsg={formik.errors.city2}
+                              />
+                            </Col>
+                            <Col md="6">
+                              <CustomInput
+                                formGroupClassName="form-group"
+                                formLabel="State"
+                                compulsoryLabel="*"
+                                formType="text"
+                                customInputClassName=""
+                                value={formik.values.state2}
+                                onChange={formik.handleChange("state2")}
+                                onBlur={formik.handleBlur("state2")}
+                                isError={
+                                  formik.touched.state2 && formik.errors.state2 && Boolean(formik.errors.state2)
+                                }
+                                errorMsg={formik.errors.state2}
                               />
                             </Col>
                             <Col md="6">
@@ -475,6 +607,12 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="text"
                                 customInputClassName=""
+                                {...formik.getFieldProps("country2")}
+                                isError={
+                                  formik.touched.country2 && formik.errors.country2 &&
+                                  Boolean(formik.errors.country2)
+                                }
+                                errorMsg={formik.errors.country2}
                               />
                             </Col>
                             <Col md="6">
@@ -484,16 +622,29 @@ const Checkout = ({ globalStore, userStore }) => {
                                 compulsoryLabel="*"
                                 formType="number"
                                 customInputClassName=""
+                                {...formik.getFieldProps("postcode2")}
+                                isError={
+                                  formik.touched.postcode2 && formik.errors.postcode2 &&
+                                  Boolean(formik.errors.postcode2)
+                                }
+                                errorMsg={formik.errors.postcode2}
                               />
                             </Col>
                             <Col xs="12">
                               <Form.Label>Order notes</Form.Label>
-                              <Form.Control as="textarea" rows={3} />
+                              <Form.Control
+                                as="textarea"
+                                rows={3}
+                                id="orderNotes"
+                                name="orderNotes"
+                                value={formik.values.orderNotes}
+                                {...formik.getFieldProps("orderNotes")}
+                              />
                             </Col>
                           </Row>
                         </Accordion.Body>
                       </Accordion.Item>
-                      <Accordion.Item eventKey="checkoutB1">
+                      {/* <Accordion.Item eventKey="checkoutB1">
                         <Accordion.Header>
                           <b>Medical Condition:</b>
                         </Accordion.Header>
@@ -597,27 +748,12 @@ const Checkout = ({ globalStore, userStore }) => {
                             </Col>
                           </Row>
                         </Accordion.Body>
-                      </Accordion.Item>
+                      </Accordion.Item> */}
                     </Accordion>}
                   </Col>
 
                   <Col xs="12" className="mt-4">
                     <div className="checkout-card-details-wrap">
-                      {/* <Form.Check
-                  type="radio"
-                  id="smokeradioCard0"
-                  label="Pay By Credit/Debit Card"
-                  name="smokeradioCards0"
-                  className="custom-checkbox custom-radio mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  id="smokeradioCard1"
-                  label="USA Bank Transfer"
-                  name="smokeradioCards0"
-                  className="custom-checkbox custom-radio"
-                />
-                  <hr /> */}
                       <p>
                         Your personal data will be used to process your order, support
                         your experience throughout this website, and for other
@@ -633,18 +769,6 @@ const Checkout = ({ globalStore, userStore }) => {
                           onChange={() => setTAndC(!tAndC)}
                         />
                       </Form.Group>
-
-                      {/* {!isLogin ?
-                    <Link
-                      to="/login"
-                      className="ms-auto d-flex"
-                    > <CustomButton
-                        type="submit"
-                        text="Login"
-                        formGroupClassName="form-group mt-4 mb-0"
-                      />
-                    </Link>
-                    : */}
                       {paymentLink ?
                         <a href={paymentLink.links[1].href} target="_blank">
                           <CustomButton
@@ -666,14 +790,65 @@ const Checkout = ({ globalStore, userStore }) => {
                           {checkOutError ? <p>Somthing went wrong</p> : null}
                         </>
                       }
-
                     </div>
                   </Col>
                 </Row>
               </Form>
             </Container>
           </section> :
-          <p> login Place</p>
+          <section className="mt-5">
+            <Container>
+              <Row>
+                <Col>
+                  <li>
+                    <b>Please Login to Continue</b>
+                  </li>
+                </Col>
+              </Row>
+              <Form onSubmit={loginFormik.handleSubmit} className="mt-5 border border-1 p-3">
+                <Row>
+                  <Col xs={6}>
+                    <CustomInput
+                      placeholder="Mobile Number"
+                      value={loginFormik.values.mobile}
+                      onChange={loginFormik.handleChange("mobile")}
+                      isError={loginFormik.errors.mobile && loginFormik.touched.mobile && Boolean(loginFormik.errors.mobile)}
+                      errorMsg={loginFormik.errors.mobile}
+                      formGroupClassName="form-group"
+                      formLabel="Mobile"
+                      formType="mobile"
+                      customInputClassName=""
+                    />
+                  </Col>
+                  <Col xs={6}>
+                    <CustomInput
+                      placeholder="Password"
+                      value={loginFormik.values.password}
+                      onChange={loginFormik.handleChange("password")}
+                      isError={
+                        loginFormik.errors.password && loginFormik.touched.password && Boolean(loginFormik.errors.password)
+                      }
+                      errorMsg={loginFormik.errors.password}
+                      formGroupClassName="form-group"
+                      formLabel="Password"
+                      formType="password"
+                      customInputClassName=""
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <CustomButton
+                      type="submit"
+                      text="Login"
+                      disabled={loading || !loginFormik.isValid}
+                      formGroupClassName="form-group text-end"
+                    />
+                  </Col>
+                </Row>
+              </Form>
+            </Container>
+          </section>
       }
     </>
   );

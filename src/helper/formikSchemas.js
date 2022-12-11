@@ -16,9 +16,9 @@ export const signUpSchema = Yup.object().shape({
 });
 
 export const billingDetailsSchema = Yup.object().shape({
-  fName: Yup.string().required("first Name is required"),
-  lName: Yup.string().required("last name is required"),
-  address: Yup.string().required("Address Number is required"),
+  fName: Yup.string().required("Firstname is required"),
+  lName: Yup.string().required("Lastname is required"),
+  address: Yup.string().required("Address is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -28,5 +28,40 @@ export const billingDetailsSchema = Yup.object().shape({
   country: Yup.string().required("Country is required"),
   phoneNo: Yup.string().required("Phone number is required")
     .min(10, 'Must be exactly 10 digits')
-    .max(10, 'Must be exactly 10 digits')// companyName: Yup.string().required("companyName is required"),
+    .max(10, 'Must be exactly 10 digits'),
+  fName2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('Firstname is required'),
+  }),
+  lName2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('Lastname is required'),
+  }),
+  address2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('Address is required'),
+  }),
+  city2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('City is required'),
+  }),
+  state2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('State is required'),
+  }),
+  country2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('Country is required'),
+  }),
+  postcode2: Yup.string().when('shipToOtherAdd', {
+    is: true,
+    then: Yup.string()
+      .required('Postalcode is required'),
+  }),
 });

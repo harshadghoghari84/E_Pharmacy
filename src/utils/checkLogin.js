@@ -1,6 +1,11 @@
-export const checkLogin = async () => {
-  const { data } = useQuery(Query.userDetail);
+import { useQuery } from "@apollo/client";
+import constant from "./constant";
+import Query from "../graphql/Query";
 
-  const isUser = !!data?.userDetail;
-  return isUser;
+export const CheckLogin = () => {
+  const { data } = useQuery(Query.userDetail);
+  const isLogin = !!data?.userDetail || !!localStorage.getItem(constant.prfUserToken);
+  // const isLogin = !!data?.userDetail
+
+  return isLogin
 };

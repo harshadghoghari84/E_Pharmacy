@@ -7,7 +7,6 @@ import product0 from "./../../../Assets/Images/products/product0.jpg";
 import "./HomeProducts.css";
 
 const HomeProducts = ({ data }) => {
-  console.log("home product", data);
   var homeProductSlider = {
     dots: false,
     infinite: false,

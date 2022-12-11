@@ -28,7 +28,6 @@ export default function Register() {
     },
     validationSchema: signUpSchema,
     onSubmit: ({ fName, lName, mobile, email, password }) => {
-      console.log(fName, lName, mobile, email, password);
       userSignup({
         variables: {
           fName,
@@ -67,6 +66,7 @@ export default function Register() {
   const handleClick = () => {
     setOpen(true);
   };
+  
   return (
     <>
       <section className="authentication-section">

@@ -5,17 +5,20 @@ import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
 import ProductSlider from "./ProductSlider/ProductSlider";
 import "./ProductDetails.css";
+import constant from "../../utils/constant";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import Querys from "../../graphql/Query";
 import Mutation from "../../graphql/Mutation";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 
-const ProductDetails = () => {
+const ProductDetails = ({userStore, globalStore}) => {
   const { productId } = useParams();
 
-  const [productData, setProductData] = useState()
-  const [medicineData, setMedicineData] = useState()
+  const isLogin = toJS(userStore?.user) || localStorage.getItem(constant.prfUserToken);
+
+  const [productData, setProductData] = useState();
+  const [medicineData, setMedicineData] = useState();
 
   // const productQty = toJS(globalStore.selectedProductQty);
 
@@ -42,6 +45,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (productInfo) {
+      console.log("productInfo", productInfo)
       setProductData(productInfo?.getSelectedProduct?.relatedProduct[0])
 
       let medicineInfo = []
@@ -54,16 +58,18 @@ const ProductDetails = () => {
 
   const handleAddToCart = (id) => {
     let product = medicineData.find((ele) => ele?.id === id);
+    console.log("product", product)
 
-    if (product) {
+    if (product && isLogin) {
       addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
-        // globalStore.setCartData(res.data.addToCart.cartItems);
-      });
-    } else {
-      addToCart({ variables: { medicineId: id, qty: 1 } }).then((res) => {
-        // globalStore.setCartData(res.data.addToCart.cartItems);
+        // globalStore.setCartData(res?.data?.addToCart?.cartItems);
+        console.log("res", res)
       });
     }
+    else {
+      globalStore.setCartData(product)
+    }
+
   };
 
   const handleSelectMedicine = (qty, id) => {
@@ -76,6 +82,8 @@ const ProductDetails = () => {
 
     setMedicineData(tempMedicineData)
   }
+
+  // console.log("productData", productData)
 
   return (
     <>

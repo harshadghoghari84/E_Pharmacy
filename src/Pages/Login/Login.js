@@ -44,11 +44,10 @@ const Login = ({ userStore }) => {
         },
       })
         .then(async ({ data, errors }) => {
-          // console.log("data--", data);
-          // console.log("errors--", errors);
           if (data) {
             localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
             userStore.setUser(data.userSingIn.user);
+            userStore.loadUserBillingDetails();
             setMessage({
               message: "Login successfully!",
               type: constant.badgeSucessType,

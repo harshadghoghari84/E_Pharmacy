@@ -19,18 +19,32 @@ export default {
     }
   `,
   userSignIn: gql`
-    mutation UserSingIn($mobile: String!, $password: String!) {
-      userSingIn(mobile: $mobile, password: $password) {
-        msg
-        token
-        user {
-          email
+  mutation UserSingIn($mobile: String!, $password: String!) {
+    userSingIn(mobile: $mobile, password: $password) {
+      msg
+      token
+      user {
+        mobile
+        lName
+        fName
+        email
+        billing_detail {
+          id
+          userId
           fName
           lName
-          mobile
+          companyName
+          address
+          city
+          postcode
+          state
+          country
+          phoneNo
+          email
         }
       }
     }
+  }
   `,
   addToCart: gql`
     mutation AddToCart($medicineId: Int!, $qty: Int!) {
@@ -64,45 +78,23 @@ export default {
     }
   `,
   checkoutOrder: gql`
-    mutation CheckOutOrder(
-      $fName: String!
-      $lName: String!
-      $address: String!
-      $city: String!
-      $postcode: Int!
-      $state: String!
-      $country: String!
-      $phoneNo: String!
-      $email: String!
-      $orderItems: [orderItem]!
-    ) {
-      checkOutOrder(
-        fName: $fName
-        lName: $lName
-        address: $address
-        city: $city
-        postcode: $postcode
-        state: $state
-        country: $country
-        phoneNo: $phoneNo
-        email: $email
-        orderItems: $orderItems
-      ) {
-        create_time
-        id
-        links {
-          href
-          method
-          rel
-        }
-        transactions {
-          amount {
-            currency
-            total
-          }
+  mutation CheckOutOrder($fName: String!, $lName: String!, $address: String!, $city: String!, $postcode: Int!, $state: String!, $country: String!, $phoneNo: String!, $email: String!, $orderItems: [orderItem]!, $companyName: String, $fName2: String, $lName2: String, $companyName2: String, $address2: String, $city2: String, $postcode2: Int, $state2: String, $country2: String, $orderNotes: String) {
+    checkOutOrder(fName: $fName, lName: $lName, address: $address, city: $city, postcode: $postcode, state: $state, country: $country, phoneNo: $phoneNo, email: $email, orderItems: $orderItems, companyName: $companyName, fName2: $fName2, lName2: $lName2, companyName2: $companyName2, address2: $address2, city2: $city2, postcode2: $postcode2, state2: $state2, country2: $country2, orderNotes: $orderNotes) {
+      id
+      create_time
+      transactions {
+        amount {
+          currency
+          total
         }
       }
+      links {
+        href
+        method
+        rel
+      }
     }
+  }
   `,
   updateCart: gql`mutation UpdateCart($updateCartId: Int!, $qty: Int) {
     updateCart(id: $updateCartId, qty: $qty)
@@ -110,21 +102,4 @@ export default {
   confirmPayment: gql`mutation ConfirmPayment($paymentId: String!, $total: String!, $currency: String!, $href: String!, $rel: String!) {
     confirmPayment(paymentId: $paymentId, total: $total, currency: $currency, href: $href, rel: $rel)
   }`
-  // checkoutOrder:gql`mutation CheckOutOrder($fName: String!, $lName: String!, $address: String!, $city: String!, $postcode: Int!, $state: String!, $country: String!, $phoneNo: String!, $email: String!, $orderItems: [orderItem]!) {
-  //   checkOutOrder(fName: $fName, lName: $lName, address: $address, city: $city, postcode: $postcode, state: $state, country: $country, phoneNo: $phoneNo, email: $email, orderItems: $orderItems) {
-  //     id
-  //     create_time
-  //     transactions {
-  //       amount {
-  //         total
-  //         currency
-  //       }
-  //     }
-  //     links {
-  //       href
-  //       rel
-  //       method
-  //     }
-  //   }
-  // }`
 };

@@ -25,12 +25,15 @@ import Register from "./Pages/Register/Register";
 import TermsConditions from "./Pages/TermsConditions/TermsConditions";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
+import { CheckLogin, checkLogin } from "./utils/CheckLogin";
 
 const AppWrapper = ({ globalStore, userStore }) => {
 
+  console.log("checkLogin()", CheckLogin())
+
   useEffect(() => {
     globalStore.loadAllCatagory();
-    userStore.loadUserBillingDetails()
+    // userStore.loadUserBillingDetails()
   }, [userStore.user])
 
   return (
