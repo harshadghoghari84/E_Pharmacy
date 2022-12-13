@@ -13,7 +13,7 @@ class GlobalStore {
   constructor() {
     makeAutoObservable(this);
   }
-  
+
   loadAllCatagory = () => {
     this.catLoading = true;
     ApolloClient.query({
@@ -53,7 +53,14 @@ class GlobalStore {
   };
 
   setCartData = (data) => {
-    this.cartData = [...this.cartData, data];
+    let index = this.cartData.findIndex((CData) => data.id === CData.id);
+    if (index < 0) {
+      this.cartData = [...this.cartData, data];
+    }
+    else {
+      this.cartData.splice(index, 1, data)
+    }
+    // this.cartData = data;
   };
   setCheckOutData = (data) => {
     this.checkOutData = data;

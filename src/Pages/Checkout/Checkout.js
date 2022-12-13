@@ -5,7 +5,7 @@ import Querys from "../../graphql/Query";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
 import Mutation from "../../graphql/Mutation";
@@ -14,6 +14,9 @@ import constant from "../../utils/constant";
 import "./Checkout.css";
 
 const Checkout = ({ globalStore, userStore }) => {
+  const navigate = useNavigate()
+  const { search } = useLocation();
+  // console.log("params", location)
 
   // const checkOutData = toJS(globalStore.checkOutData);
   // const countryListData = toJS(globalStore.countryList);
@@ -30,11 +33,11 @@ const Checkout = ({ globalStore, userStore }) => {
   const [checkOutLoading, setCheckOutLoading] = useState(false);
   const [paymentLink, setPaymentLink] = useState(null);
 
-  const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
+  const [userSignIn, { loading: signInLoading }] = useMutation(Mutation.userSignIn, {
     errorPolicy: "all",
     fetchPolicy: "no-cache",
   });
-  const [viewCart, { data: apiCartData, loading: apiCartDataLoading }] = useLazyQuery(Querys.viewCart, {
+  const [viewCart, { data: apiCartData, loading: apiCartDataLoading, errors: cartDataError }] = useLazyQuery(Querys.viewCart, {
     fetchPolicy: "no-cache",
     errorPolicy: "all",
   });
@@ -126,9 +129,9 @@ const Checkout = ({ globalStore, userStore }) => {
 
     checkoutOrder({ variables: checkOutVariable })
       .then((res) => {
+        console.log("res", res)
         setPaymentLink(res.data.checkOutOrder)
         setCheckOutLoading(false)
-        console.log("checkOutVariable", res)
       })
       .catch((err) => {
         setCheckOutError(err);
@@ -139,21 +142,29 @@ const Checkout = ({ globalStore, userStore }) => {
 
   const handleConfirmOrder = () => {
     const confirmPaymentVariable = {
-      paymentId: paymentLink.id,
-      total: paymentLink.transactions[0].amount.total,
-      currency: paymentLink.transactions[0].amount.currency,
-      href: paymentLink.links[1].href,
-      rel: paymentLink.links[1].rel
+      paymentId: search?.substring(11, 41),
+      payerId: search?.substr(-13),
+      total: '31',
+      currency: 'USD',
     }
-
+    // console.log("confirmPaymentVariable", confirmPaymentVariable)
     confirmPayment({ variables: confirmPaymentVariable })
       .then((res) => {
-        console.log("confirmPaymentVariable", res)
+        if (res.data.confirmPayment === "Sucess") {
+          navigate("/orderSuccessfull")
+        }
+        // console.log("confirmPaymentVariable", res)
       })
       .catch((err) => {
         console.log("confirmPaymentVariable -------", err);
       })
   }
+
+  useEffect(() => {
+    if (search?.includes('PayerID') && search?.includes('paymentId')) {
+      handleConfirmOrder()
+    }
+  }, [])
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -231,7 +242,6 @@ const Checkout = ({ globalStore, userStore }) => {
           </Row>
         </Container>
       </section>
-
       <section>
         <Container>
           <Row>
@@ -241,410 +251,416 @@ const Checkout = ({ globalStore, userStore }) => {
               </li>
             </Col>
             <Col xs="12">
-            {apiCartDataLoading ? 
-              <div className="text-center">
-                Loading Cart Data.......
-              </div>
-              :
-              <div className="table-responsive">
-                <table className="product-detail-tbl mt-4 cart-table-tbl">
-                  <thead>
-                    <tr>
-                      <th>Product Name</th>
-                      <th>Product Code</th>
-                      <th>Quantity</th>
-                      <th>Unit Price</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {checkOutData?.length > 0 &&
-                      checkOutData?.map((item) => {
-                        return (
+              {
+                cartDataError ?
+                  <div className="text-center">
+                    <b>{cartDataError?.[0]?.message}</b>
+                  </div> :
+                  apiCartDataLoading ?
+                    <div className="text-center">
+                      Loading Cart Data.......
+                    </div>
+                    :
+                    <div className="table-responsive">
+                      <table className="product-detail-tbl mt-4 cart-table-tbl">
+                        <thead>
                           <tr>
-                            <td>{item.title}</td>
-                            <td>{item.sku}</td>
-                            <td>{item.medicine_detail.cart_master.qty}</td>
-                            <td>
-                              ${item.medicine_detail.price}
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {checkOutData?.length > 0 &&
+                            checkOutData?.map((item) => {
+                              return (
+                                <tr>
+                                  <td>{item.title}</td>
+                                  <td>{item.sku}</td>
+                                  <td>{item.medicine_detail.cart_master.qty}</td>
+                                  <td>
+                                    ${item.medicine_detail.price}
+                                  </td>
+                                  <td>
+                                    ${item.medicine_detail.cart_master.qty * item.medicine_detail.price}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+
+                          <tr>
+                            <td colSpan="4" className="text-end">
+                              Subtotal
+                            </td>
+                            <td>${subTotal}</td>
+                          </tr>
+                          <tr>
+                            <td colSpan="4" className="text-end">
+                              Shipping
                             </td>
                             <td>
-                              ${item.medicine_detail.cart_master.qty * item.medicine_detail.price}
+                              <b>Shipping Charge: ${shippingCharge}</b>
                             </td>
                           </tr>
-                        );
-                      })}
-
-                    <tr>
-                      <td colSpan="4" className="text-end">
-                        Subtotal
-                      </td>
-                      <td>${subTotal}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="4" className="text-end">
-                        Shipping
-                      </td>
-                      <td>
-                        <b>Shipping Charge: ${shippingCharge}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan="4" className="text-end">
-                        Total
-                      </td>
-                      <td>
-                        <b>${subTotal + shippingCharge}</b>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>}
+                          <tr>
+                            <td colSpan="4" className="text-end">
+                              Total
+                            </td>
+                            <td>
+                              <b>${subTotal + shippingCharge}</b>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>}
             </Col>
           </Row>
         </Container>
       </section>
       {
-        isLogin ?
-          <section className="checkout-section mt-5">
-            <Container>
-              <Form onSubmit={formik.handleSubmit}>
-                <Row>
-                  <Col xs="12" className="mt-4">
-                    <Accordion defaultActiveKey="checkoutA0">
-                      <Accordion.Item eventKey="checkoutA0">
-                        <Accordion.Header>
-                          <b>Billing details:</b>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                          <Row>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="First Name"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.fName}
-                                onChange={formik.handleChange("fName")}
-                                onBlur={formik.handleBlur("fName")}
-                                isError={
-                                  formik.touched.fName && formik.errors.fName &&
-                                  Boolean(formik.errors.fName)
-                                }
-                                errorMsg={formik.errors.fName}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Last Name"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.lName}
-                                onChange={formik.handleChange("lName")}
-                                onBlur={formik.handleBlur("lName")}
-                                isError={
-                                  formik.touched.lName && formik.errors.lName &&
-                                  Boolean(formik.errors.lName)
-                                }
-                                errorMsg={formik.errors.lName}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Company Name"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.companyName}
-                                onChange={formik.handleChange("companyName")}
-                                onBlur={formik.handleBlur("companyName")}
-                                isError={
-                                  formik.touched.companyName && formik.errors.companyName &&
-                                  Boolean(formik.errors.companyName)
-                                }
-                                errorMsg={formik.errors.companyName}
-                              />
-                            </Col>
-                            <Col md="6" className="mt-4 mt-md-0">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Street address"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.address}
-                                onChange={formik.handleChange("address")}
-                                onBlur={formik.handleBlur("address")}
-                                isError={
-                                  formik.touched.address && formik.errors.address &&
-                                  Boolean(formik.errors.address)
-                                }
-                                errorMsg={formik.errors.address}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Town / City"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.city}
-                                onChange={formik.handleChange("city")}
-                                onBlur={formik.handleBlur("city")}
-                                isError={
-                                  formik.touched.city && formik.errors.city && Boolean(formik.errors.city)
-                                }
-                                errorMsg={formik.errors.city}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="State"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.state}
-                                onChange={formik.handleChange("state")}
-                                onBlur={formik.handleBlur("state")}
-                                isError={
-                                  formik.touched.state && formik.errors.state && Boolean(formik.errors.state)
-                                }
-                                errorMsg={formik.errors.state}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Country"
-                                formType="text"
-                                compulsoryLabel="*"
-                                customInputClassName=""
-                                value={formik.values.country}
-                                onChange={formik.handleChange("country")}
-                                onBlur={formik.handleBlur("country")}
-                                isError={
-                                  formik.touched.country && formik.errors.country &&
-                                  Boolean(formik.errors.country)
-                                }
-                                errorMsg={formik.errors.country}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Postcode"
-                                compulsoryLabel="*"
-                                formType="number"
-                                customInputClassName=""
-                                value={formik.values.postcode}
-                                onChange={formik.handleChange("postcode")}
-                                onBlur={formik.handleBlur("postcode")}
-                                isError={
-                                  formik.touched.postcode && formik.errors.postcode &&
-                                  Boolean(formik.errors.postcode)
-                                }
-                                errorMsg={formik.errors.postcode}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Mobile Number"
-                                compulsoryLabel="*"
-                                formType="number"
-                                customInputClassName=""
-                                value={formik.values.phoneNo}
-                                onChange={formik.handleChange("phoneNo")}
-                                onBlur={formik.handleBlur("phoneNo")}
-                                isError={
-                                  formik.touched.phoneNo && formik.errors.phoneNo &&
-                                  Boolean(formik.errors.phoneNo)
-                                }
-                                errorMsg={formik.errors.phoneNo}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Email Address"
-                                compulsoryLabel="*"
-                                formType="email"
-                                customInputClassName=""
-                                value={formik.values.email}
-                                onChange={formik.handleChange("email")}
-                                onBlur={formik.handleBlur("email")}
-                                isError={
-                                  formik.touched.email && formik.errors.email &&
-                                  Boolean(formik.errors.email)
-                                }
-                                errorMsg={formik.errors.email}
-                              />
-                            </Col>
-                          </Row>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                  </Col>
-                  <Col xs="12" className="mt-4">
-                    <Form.Group className="mb-0" controlId="formBasicCheckbox">
-                      <Form.Check
-                        id="otherAdress"
-                        type="checkbox"
-                        name="shipToOtherAdd"
-                        value={formik.values.shipToOtherAdd}
-                        checked={formik.values.shipToOtherAdd === true}
-                        label={<b>Ship to a differenet address ?</b>}
-                        className="custom-checkbox"
-                        onChange={formik.handleChange("shipToOtherAdd")}
-                      />
-                    </Form.Group>
-                    {formik.values.shipToOtherAdd && <Accordion defaultActiveKey="checkoutB0" className="mt-3">
-                      <Accordion.Item eventKey="checkoutB0">
-                        <Accordion.Header>
-                          <b>Shipping address:</b>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                          <Row>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="First Name"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("fName2")}
-                                isError={
-                                  formik.touched.fName2 && formik.errors.fName2 &&
-                                  Boolean(formik.errors.fName2)
-                                }
-                                errorMsg={formik.errors.fName2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Last Name"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("lName2")}
-                                isError={
-                                  formik.touched.lName2 && formik.errors.lName2 &&
-                                  Boolean(formik.errors.lName2)
-                                }
-                                errorMsg={formik.errors.lName2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Company Name"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("companyName2")}
-                                isError={
-                                  formik.touched.companyName2 && formik.errors.companyName2 &&
-                                  Boolean(formik.errors.companyName2)
-                                }
-                                errorMsg={formik.errors.companyName2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Street address"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("address2")}
-                                isError={
-                                  formik.touched.address2 && formik.errors.address2 &&
-                                  Boolean(formik.errors.address2)
-                                }
-                                errorMsg={formik.errors.address2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Town / City"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("city2")}
-                                isError={
-                                  formik.touched.city2 && formik.errors.city2 &&
-                                  Boolean(formik.errors.city2)
-                                }
-                                errorMsg={formik.errors.city2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="State"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                value={formik.values.state2}
-                                onChange={formik.handleChange("state2")}
-                                onBlur={formik.handleBlur("state2")}
-                                isError={
-                                  formik.touched.state2 && formik.errors.state2 && Boolean(formik.errors.state2)
-                                }
-                                errorMsg={formik.errors.state2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Country"
-                                compulsoryLabel="*"
-                                formType="text"
-                                customInputClassName=""
-                                {...formik.getFieldProps("country2")}
-                                isError={
-                                  formik.touched.country2 && formik.errors.country2 &&
-                                  Boolean(formik.errors.country2)
-                                }
-                                errorMsg={formik.errors.country2}
-                              />
-                            </Col>
-                            <Col md="6">
-                              <CustomInput
-                                formGroupClassName="form-group"
-                                formLabel="Postcode"
-                                compulsoryLabel="*"
-                                formType="number"
-                                customInputClassName=""
-                                {...formik.getFieldProps("postcode2")}
-                                isError={
-                                  formik.touched.postcode2 && formik.errors.postcode2 &&
-                                  Boolean(formik.errors.postcode2)
-                                }
-                                errorMsg={formik.errors.postcode2}
-                              />
-                            </Col>
-                            <Col xs="12">
-                              <Form.Label>Order notes</Form.Label>
-                              <Form.Control
-                                as="textarea"
-                                rows={3}
-                                id="orderNotes"
-                                name="orderNotes"
-                                value={formik.values.orderNotes}
-                                {...formik.getFieldProps("orderNotes")}
-                              />
-                            </Col>
-                          </Row>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                      {/* <Accordion.Item eventKey="checkoutB1">
+        cartDataError ? null :
+          isLogin ?
+            <section className="checkout-section mt-5">
+              <Container>
+                <Form onSubmit={formik.handleSubmit}>
+                  <Row>
+                    <Col xs="12" className="mt-4">
+                      <Accordion defaultActiveKey="checkoutA0">
+                        <Accordion.Item eventKey="checkoutA0">
+                          <Accordion.Header>
+                            <b>Billing details:</b>
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Row>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="First Name"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.fName}
+                                  onChange={formik.handleChange("fName")}
+                                  onBlur={formik.handleBlur("fName")}
+                                  isError={
+                                    formik.touched.fName && formik.errors.fName &&
+                                    Boolean(formik.errors.fName)
+                                  }
+                                  errorMsg={formik.errors.fName}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Last Name"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.lName}
+                                  onChange={formik.handleChange("lName")}
+                                  onBlur={formik.handleBlur("lName")}
+                                  isError={
+                                    formik.touched.lName && formik.errors.lName &&
+                                    Boolean(formik.errors.lName)
+                                  }
+                                  errorMsg={formik.errors.lName}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Company Name"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.companyName}
+                                  onChange={formik.handleChange("companyName")}
+                                  onBlur={formik.handleBlur("companyName")}
+                                  isError={
+                                    formik.touched.companyName && formik.errors.companyName &&
+                                    Boolean(formik.errors.companyName)
+                                  }
+                                  errorMsg={formik.errors.companyName}
+                                />
+                              </Col>
+                              <Col md="6" className="mt-4 mt-md-0">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Street address"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.address}
+                                  onChange={formik.handleChange("address")}
+                                  onBlur={formik.handleBlur("address")}
+                                  isError={
+                                    formik.touched.address && formik.errors.address &&
+                                    Boolean(formik.errors.address)
+                                  }
+                                  errorMsg={formik.errors.address}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Town / City"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.city}
+                                  onChange={formik.handleChange("city")}
+                                  onBlur={formik.handleBlur("city")}
+                                  isError={
+                                    formik.touched.city && formik.errors.city && Boolean(formik.errors.city)
+                                  }
+                                  errorMsg={formik.errors.city}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="State"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.state}
+                                  onChange={formik.handleChange("state")}
+                                  onBlur={formik.handleBlur("state")}
+                                  isError={
+                                    formik.touched.state && formik.errors.state && Boolean(formik.errors.state)
+                                  }
+                                  errorMsg={formik.errors.state}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Country"
+                                  formType="text"
+                                  compulsoryLabel="*"
+                                  customInputClassName=""
+                                  value={formik.values.country}
+                                  onChange={formik.handleChange("country")}
+                                  onBlur={formik.handleBlur("country")}
+                                  isError={
+                                    formik.touched.country && formik.errors.country &&
+                                    Boolean(formik.errors.country)
+                                  }
+                                  errorMsg={formik.errors.country}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Postcode"
+                                  compulsoryLabel="*"
+                                  formType="number"
+                                  customInputClassName=""
+                                  value={formik.values.postcode}
+                                  onChange={formik.handleChange("postcode")}
+                                  onBlur={formik.handleBlur("postcode")}
+                                  isError={
+                                    formik.touched.postcode && formik.errors.postcode &&
+                                    Boolean(formik.errors.postcode)
+                                  }
+                                  errorMsg={formik.errors.postcode}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Mobile Number"
+                                  compulsoryLabel="*"
+                                  formType="number"
+                                  customInputClassName=""
+                                  value={formik.values.phoneNo}
+                                  onChange={formik.handleChange("phoneNo")}
+                                  onBlur={formik.handleBlur("phoneNo")}
+                                  isError={
+                                    formik.touched.phoneNo && formik.errors.phoneNo &&
+                                    Boolean(formik.errors.phoneNo)
+                                  }
+                                  errorMsg={formik.errors.phoneNo}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Email Address"
+                                  compulsoryLabel="*"
+                                  formType="email"
+                                  customInputClassName=""
+                                  value={formik.values.email}
+                                  onChange={formik.handleChange("email")}
+                                  onBlur={formik.handleBlur("email")}
+                                  isError={
+                                    formik.touched.email && formik.errors.email &&
+                                    Boolean(formik.errors.email)
+                                  }
+                                  errorMsg={formik.errors.email}
+                                />
+                              </Col>
+                            </Row>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </Col>
+                    <Col xs="12" className="mt-4">
+                      <Form.Group className="mb-0" controlId="formBasicCheckbox">
+                        <Form.Check
+                          id="otherAdress"
+                          type="checkbox"
+                          name="shipToOtherAdd"
+                          value={formik.values.shipToOtherAdd}
+                          checked={formik.values.shipToOtherAdd === true}
+                          label={<b>Ship to a differenet address ?</b>}
+                          className="custom-checkbox"
+                          onChange={formik.handleChange("shipToOtherAdd")}
+                        />
+                      </Form.Group>
+                      {formik.values.shipToOtherAdd && <Accordion defaultActiveKey="checkoutB0" className="mt-3">
+                        <Accordion.Item eventKey="checkoutB0">
+                          <Accordion.Header>
+                            <b>Shipping address:</b>
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Row>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="First Name"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("fName2")}
+                                  isError={
+                                    formik.touched.fName2 && formik.errors.fName2 &&
+                                    Boolean(formik.errors.fName2)
+                                  }
+                                  errorMsg={formik.errors.fName2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Last Name"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("lName2")}
+                                  isError={
+                                    formik.touched.lName2 && formik.errors.lName2 &&
+                                    Boolean(formik.errors.lName2)
+                                  }
+                                  errorMsg={formik.errors.lName2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Company Name"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("companyName2")}
+                                  isError={
+                                    formik.touched.companyName2 && formik.errors.companyName2 &&
+                                    Boolean(formik.errors.companyName2)
+                                  }
+                                  errorMsg={formik.errors.companyName2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Street address"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("address2")}
+                                  isError={
+                                    formik.touched.address2 && formik.errors.address2 &&
+                                    Boolean(formik.errors.address2)
+                                  }
+                                  errorMsg={formik.errors.address2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Town / City"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("city2")}
+                                  isError={
+                                    formik.touched.city2 && formik.errors.city2 &&
+                                    Boolean(formik.errors.city2)
+                                  }
+                                  errorMsg={formik.errors.city2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="State"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  value={formik.values.state2}
+                                  onChange={formik.handleChange("state2")}
+                                  onBlur={formik.handleBlur("state2")}
+                                  isError={
+                                    formik.touched.state2 && formik.errors.state2 && Boolean(formik.errors.state2)
+                                  }
+                                  errorMsg={formik.errors.state2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Country"
+                                  compulsoryLabel="*"
+                                  formType="text"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("country2")}
+                                  isError={
+                                    formik.touched.country2 && formik.errors.country2 &&
+                                    Boolean(formik.errors.country2)
+                                  }
+                                  errorMsg={formik.errors.country2}
+                                />
+                              </Col>
+                              <Col md="6">
+                                <CustomInput
+                                  formGroupClassName="form-group"
+                                  formLabel="Postcode"
+                                  compulsoryLabel="*"
+                                  formType="number"
+                                  customInputClassName=""
+                                  {...formik.getFieldProps("postcode2")}
+                                  isError={
+                                    formik.touched.postcode2 && formik.errors.postcode2 &&
+                                    Boolean(formik.errors.postcode2)
+                                  }
+                                  errorMsg={formik.errors.postcode2}
+                                />
+                              </Col>
+                              <Col xs="12">
+                                <Form.Label>Order notes</Form.Label>
+                                <Form.Control
+                                  as="textarea"
+                                  rows={3}
+                                  id="orderNotes"
+                                  name="orderNotes"
+                                  value={formik.values.orderNotes}
+                                  {...formik.getFieldProps("orderNotes")}
+                                />
+                              </Col>
+                            </Row>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                        {/* <Accordion.Item eventKey="checkoutB1">
                         <Accordion.Header>
                           <b>Medical Condition:</b>
                         </Accordion.Header>
@@ -749,106 +765,107 @@ const Checkout = ({ globalStore, userStore }) => {
                           </Row>
                         </Accordion.Body>
                       </Accordion.Item> */}
-                    </Accordion>}
-                  </Col>
+                      </Accordion>}
+                    </Col>
 
-                  <Col xs="12" className="mt-4">
-                    <div className="checkout-card-details-wrap">
-                      <p>
-                        Your personal data will be used to process your order, support
-                        your experience throughout this website, and for other
-                        purposes described in our privacy policy.
-                      </p>
-                      <Form.Group className="mb-0" controlId="formBasicCheckbox">
-                        <Form.Check
-                          id="tandc"
-                          type="checkbox"
-                          defaultChecked={!tAndC}
-                          label="I have read and agree to the website *"
-                          className="custom-checkbox"
-                          onChange={() => setTAndC(!tAndC)}
-                        />
-                      </Form.Group>
-                      {paymentLink ?
-                        <a href={paymentLink.links[1].href} target="_blank">
-                          <CustomButton
-                            onClick={() => handleConfirmOrder()}
-                            type="button"
-                            text="Confirm Order"
-                            formGroupClassName="form-group mt-4 mb-0"
-                          // disabled={tAndC}
+                    <Col xs="12" className="mt-4">
+                      <div className="checkout-card-details-wrap">
+                        <p>
+                          Your personal data will be used to process your order, support
+                          your experience throughout this website, and for other
+                          purposes described in our privacy policy.
+                        </p>
+                        <Form.Group className="mb-0" controlId="formBasicCheckbox">
+                          <Form.Check
+                            id="tandc"
+                            type="checkbox"
+                            defaultChecked={!tAndC}
+                            label="I have read and agree to the website *"
+                            className="custom-checkbox"
+                            onChange={() => setTAndC(!tAndC)}
                           />
-                        </a> :
-                        <>
-                          <CustomButton
-                            type="submit"
-                            text="Place order"
-                            formGroupClassName="form-group mt-4 mb-0"
-                            disabled={tAndC}
-                            loading={checkOutLoading}
-                          />
-                          {checkOutError ? <p>Somthing went wrong</p> : null}
-                        </>
-                      }
-                    </div>
-                  </Col>
-                </Row>
-              </Form>
-            </Container>
-          </section> :
-          <section className="mt-5">
-            <Container>
-              <Row>
-                <Col>
-                  <li>
-                    <b>Please Login to Continue</b>
-                  </li>
-                </Col>
-              </Row>
-              <Form onSubmit={loginFormik.handleSubmit} className="mt-5 border border-1 p-3">
-                <Row>
-                  <Col xs={6}>
-                    <CustomInput
-                      placeholder="Mobile Number"
-                      value={loginFormik.values.mobile}
-                      onChange={loginFormik.handleChange("mobile")}
-                      isError={loginFormik.errors.mobile && loginFormik.touched.mobile && Boolean(loginFormik.errors.mobile)}
-                      errorMsg={loginFormik.errors.mobile}
-                      formGroupClassName="form-group"
-                      formLabel="Mobile"
-                      formType="mobile"
-                      customInputClassName=""
-                    />
-                  </Col>
-                  <Col xs={6}>
-                    <CustomInput
-                      placeholder="Password"
-                      value={loginFormik.values.password}
-                      onChange={loginFormik.handleChange("password")}
-                      isError={
-                        loginFormik.errors.password && loginFormik.touched.password && Boolean(loginFormik.errors.password)
-                      }
-                      errorMsg={loginFormik.errors.password}
-                      formGroupClassName="form-group"
-                      formLabel="Password"
-                      formType="password"
-                      customInputClassName=""
-                    />
-                  </Col>
-                </Row>
+                        </Form.Group>
+                        {(paymentLink) ?
+                          <a href={paymentLink.links[1].href}>
+                            <CustomButton
+                              onClick={() => handleConfirmOrder()}
+                              type="button"
+                              text="Confirm Order"
+                              formGroupClassName="form-group mt-4 mb-0"
+                            // disabled={tAndC}
+                            />
+                          </a>
+                          :
+                          <>
+                            <CustomButton
+                              type="submit"
+                              text="Place order"
+                              formGroupClassName="form-group mt-4 mb-0"
+                              disabled={tAndC}
+                              loading={checkOutLoading}
+                            />
+                            {checkOutError ? <p>Somthing went wrong</p> : null}
+                          </>
+                        }
+                      </div>
+                    </Col>
+                  </Row>
+                </Form>
+              </Container>
+            </section> :
+            <section className="mt-5">
+              <Container>
                 <Row>
                   <Col>
-                    <CustomButton
-                      type="submit"
-                      text="Login"
-                      disabled={loading || !loginFormik.isValid}
-                      formGroupClassName="form-group text-end"
-                    />
+                    <li>
+                      <b>Please Login to Continue</b>
+                    </li>
                   </Col>
                 </Row>
-              </Form>
-            </Container>
-          </section>
+                <Form onSubmit={loginFormik.handleSubmit} className="mt-5 border border-1 p-3">
+                  <Row>
+                    <Col xs={6}>
+                      <CustomInput
+                        placeholder="Mobile Number"
+                        value={loginFormik.values.mobile}
+                        onChange={loginFormik.handleChange("mobile")}
+                        isError={loginFormik.errors.mobile && loginFormik.touched.mobile && Boolean(loginFormik.errors.mobile)}
+                        errorMsg={loginFormik.errors.mobile}
+                        formGroupClassName="form-group"
+                        formLabel="Mobile"
+                        formType="mobile"
+                        customInputClassName=""
+                      />
+                    </Col>
+                    <Col xs={6}>
+                      <CustomInput
+                        placeholder="Password"
+                        value={loginFormik.values.password}
+                        onChange={loginFormik.handleChange("password")}
+                        isError={
+                          loginFormik.errors.password && loginFormik.touched.password && Boolean(loginFormik.errors.password)
+                        }
+                        errorMsg={loginFormik.errors.password}
+                        formGroupClassName="form-group"
+                        formLabel="Password"
+                        formType="password"
+                        customInputClassName=""
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <CustomButton
+                        type="submit"
+                        text="Login"
+                        disabled={signInLoading || !loginFormik.isValid}
+                        formGroupClassName="form-group text-end"
+                      />
+                    </Col>
+                  </Row>
+                </Form>
+              </Container>
+            </section>
       }
     </>
   );

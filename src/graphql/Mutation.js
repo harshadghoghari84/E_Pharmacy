@@ -99,7 +99,8 @@ export default {
   updateCart: gql`mutation UpdateCart($updateCartId: Int!, $qty: Int) {
     updateCart(id: $updateCartId, qty: $qty)
   }`,
-  confirmPayment: gql`mutation ConfirmPayment($paymentId: String!, $total: String!, $currency: String!, $href: String!, $rel: String!) {
-    confirmPayment(paymentId: $paymentId, total: $total, currency: $currency, href: $href, rel: $rel)
+  confirmPayment: gql` mutation ConfirmPayment($paymentId: String!, $total: String!, $currency: String!, $payerId: String!) {
+    confirmPayment(paymentId: $paymentId, total: $total, currency: $currency, payerId: $payerId)
   }`
+
 };

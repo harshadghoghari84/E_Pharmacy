@@ -26,6 +26,7 @@ import TermsConditions from "./Pages/TermsConditions/TermsConditions";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 import { CheckLogin, checkLogin } from "./utils/CheckLogin";
+import SuccessPayment from "./Pages/Checkout/SuccessPayment";
 
 const AppWrapper = ({ globalStore, userStore }) => {
 
@@ -70,6 +71,7 @@ const AppWrapper = ({ globalStore, userStore }) => {
             element={<MyAccountDetails />}
           />
           <Route path={"/checkout"} element={<Checkout />} />
+          <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
         </Routes>
         <Footer />
       </>

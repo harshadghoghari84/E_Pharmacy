@@ -12,15 +12,13 @@ import Mutation from "../../graphql/Mutation";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 
-const ProductDetails = ({userStore, globalStore}) => {
+const ProductDetails = ({ userStore, globalStore }) => {
   const { productId } = useParams();
 
   const isLogin = toJS(userStore?.user) || localStorage.getItem(constant.prfUserToken);
 
   const [productData, setProductData] = useState();
   const [medicineData, setMedicineData] = useState();
-
-  // const productQty = toJS(globalStore.selectedProductQty);
 
   const [selectedProduct, { data: productInfo }] = useLazyQuery(Querys.getSelectedProduct, {
     fetchPolicy: "no-cache",
@@ -41,11 +39,8 @@ const ProductDetails = ({userStore, globalStore}) => {
     }
   }, [productId]);
 
-  // console.log("medicineData", medicineData)
-
   useEffect(() => {
     if (productInfo) {
-      console.log("productInfo", productInfo)
       setProductData(productInfo?.getSelectedProduct?.relatedProduct[0])
 
       let medicineInfo = []
@@ -58,18 +53,15 @@ const ProductDetails = ({userStore, globalStore}) => {
 
   const handleAddToCart = (id) => {
     let product = medicineData.find((ele) => ele?.id === id);
-    console.log("product", product)
 
     if (product && isLogin) {
       addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
-        // globalStore.setCartData(res?.data?.addToCart?.cartItems);
         console.log("res", res)
       });
     }
     else {
-      globalStore.setCartData(product)
+      globalStore.setCartData({ title: productData?.title, ...product })
     }
-
   };
 
   const handleSelectMedicine = (qty, id) => {
@@ -82,8 +74,6 @@ const ProductDetails = ({userStore, globalStore}) => {
 
     setMedicineData(tempMedicineData)
   }
-
-  // console.log("productData", productData)
 
   return (
     <>
@@ -98,9 +88,6 @@ const ProductDetails = ({userStore, globalStore}) => {
                 <h5>
                   <b>{productData?.title}</b>
                 </h5>
-                {/* <h5 className="primary-color">
-                <b>Rs.150</b>
-              </h5> */}
                 <p>{productData?.indication}</p>
                 <Nav as="ul" className="nav-ul-block product-detail-content">
                   <Nav.Item as="li">
