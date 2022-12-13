@@ -1,6 +1,7 @@
 import { Col, Container, Row, Image } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import HomeProducts from "../Home/HomeProducts/HomeProducts";
+import { BeatLoader } from "react-spinners";
 import product0 from "../../../src/Assets/Images/products/product0.jpg";
 import "./CategoryProduct.css";
 import AboutCompanyNote from "../../Components/AboutCompanyNote/AboutCompanyNote";
@@ -10,9 +11,7 @@ import Querys from "../../graphql/Query";
 export default function CategoryProduct() {
   const { mainId, subId } = useParams();
 
-  // console.log("-----mainId----", mainId);
-  // console.log("-----subId----", subId);
-  const [products, { data, loading, error }] = useLazyQuery(
+  const [products, { data, loading: productLoading, error }] = useLazyQuery(
     Querys.productByCatogary,
     {
       fetchPolicy: "no-cache",
@@ -28,51 +27,12 @@ export default function CategoryProduct() {
     }
   }, [mainId, subId]);
 
-  // console.log("category error--->", error);
-  // console.log("category data--->", data);
-
-  const CategoryProductDetails = [
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "Intas Pharma",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "Torrent Pharma",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "Novartis",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "Sun Pharma",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "Cipla",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-    {
-      CategoryProductImg: product0,
-      CategoryProductTitle: "GSK",
-      CategoryProductContent:
-        "Extraction method has been tested to increase the sperm count that occurs.",
-    },
-  ];
   return (
     <>
-      {loading ? (
-        <div>Loading...</div>
+      {productLoading ? (
+        <div className="text-center py-5 mt-5">
+          <BeatLoader color="#00A3C8" />
+        </div>
       ) : (
         <>
           <section className="page-head-section">

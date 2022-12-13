@@ -1,14 +1,15 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Col, Container, Row, Nav, Form, Image } from "react-bootstrap";
+import { toJS } from "mobx";
+import { inject, observer } from "mobx-react";
+import { useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
+import { Col, Container, Form, Image, Nav, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
+import Mutation from "../../graphql/Mutation";
+import Querys from "../../graphql/Query";
 import heroSlider0 from "./../../Assets/Images/products/product0.jpg";
 import "./Cart.css";
-import Querys from "../../graphql/Query";
-import { useEffect, useState } from "react";
-import Mutation from "../../graphql/Mutation";
-import { inject, observer } from "mobx-react";
-import { toJS } from "mobx";
 
 const Cart = ({ globalStore }) => {
   const storeCartData = toJS(globalStore.cartData);
@@ -17,7 +18,8 @@ const Cart = ({ globalStore }) => {
   const [subTotal, setSubTotal] = useState(null);
   const [shippingCharge, setShippingCharge] = useState(null);
 
-  const [viewCart, { data, loading: cartDatLoading, errors: cartDataError }] = useLazyQuery(Querys.viewCart, {
+
+  const [viewCart, { data, loading: cartLoading, errors: cartDataError }] = useLazyQuery(Querys.viewCart, {
     fetchPolicy: "no-cache",
     errorPolicy: "all",
   });
@@ -92,6 +94,14 @@ const Cart = ({ globalStore }) => {
       });
   };
 
+  // if (cartLoading) {
+  //   return (
+  //     <div className="text-center py-5">
+  //       <BeatLoader color="#00A3C8" />
+  //     </div>
+  //   )
+  // }
+
   return (
     <>
       <section className="page-head-section">
@@ -121,143 +131,128 @@ const Cart = ({ globalStore }) => {
               </Col>
             </Row>
             :
-            cartDatLoading ?
+            cartData?.length === 0 || cartData === undefined ?
               <Row>
-                <Col className="text-center">
-                  <b>Loading Cart Data.......</b>
+                <Col xs={12}>
+                  <div className="text-center my-5">
+                    <div>
+                      <h1>
+                        <i class="ri-shopping-cart-line"></i>
+                      </h1>
+                    </div>
+                    <div>
+                      <h4>
+                        <b>Your cart is currently empty.</b>
+                      </h4>
+                    </div>
+                  </div>
+                </Col>
+                <Col xs={12}>
+                  <Link to="/">
+                    <CustomButton
+                      text="Continue Shopping"
+                      formGroupClassName="form-group text-end w-100 mb-0"
+                    />
+                  </Link>
                 </Col>
               </Row>
               :
-              cartData?.length === 0 || cartData === undefined ?
-                <Row>
-                  <Col xs={12}>
-                    <div className="text-center my-5">
-                      <div>
-                        <h1>
-                          <i class="ri-shopping-cart-line"></i>
-                        </h1>
-                      </div>
-                      <div>
-                        <h4>
-                          <b>Your cart is currently empty.</b>
-                        </h4>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xs={12}>
-                    <Link to="/">
-                      <CustomButton
-                        text="Continue Shopping"
-                        formGroupClassName="form-group text-end w-100 mb-0"
-                      />
-                    </Link>
-                  </Col>
-                </Row>
-                :
-                <Row>
-                  <Col xs="12">
-                    <div className="table-responsive">
-                      <table className="product-detail-tbl">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Subtotal</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {cartData?.length > 0 &&
-                            cartData?.map((item, index) => {
-                              // { console.log("items", item) }
-                              return (
-                                <tr>
-                                  <td className="">
-                                    <div className="d-flex align-items-center">
-                                      <Link
-                                        onClick={() => removeItem(item.medicine_detail.cart_master.id)}
-                                        to=""
-                                      >
-                                        <div className="delete-cart-product me-3">
-                                          <i className="ri-delete-bin-line"></i>
-                                        </div>
-                                      </Link>
-                                      <div className="cart-product-img">
-                                        <Image
-                                          src={heroSlider0}
-                                          fluid
-                                          alt=""
-                                          className="img-cover w-100 h-100"
-                                        />
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <Link to="#">{item?.title}</Link>
-                                  </td>
-                                  <td>${item?.medicine_detail?.price}</td>
-                                  <td>
-                                    <Form.Select
-                                      value={item?.medicine_detail?.cart_master?.qty}
-                                      onChange={(e) => handleQuantityChange(e.target.value, item.medicine_detail.cart_master.id, item)}
+              <Row>
+                <Col xs="12">
+                  <div className="table-responsive">
+                    <table className="product-detail-tbl">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                          <th>Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cartData?.length > 0 &&
+                          cartData?.map((item, index) => {
+                            // { console.log("items", item) }
+                            return (
+                              <tr>
+                                <td className="">
+                                  <div className="d-flex align-items-center">
+                                    <Link
+                                      onClick={() => removeItem(item.medicine_detail.cart_master.id)}
+                                      to=""
                                     >
-                                      {[...Array(50).keys()].map((ele) => {
-                                        return <option value={ele}>{ele}</option>;
-                                      })}
-                                    </Form.Select>
-                                  </td>
-                                  <td>
-                                    ${item?.medicine_detail?.price * item?.medicine_detail?.cart_master.qty}
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                        </tbody>
-                      </table>
-                    </div>
-                    {/* <div className="apply-code d-flex align-items-center flex-wrap w-100">
-                <Link to="#" className="ms-auto d-flex">
-                  <CustomButton
-                    text="Update cart"
-                    formGroupClassName="form-group mb-0"
-                  />
-                </Link>
-              </div> */}
-                  </Col>
-                  <Col xs="12" className="mt-4">
-                    <h6>Card Totals</h6>
-                    <Nav
-                      as="ul"
-                      className="nav-ul-block product-detail-content mt-3 card-total-box"
-                    >
-                      <Nav.Item as="li">
-                        <b>Subtotal:</b>
-                        <span>${subTotal}</span>
-                      </Nav.Item>
-                      <Nav.Item as="li">
-                        <b>Shipping:</b>
-                        <span className="d-flex align-items-center">
-                          Shipping Charge:{" "}
-                          <b className="p-0 bg-transparent ms-3">${shippingCharge}</b>
-                        </span>
-                      </Nav.Item>
-                      <Nav.Item as="li">
-                        <b>Total:</b>
-                        <span>
-                          <b className="p-0 bg-transparent">${subTotal + shippingCharge}</b>
-                        </span>
-                      </Nav.Item>
-                    </Nav>
-                    <Link to="/checkout" className="ms-auto d-flex">
-                      <CustomButton
-                        text="Process to Chekout"
-                        formGroupClassName="form-group mb-0 mt-3"
-                      // onClick={handleCheckout}
-                      />
-                    </Link>
-                  </Col>
-                </Row>}
+                                      <div className="delete-cart-product me-3">
+                                        <i className="ri-delete-bin-line"></i>
+                                      </div>
+                                    </Link>
+                                    <div className="cart-product-img">
+                                      <Image
+                                        src={heroSlider0}
+                                        fluid
+                                        alt=""
+                                        className="img-cover w-100 h-100"
+                                      />
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>
+                                  <Link to="#">{item?.title}</Link>
+                                </td>
+                                <td>${item?.medicine_detail?.price}</td>
+                                <td>
+                                  <Form.Select
+                                    value={item?.medicine_detail?.cart_master?.qty}
+                                    onChange={(e) => handleQuantityChange(e.target.value, item.medicine_detail.cart_master.id, item)}
+                                  >
+                                    {[1, 2, 3, 4, 5].map((ele) => {
+                                      return <option value={ele}>{ele}</option>;
+                                    })}
+                                  </Form.Select>
+                                </td>
+                                <td>
+                                  ${item?.medicine_detail?.price * item?.medicine_detail?.cart_master.qty}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    </table>
+                  </div>
+                </Col>
+                <Col xs="12" className="mt-4">
+                  <h6>Card Totals</h6>
+                  <Nav
+                    as="ul"
+                    className="nav-ul-block product-detail-content mt-3 card-total-box"
+                  >
+                    <Nav.Item as="li">
+                      <b>Subtotal:</b>
+                      <span>${subTotal}</span>
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                      <b>Shipping:</b>
+                      <span className="d-flex align-items-center">
+                        Shipping Charge:{" "}
+                        <b className="p-0 bg-transparent ms-3">${shippingCharge}</b>
+                      </span>
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                      <b>Total:</b>
+                      <span>
+                        <b className="p-0 bg-transparent">${subTotal + shippingCharge}</b>
+                      </span>
+                    </Nav.Item>
+                  </Nav>
+                  <Link to="/checkout" className="ms-auto d-flex">
+                    <CustomButton
+                      text="Process to Chekout"
+                      formGroupClassName="form-group mb-0 mt-3"
+                    // onClick={handleCheckout}
+                    />
+                  </Link>
+                </Col>
+              </Row>}
         </Container>
       </section>
     </>

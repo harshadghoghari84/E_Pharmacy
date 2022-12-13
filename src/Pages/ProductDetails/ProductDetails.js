@@ -1,16 +1,17 @@
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { toJS } from "mobx";
+import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Dropdown, Form, Nav, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
-import ProductSlider from "./ProductSlider/ProductSlider";
-import "./ProductDetails.css";
-import constant from "../../utils/constant";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import Querys from "../../graphql/Query";
 import Mutation from "../../graphql/Mutation";
-import { inject, observer } from "mobx-react";
-import { toJS } from "mobx";
+import Querys from "../../graphql/Query";
+import constant from "../../utils/constant";
+import "./ProductDetails.css";
+import ProductSlider from "./ProductSlider/ProductSlider";
 
 const ProductDetails = ({ userStore, globalStore }) => {
   const { productId } = useParams();
@@ -20,11 +21,11 @@ const ProductDetails = ({ userStore, globalStore }) => {
   const [productData, setProductData] = useState();
   const [medicineData, setMedicineData] = useState();
 
-  const [selectedProduct, { data: productInfo }] = useLazyQuery(Querys.getSelectedProduct, {
+  const [selectedProduct, { data: productInfo, loading, errors }] = useLazyQuery(Querys.getSelectedProduct, {
     fetchPolicy: "no-cache",
   });
 
-  const [addToCart, { data: cartData, loading, error }] = useMutation(
+  const [addToCart, { data: cartData }] = useMutation(
     Mutation.addToCart,
     {
       fetchPolicy: "no-cache",
@@ -53,6 +54,7 @@ const ProductDetails = ({ userStore, globalStore }) => {
 
   const handleAddToCart = (id) => {
     let product = medicineData.find((ele) => ele?.id === id);
+    // console.log("product", product)
 
     if (product && isLogin) {
       addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
@@ -73,6 +75,22 @@ const ProductDetails = ({ userStore, globalStore }) => {
     }
 
     setMedicineData(tempMedicineData)
+  }
+
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <BeatLoader color="#00A3C8" />
+      </div>
+    )
+  }
+
+  if (errors) {
+    return (
+      <div className="text-center py-5">
+        <p>{errors[0].message}</p>
+      </div>
+    )
   }
 
   return (
@@ -172,7 +190,7 @@ const ProductDetails = ({ userStore, globalStore }) => {
             ) : null}
             {/* {checkOutData.length > 0 && ( */}
             <div className="view-cart">
-              <Link to="/cart">
+              <Link to={isLogin ? "/cart" : "/login"}>
                 <CustomButton
                   text="View Cart"
                   formGroupClassName="form-group mt-4 mb-0"
