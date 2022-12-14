@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Badge from "../../Components/Badge/Badge";
 import CustomButton from "../../Components/CustomButton/CustomButton";
@@ -11,59 +11,40 @@ import { loginSchema } from "../../helper/formikSchemas";
 import { useMutation } from "@apollo/client";
 import Mutation from "../../graphql/Mutation";
 import constant from "../../utils/constant";
+import { errorNotification, successNotification } from "../../utils/notification";
 
 const Login = ({ userStore }) => {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState({ message: "", type: "" });
   const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
     errorPolicy: "all",
     fetchPolicy: "no-cache",
   });
 
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        setOpen(false);
-      }, 2000);
-    }
-  }, [open]);
-
   const formik = useFormik({
     initialValues: {
-      mobile: "",
+      email: "",
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit: ({ mobile, password }) => {
-      // console.log("called submit");
+    onSubmit: ({ email, password }) => {
+      console.log("called submit",);
       userSignIn({
         variables: {
-          mobile,
+          email,
           password,
         },
       })
-        .then(async ({ data, errors }) => {
-          if (data) {
+        .then(async ({data, errors}) => {
+          if (errors) {
+            errorNotification(errors[0].message)
+          }
+
+          if (data.userSignIn !== null) {
             localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
             userStore.setUser(data.userSingIn.user);
             userStore.loadUserBillingDetails();
-            setMessage({
-              message: "Login successfully!",
-              type: constant.badgeSucessType,
-            });
-            handleClick();
-            setTimeout(() => {
-              // console.log("navigate");
-              navigate("/");
-            }, 1000);
-          }
-          if (errors !== undefined) {
-            handleClick();
-            setMessage({
-              message: errors[0].message,
-              type: constant.badgeDangerType,
-            });
+            successNotification("Login successfully!")
+            navigate("/");
           }
         })
         .catch((err) => {
@@ -71,10 +52,6 @@ const Login = ({ userStore }) => {
         });
     },
   });
-
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   return (
     <>
@@ -85,17 +62,22 @@ const Login = ({ userStore }) => {
           </h3>
           <Form onSubmit={formik.handleSubmit}>
             <CustomInput
-              placeholder="Mobile Number"
-              value={formik.values.mobile}
-              onChange={formik.handleChange("mobile")}
-              isError={formik.errors.mobile && formik.touched.mobile && Boolean(formik.errors.mobile)}
-              errorMsg={formik.errors.mobile}
               formGroupClassName="form-group"
-              formLabel="Mobile"
-              formType="mobile"
-              customInputClassName=""
+              formLabel="Email ID"
+              customInputClassName="*"
+              formType="email"
+              placeholder="Email ID"
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("fName")}
+              isError={formik.errors.email && formik.touched.email && Boolean(formik.errors.email)}
+              errorMsg={formik.errors.email}
             />
             <CustomInput
+              formGroupClassName="form-group"
+              formLabel="Password"
+              formType="password"
+              customInputClassName="*"
               placeholder="Password"
               value={formik.values.password}
               onChange={formik.handleChange("password")}
@@ -103,16 +85,12 @@ const Login = ({ userStore }) => {
                 formik.errors.password && formik.touched.password && Boolean(formik.errors.password)
               }
               errorMsg={formik.errors.password}
-              formGroupClassName="form-group"
-              formLabel="Password"
-              formType="password"
-              customInputClassName=""
             />
 
             <CustomButton
               type="submit"
               text="Login"
-              disabled={loading || !formik.isValid}
+              disabled={loading}
               formGroupClassName="form-group text-center w-100 mt-5 mb-0"
             />
 
@@ -129,7 +107,6 @@ const Login = ({ userStore }) => {
           </Form>
         </div>
       </section>
-      {open && <Badge text={message.message} customBadgeName={message.type} />}
     </>
   );
 };

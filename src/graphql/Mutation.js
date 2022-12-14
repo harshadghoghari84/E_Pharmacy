@@ -19,14 +19,14 @@ export default {
     }
   `,
   userSignIn: gql`
-  mutation UserSingIn($mobile: String!, $password: String!) {
-    userSingIn(mobile: $mobile, password: $password) {
+  mutation UserSingIn($email: String!, $password: String!) {
+    userSingIn(email: $email, password: $password) {
       msg
       token
       user {
-        mobile
-        lName
         fName
+        lName
+        mobile
         email
         billing_detail {
           id
