@@ -18,7 +18,6 @@ const Cart = ({ globalStore }) => {
   const [subTotal, setSubTotal] = useState(null);
   const [shippingCharge, setShippingCharge] = useState(null);
 
-
   const [viewCart, { data, loading: cartLoading, errors: cartDataError }] = useLazyQuery(Querys.viewCart, {
     fetchPolicy: "no-cache",
     errorPolicy: "all",

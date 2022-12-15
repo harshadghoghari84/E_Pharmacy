@@ -1,19 +1,19 @@
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { useFormik } from "formik";
 import { toJS } from "mobx";
 import { inject, observer } from "mobx-react";
-import Querys from "../../graphql/Query";
-import { useLazyQuery, useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
-import { BeatLoader } from "react-spinners";
+import Modal from 'react-bootstrap/Modal';
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
 import Mutation from "../../graphql/Mutation";
+import Querys from "../../graphql/Query";
 import { billingDetailsSchema, loginSchema } from "../../helper/formikSchemas";
 import constant from "../../utils/constant";
 import "./Checkout.css";
-import Modal from 'react-bootstrap/Modal';
 
 const Checkout = ({ globalStore, userStore }) => {
   const navigate = useNavigate()

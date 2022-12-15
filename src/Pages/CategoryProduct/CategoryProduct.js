@@ -2,7 +2,6 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import HomeProducts from "../Home/HomeProducts/HomeProducts";
 import { BeatLoader } from "react-spinners";
-import product0 from "../../../src/Assets/Images/products/product0.jpg";
 import "./CategoryProduct.css";
 import AboutCompanyNote from "../../Components/AboutCompanyNote/AboutCompanyNote";
 import { useEffect } from "react";

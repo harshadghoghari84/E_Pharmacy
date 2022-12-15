@@ -10,6 +10,7 @@ class GlobalStore {
   cartData = [];
   checkOutData = [];
   countryList = [];
+  noOfCartItems = null;
   constructor() {
     makeAutoObservable(this);
   }
@@ -68,6 +69,9 @@ class GlobalStore {
   setCountryList = (data) => {
     this.countryList = data;
   };
+  setNoOfCartItems = (data) => {
+    this.noOfCartItems = data
+  }
 }
 
 export default new GlobalStore();

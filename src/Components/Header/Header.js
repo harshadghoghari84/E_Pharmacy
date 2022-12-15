@@ -34,13 +34,17 @@ const menuOption0 = [
     subMenuOption0: "Male Infertility",
   },
 ];
-const Header = ({ userStore, globalStore }) => {
+const Header = ({ cartData, userStore, globalStore }) => {
   const location = useLocation()
   const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
   const catagory = toJS(globalStore.AllCatagory);
-  
-  const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken)
-  // console.log("category", catagory)
+
+  const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken);
+
+  // const [viewCart, { data: cartData, loading: cartLoading, errors: cartDataError }] = useQuery(Query.viewCart, {
+  //   fetchPolicy: "no-cache",
+  //   errorPolicy: "all",
+  // });
 
   // const isMountedRef = common.useIsMountedRef();
   // // useEffect(() => {
@@ -189,11 +193,10 @@ const Header = ({ userStore, globalStore }) => {
                       <Nav.Item as="li" onClick={onClickLogout}>
                         <Link to="/">Logout</Link>
                       </Nav.Item>
-                      {/* {checkOutData.length > 0 && ( */}
-                      <Nav.Item as="li">
-                        <Link to="/cart">View Cart</Link>
+                      <Nav.Item as="li" className="viewCartBtn">
+                        <Link to="/cart" className="border border-2 rounded p-2">View Cart</Link>
+                        <span id='CartCount'>{cartData?.viewCart?.cartItems?.length || 0}</span>
                       </Nav.Item>
-                      {/* )} */}
                     </>
                   ) : (
                     <>
@@ -235,7 +238,88 @@ const Header = ({ userStore, globalStore }) => {
             onClick={() => setmobileSidebarOpen(false)}
           ></i>
         </div>
-        <Nav as="ul" className="d-block mt-3">
+        <Nav as="ul" className="d-block">
+          <Nav.Item as="li" className="menu-list">
+            <Link to="">
+              {catagory?.[0]?.name}
+              <i className="ri-arrow-drop-down-line ms-2"></i>
+            </Link>
+            <Nav as="ul" className="sub-menu">
+              {catagory?.[0]?.sub_categories.map((item) => (
+                <Nav.Item as="li">
+                  <Link
+                    to={`/category-product/${catagory?.[0]?.id}/${item.id}`}
+                  >
+                    {item.name}
+                  </Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Nav.Item>
+          <Nav.Item as="li" className="menu-list">
+            <Link to="">
+              {catagory?.[1]?.name}
+              <i className="ri-arrow-drop-down-line ms-2"></i>
+            </Link>
+            <Nav as="ul" className="sub-menu">
+              {catagory?.[1]?.sub_categories.map((item) => (
+                <Nav.Item as="li">
+                  <Link
+                    to={`/category-product/${catagory?.[1]?.id}/${item.id}`}
+                  >
+                    {item.name}
+                  </Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Nav.Item>
+          <Nav.Item as="li" className="menu-list">
+            <Link to="">
+              Skin Care <i className="ri-arrow-drop-down-line ms-2"></i>
+            </Link>
+            <Nav as="ul" className="sub-menu">
+              {menuOption0.map((item) => (
+                <Nav.Item as="li">
+                  <Link to="/category-product">
+                    {item.subMenuOption0}
+                  </Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Nav.Item>
+          <Nav.Item as="li" className="menu-list">
+            <Link to="">
+              Viral Care{" "}
+              <i className="ri-arrow-drop-down-line ms-2"></i>
+            </Link>
+            <Nav as="ul" className="sub-menu">
+              {menuOption0.map((item) => (
+                <Nav.Item as="li">
+                  <Link to="/category-product">
+                    {item.subMenuOption0}
+                  </Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Nav.Item>
+          <Nav.Item as="li" className="menu-list">
+            <Link to="">
+              <div className="waviy">
+                <span style={{ color: "--i:1" }}>O</span>
+                <span style={{ color: "--i:2" }}>F</span>
+                <span style={{ color: "--i:3" }}>F</span>
+                <span style={{ color: "--i:4" }}>E</span>
+                <span style={{ color: "--i:5" }}>R</span>
+                <span style={{ color: "--i:6" }}>_V</span>
+                <span style={{ color: "--i:7" }}>I</span>
+                <span style={{ color: "--i:8" }}>L</span>
+                <span style={{ color: "--i:9" }}>L</span>
+                <span style={{ color: "--i:10" }}>A</span>
+              </div>
+            </Link>
+          </Nav.Item>
+        </Nav>
+        {/* <Nav as="ul" className="d-block mt-3">
           <Nav.Item as="li" className="menu-list">
             <Link to="">
               Men's Health <i className="ri-arrow-drop-down-line ms-2"></i>
@@ -300,7 +384,7 @@ const Header = ({ userStore, globalStore }) => {
               </div>
             </Link>
           </Nav.Item>
-        </Nav>
+        </Nav> */}
       </div>
     </>
   );

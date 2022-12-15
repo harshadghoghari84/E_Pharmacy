@@ -35,7 +35,9 @@ const AppWrapper = ({ globalStore, userStore }) => {
   useEffect(() => {
     globalStore.loadAllCatagory();
     // userStore.loadUserBillingDetails()
-  }, [userStore.user])
+  }, [userStore.user]);
+
+  const { data } = useQuery(Query.viewCart);
 
   return (
     <Router>
@@ -43,7 +45,7 @@ const AppWrapper = ({ globalStore, userStore }) => {
         <div>Loading...</div>
       ) : ( */}
       <>
-        <Header />
+        <Header cartData={data}/>
         <ScrollToTop />
         <Routes>
           <Route path={"/"} element={<Home />} />

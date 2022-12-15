@@ -2,8 +2,9 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { toJS } from "mobx";
 import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Dropdown, Form, Nav, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Col, Container, Form, Nav, Row } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomInput from "../../Components/CustomInput/CustomInput";
@@ -15,11 +16,12 @@ import ProductSlider from "./ProductSlider/ProductSlider";
 
 const ProductDetails = ({ userStore, globalStore }) => {
   const { productId } = useParams();
-
+  const navigate = useNavigate();
   const isLogin = toJS(userStore?.user) || localStorage.getItem(constant.prfUserToken);
 
   const [productData, setProductData] = useState();
   const [medicineData, setMedicineData] = useState();
+  const [loginCnfModal, setLoginCnfModal] = useState(false)
 
   const [selectedProduct, { data: productInfo, loading, errors }] = useLazyQuery(Querys.getSelectedProduct, {
     fetchPolicy: "no-cache",
@@ -75,6 +77,10 @@ const ProductDetails = ({ userStore, globalStore }) => {
     }
 
     setMedicineData(tempMedicineData)
+  }
+
+  const handleViewCart = () => {
+    isLogin ? navigate("/cart") : setLoginCnfModal(true)
   }
 
   if (loading) {
@@ -190,12 +196,11 @@ const ProductDetails = ({ userStore, globalStore }) => {
             ) : null}
             {/* {checkOutData.length > 0 && ( */}
             <div className="view-cart">
-              <Link to={isLogin ? "/cart" : "/login"}>
-                <CustomButton
-                  text="View Cart"
-                  formGroupClassName="form-group mt-4 mb-0"
-                />
-              </Link>
+              <CustomButton
+                text="View Cart"
+                formGroupClassName="form-group mt-4 mb-0"
+                onClick={() => handleViewCart()}
+              />
             </div>
             {/* )} */}
             <Col xs="12" className="mt-5">
@@ -234,6 +239,44 @@ const ProductDetails = ({ userStore, globalStore }) => {
           </Row>
         </Container>
       </section>
+
+      {/* Login Conformation modal */}
+      <Modal show={loginCnfModal} backdrop="static">
+        <Modal.Body>
+          <Row>
+            <Col className="text-center">
+              <span style={{ color: "#00A3C8", fontSize: "50px" }}>
+                <i class="ri-login-circle-fill"></i>
+              </span>
+              <p>
+                <b>
+                  Please Login to Continue...
+                </b>
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="d-flex justify-content-end">
+              <CustomButton
+                onClick={() => { setLoginCnfModal(false) }}
+                type="button"
+                text="Close"
+                formGroupClassName="form-group mt-4 mb-0"
+                customBtnClassName="me-3"
+              />
+              <CustomButton
+                onClick={() => { navigate("/login"); setLoginCnfModal(false) }}
+                type="button"
+                text="Continue to Login"
+                formGroupClassName="form-group mt-4 mb-0"
+              />
+            </Col>
+          </Row>
+        </Modal.Body>
+      </Modal>
+
+
+
     </>
   );
 };
