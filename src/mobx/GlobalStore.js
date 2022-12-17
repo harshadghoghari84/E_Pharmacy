@@ -54,14 +54,16 @@ class GlobalStore {
   };
 
   setCartData = (data) => {
-    let index = this.cartData.findIndex((CData) => data.id === CData.id);
-    if (index < 0) {
-      this.cartData = [...this.cartData, data];
+   if(Array.isArray(data)){
+    this.cartData = data
+    }else{
+      let index = this.cartData.findIndex((CData) => data.medicine_detail.id === CData.medicine_detail.id);
+      if (index < 0) {
+        this.cartData = [...this.cartData, data];
+      }else {  
+        this.cartData.splice(index, 1, data)
+      }
     }
-    else {
-      this.cartData.splice(index, 1, data)
-    }
-    // this.cartData = data;
   };
   setCheckOutData = (data) => {
     this.checkOutData = data;

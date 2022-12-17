@@ -8,18 +8,31 @@ import "./Login.css";
 import { inject, observer } from "mobx-react";
 import { useFormik } from "formik";
 import { loginSchema } from "../../helper/formikSchemas";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Mutation from "../../graphql/Mutation";
+import Querys from "../../graphql/Query";
 import constant from "../../utils/constant";
 import { errorNotification, successNotification } from "../../utils/notification";
 
-const Login = ({ userStore }) => {
+const Login = ({ userStore,globalStore }) => {
   const navigate = useNavigate();
   const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
     errorPolicy: "all",
     fetchPolicy: "no-cache",
   });
 
+  const [viewCart, { data, loading: cartLoading, errors: cartDataError }] = useLazyQuery(Querys.viewCart, {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  });
+
+  useEffect(() => {
+    if (data) {
+      globalStore.setCartData(data?.viewCart?.cartItems)
+      navigate("/");
+
+    }
+  }, [data]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -42,9 +55,10 @@ const Login = ({ userStore }) => {
           if (data.userSignIn !== null) {
             localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
             userStore.setUser(data.userSingIn.user);
+            viewCart();
             userStore.loadUserBillingDetails();
             successNotification("Login successfully!")
-            navigate("/");
+            // navigate("/");
           }
         })
         .catch((err) => {
@@ -90,7 +104,7 @@ const Login = ({ userStore }) => {
             <CustomButton
               type="submit"
               text="Login"
-              disabled={loading}
+              disabled={loading||cartLoading}
               formGroupClassName="form-group text-center w-100 mt-5 mb-0"
             />
 
@@ -111,4 +125,4 @@ const Login = ({ userStore }) => {
   );
 };
 
-export default inject("userStore")(observer(Login));
+export default inject("userStore","globalStore")(observer(Login));

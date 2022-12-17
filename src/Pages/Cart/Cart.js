@@ -39,13 +39,11 @@ const Cart = ({ globalStore }) => {
 
   useEffect(() => {
     if (data) {
-      // console.log("CART DATA", data.viewCart.cartItems);
       setCartData(data?.viewCart?.cartItems);
       setCountryList(data?.viewCart?.countryList);
-
-      // globalStore.setCartData(data.viewCart.cartItems);
       globalStore.setCheckOutData(data?.viewCart?.cartItems);
       globalStore.setCountryList(data?.viewCart?.countryList);
+      globalStore.setCartData(data?.viewCart?.cartItems)
     }
   }, [data]);
 

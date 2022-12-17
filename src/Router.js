@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Query from "../src/graphql/Query";
-import UserStore from "../src/mobx/UserStore";
 import "./App.css";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
@@ -24,27 +23,29 @@ import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Register from "./Pages/Register/Register";
 import TermsConditions from "./Pages/TermsConditions/TermsConditions";
 import { inject, observer } from "mobx-react";
-import { toJS } from "mobx";
 import { CheckLogin, checkLogin } from "./utils/CheckLogin";
 import SuccessPayment from "./Pages/Checkout/SuccessPayment";
 
 const AppWrapper = ({ globalStore, userStore }) => {
 
-  console.log("checkLogin()", CheckLogin())
+  
+  let isLogin = CheckLogin()
 
   useEffect(() => {
     globalStore.loadAllCatagory();
-    // userStore.loadUserBillingDetails()
   }, [userStore.user]);
 
   const { data } = useQuery(Query.viewCart);
+  
+
+  useEffect(() => {
+    if(isLogin && data?.viewCart?.cartItems.length >= 0){
+      globalStore.setCartData(data?.viewCart?.cartItems)
+    }
+  }, [data,isLogin]);
 
   return (
     <Router>
-      {/* {loading ? (
-        <div>Loading...</div>
-      ) : ( */}
-      <>
         <Header cartData={data}/>
         <ScrollToTop />
         <Routes>
@@ -76,8 +77,6 @@ const AppWrapper = ({ globalStore, userStore }) => {
           <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
         </Routes>
         <Footer />
-      </>
-      {/* )} */}
     </Router>
   );
 };

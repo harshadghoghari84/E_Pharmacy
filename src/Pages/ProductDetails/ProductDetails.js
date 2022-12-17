@@ -56,11 +56,11 @@ const ProductDetails = ({ userStore, globalStore }) => {
 
   const handleAddToCart = (id) => {
     let product = medicineData.find((ele) => ele?.id === id);
-    // console.log("product", product)
 
     if (product && isLogin) {
       addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
-        console.log("res", res)
+      globalStore.setCartData(res.data.addToCart.cartItems)
+        
       });
     }
     else {
