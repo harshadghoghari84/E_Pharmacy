@@ -34,14 +34,12 @@ const menuOption0 = [
     subMenuOption0: "Male Infertility",
   },
 ];
-const Header = ({ userStore, globalStore }) => {
+const Header = ({ cartData, userStore, globalStore }) => {
   const location = useLocation()
   const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
   const catagory = toJS(globalStore.AllCatagory);
-  const cartData = toJS(globalStore.cartData);
 
   const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken);
-
 
   // const [viewCart, { data: cartData, loading: cartLoading, errors: cartDataError }] = useQuery(Query.viewCart, {
   //   fetchPolicy: "no-cache",
@@ -197,7 +195,7 @@ const Header = ({ userStore, globalStore }) => {
                       </Nav.Item>
                       <Nav.Item as="li" className="viewCartBtn">
                         <Link to="/cart" className="border border-2 rounded p-2">View Cart</Link>
-                        <span id='CartCount'>{cartData?.length || 0}</span>
+                        <span id='CartCount'>{cartData?.viewCart?.cartItems?.length || 0}</span>
                       </Nav.Item>
                     </>
                   ) : (
@@ -241,12 +239,12 @@ const Header = ({ userStore, globalStore }) => {
           ></i>
         </div>
         <Nav as="ul" className="d-block">
-          <Nav.Item as="li" className="menu-list">
+          <Nav.Item as="li" className="mobile-menu-list">
             <Link to="">
               {catagory?.[0]?.name}
               <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
-            <Nav as="ul" className="sub-menu">
+            <Nav as="ul" className="mobile-sub-menu">
               {catagory?.[0]?.sub_categories.map((item) => (
                 <Nav.Item as="li">
                   <Link
@@ -258,12 +256,12 @@ const Header = ({ userStore, globalStore }) => {
               ))}
             </Nav>
           </Nav.Item>
-          <Nav.Item as="li" className="menu-list">
+          <Nav.Item as="li" className="mobile-menu-list">
             <Link to="">
               {catagory?.[1]?.name}
               <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
-            <Nav as="ul" className="sub-menu">
+            <Nav as="ul" className="mobile-sub-menu">
               {catagory?.[1]?.sub_categories.map((item) => (
                 <Nav.Item as="li">
                   <Link
@@ -275,11 +273,11 @@ const Header = ({ userStore, globalStore }) => {
               ))}
             </Nav>
           </Nav.Item>
-          <Nav.Item as="li" className="menu-list">
+          <Nav.Item as="li" className="mobile-menu-list">
             <Link to="">
               Skin Care <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
-            <Nav as="ul" className="sub-menu">
+            <Nav as="ul" className="mobile-sub-menu">
               {menuOption0.map((item) => (
                 <Nav.Item as="li">
                   <Link to="/category-product">
@@ -289,12 +287,12 @@ const Header = ({ userStore, globalStore }) => {
               ))}
             </Nav>
           </Nav.Item>
-          <Nav.Item as="li" className="menu-list">
+          <Nav.Item as="li" className="mobile-menu-list">
             <Link to="">
               Viral Care{" "}
               <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
-            <Nav as="ul" className="sub-menu">
+            <Nav as="ul" className="mobile-sub-menu">
               {menuOption0.map((item) => (
                 <Nav.Item as="li">
                   <Link to="/category-product">
@@ -304,7 +302,7 @@ const Header = ({ userStore, globalStore }) => {
               ))}
             </Nav>
           </Nav.Item>
-          <Nav.Item as="li" className="menu-list">
+          <Nav.Item as="li" className="mobile-menu-list">
             <Link to="">
               <div className="waviy">
                 <span style={{ color: "--i:1" }}>O</span>

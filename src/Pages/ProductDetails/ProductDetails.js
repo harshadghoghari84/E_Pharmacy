@@ -59,8 +59,7 @@ const ProductDetails = ({ userStore, globalStore }) => {
 
     if (product && isLogin) {
       addToCart({ variables: { medicineId: product.id, qty: product.qty } }).then((res) => {
-      globalStore.setCartData(res.data.addToCart.cartItems)
-        
+        globalStore.setCartData(res.data.addToCart.cartItems)
       });
     }
     else {

@@ -159,6 +159,8 @@ header #CartCount {
   }
 }
 
+/* ------ mobile sidebar css ------ */
+
 .mobile-sidebar {
   min-width: 280px;
   max-width: 280px;
@@ -174,37 +176,44 @@ header #CartCount {
   transition: all 1s;
 }
 
+.mobile-sidebar .close-sidebar {
+  color: var(--white-color);
+  font-size: 28px;
+}
+
 .mobile-sidebar-show {
   transition: all 1s;
   right: 0;
-}
-
-.mobile-sidebar .menu-list {
-  margin: 20px 0;
-  position: relative;
 }
 
 .mobile-sidebar li a {
   color: var(--white-color);
 }
 
-.mobile-sidebar .close-sidebar {
-  color: var(--white-color);
-  font-size: 28px;
+.mobile-sidebar .mobile-menu-list {
+  margin: 20px 0;
+  position: relative;
 }
 
-.mobile-sidebar .sub-menu {
-  margin: 10px 0;
-  /* display: none; */
-  max-height: 400px;
+.mobile-sidebar .mobile-sub-menu {
+  background-color: var(--white-color);
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+  width: 100%;
+  transition: all 0.3s;
   overflow-y: auto;
-  top: 100%;
+  display: none;
+  opacity: 0;
+  transition: all 0.3s;
 }
 
-.mobile-sidebar .menu-list:hover .sub-menu {
-  top: 100%;
-  /* visibility: visible;
-  opacity: 1; */
+.mobile-sidebar .mobile-sub-menu a {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.mobile-sidebar .mobile-menu-list:hover .mobile-sub-menu {
+  display: block;
+  opacity: 1;
 }
 
 .mobile-sidebar .waviy span {
@@ -224,39 +233,35 @@ header #CartCount {
   height: 4px;
 }
 
-/* 
-.mobile-sidebar li:not(:last-child) {
-  margin-bottom: 20px;
-}
-
-.mobile-sidebar .menu-list {
-  padding: 10px 0;
-}
-
-
-
-
-
-
-
-
-
-.mobile-sidebar .sub-menu a {
-  color: var(--primary-color);
-}
-
-.mobile-sidebar li {
-  position: relative;
-}
-
-.mobile-sidebar .menu-list:hover .sub-menu {
-  top: 40px;
+.mobile-sidebar .mobile-sub-menu li a {
+  width: 100%;
+  height: 100%;
   display: block;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
 }
 
+.mobile-sub-menu li a::after {
+  content: '';
+  background-color: var(--primary-color);
+  width: 0;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: all 0.3s;
+}
 
+.mobile-sub-menu li a:hover::after {
+  width: 100%;
+}
 
- */
+.mobile-sub-menu li:hover a{
+  color: var(--white-color) !important;
+}
 
 /* responsive css */
 @media (max-width:1365px) {
