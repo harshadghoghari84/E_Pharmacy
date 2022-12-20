@@ -46,7 +46,7 @@ const AppWrapper = ({ globalStore, userStore }) => {
 
   return (
     <Router>
-        <Header cartData={data}/>
+        <Header />
         <ScrollToTop />
         <Routes>
           <Route path={"/"} element={<Home />} />
