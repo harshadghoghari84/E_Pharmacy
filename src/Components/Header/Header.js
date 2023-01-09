@@ -34,12 +34,14 @@ const menuOption0 = [
     subMenuOption0: "Male Infertility",
   },
 ];
-const Header = ({ cartData, userStore, globalStore }) => {
+const Header = ({ userStore, globalStore }) => {
   const location = useLocation()
   const [mobileSidebarOpen, setmobileSidebarOpen] = useState(false);
   const catagory = toJS(globalStore.AllCatagory);
 
   const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken);
+  const cartData = toJS(globalStore.cartData);
+  console.log("cartData",cartData);
 
   // const [viewCart, { data: cartData, loading: cartLoading, errors: cartDataError }] = useQuery(Query.viewCart, {
   //   fetchPolicy: "no-cache",
@@ -195,7 +197,7 @@ const Header = ({ cartData, userStore, globalStore }) => {
                       </Nav.Item>
                       <Nav.Item as="li" className="viewCartBtn">
                         <Link to="/cart" className="border border-2 rounded p-2">View Cart</Link>
-                        <span id='CartCount'>{cartData?.viewCart?.cartItems?.length || 0}</span>
+                        <span id='CartCount'>{cartData?.length || 0}</span>
                       </Nav.Item>
                     </>
                   ) : (
