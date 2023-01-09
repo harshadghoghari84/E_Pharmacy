@@ -159,9 +159,9 @@ const ProductDetails = ({ userStore, globalStore }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {medicineData?.map((item) => {
+                      {medicineData?.map((item, i) => {
                         return (
-                          <tr>
+                          <tr key={i}>
                             <td>{item.piece} Tablet/s</td>
                             <td>${item.price}.00</td>
                             <td>${item.price / item.piece}/Piece</td>

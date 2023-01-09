@@ -172,7 +172,7 @@ const Cart = ({ globalStore }) => {
                           cartData?.map((item, index) => {
                             // { console.log("items", item) }
                             return (
-                              <tr>
+                              <tr key={index}>
                                 <td className="">
                                   <div className="d-flex align-items-center">
                                     <Link
@@ -203,7 +203,7 @@ const Cart = ({ globalStore }) => {
                                     onChange={(e) => handleQuantityChange(e.target.value, item.medicine_detail.cart_master.id, item)}
                                   >
                                     {[1, 2, 3, 4, 5].map((ele) => {
-                                      return <option value={ele}>{ele}</option>;
+                                      return <option value={ele} key={ele}>{ele}</option>;
                                     })}
                                   </Form.Select>
                                 </td>

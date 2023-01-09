@@ -38,9 +38,9 @@ const HomeProducts = ({ data }) => {
     <>
       {data?.getCategoryProduct.length > 0 ? (
         <Slider {...homeProductSlider} className="product-slider-wrap">
-          {data.getCategoryProduct.map((item) => {
+          {data.getCategoryProduct.map((item, i) => {
             return (
-              <div>
+              <div key={i}>
                 <div className="product-wrap">
                   <div className="product-img">
                     <Image src={item.img_url} fluid alt="" />

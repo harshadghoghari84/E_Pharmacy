@@ -25,6 +25,7 @@ import TermsConditions from "./Pages/TermsConditions/TermsConditions";
 import { inject, observer } from "mobx-react";
 import { CheckLogin, checkLogin } from "./utils/CheckLogin";
 import SuccessPayment from "./Pages/Checkout/SuccessPayment";
+import EmailVerify from "./Pages/Login/EmailVerify";
 
 const AppWrapper = ({ globalStore, userStore }) => {
 
@@ -75,6 +76,7 @@ const AppWrapper = ({ globalStore, userStore }) => {
           />
           <Route path={"/checkout"} element={<Checkout />} />
           <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
+          <Route path="/users/confirm/:token" element={<EmailVerify />} />
         </Routes>
         <Footer />
     </Router>

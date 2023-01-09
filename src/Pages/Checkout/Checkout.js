@@ -331,9 +331,9 @@ const Checkout = ({ globalStore, userStore }) => {
                                   </thead>
                                   <tbody>
                                     {checkOutData?.length > 0 &&
-                                      checkOutData?.map((item) => {
+                                      checkOutData?.map((item, i) => {
                                         return (
-                                          <tr>
+                                          <tr key={i}>
                                             <td>{item.title}</td>
                                             <td>{item.sku}</td>
                                             <td>{item.medicine_detail.cart_master.qty}</td>

@@ -112,7 +112,7 @@ const Header = ({ cartData, userStore, globalStore }) => {
                     </Link>
                     <Nav as="ul" className="sub-menu">
                       {catagory?.[0]?.sub_categories.map((item) => (
-                        <Nav.Item as="li">
+                        <Nav.Item as="li" key={item.id}>
                           <Link
                             to={`/category-product/${catagory?.[0]?.id}/${item.id}`}
                           >
@@ -129,7 +129,7 @@ const Header = ({ cartData, userStore, globalStore }) => {
                     </Link>
                     <Nav as="ul" className="sub-menu">
                       {catagory?.[1]?.sub_categories.map((item) => (
-                        <Nav.Item as="li">
+                        <Nav.Item as="li" key={item.id}>
                           <Link
                             to={`/category-product/${catagory?.[1]?.id}/${item.id}`}
                           >
@@ -159,8 +159,8 @@ const Header = ({ cartData, userStore, globalStore }) => {
                       <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {menuOption0.map((item) => (
-                        <Nav.Item as="li">
+                      {menuOption0.map((item, i) => (
+                        <Nav.Item as="li" key={i}>
                           <Link to="/category-product">
                             {item.subMenuOption0}
                           </Link>
@@ -246,7 +246,7 @@ const Header = ({ cartData, userStore, globalStore }) => {
             </Link>
             <Nav as="ul" className="mobile-sub-menu">
               {catagory?.[0]?.sub_categories.map((item) => (
-                <Nav.Item as="li">
+                <Nav.Item as="li" key={item.id}>
                   <Link
                     to={`/category-product/${catagory?.[0]?.id}/${item.id}`}
                   >
@@ -262,8 +262,8 @@ const Header = ({ cartData, userStore, globalStore }) => {
               <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
             <Nav as="ul" className="mobile-sub-menu">
-              {catagory?.[1]?.sub_categories.map((item) => (
-                <Nav.Item as="li">
+              {catagory?.[1]?.sub_categories.map((item, i) => (
+                <Nav.Item as="li" key={item.id}>
                   <Link
                     to={`/category-product/${catagory?.[1]?.id}/${item.id}`}
                   >
@@ -278,8 +278,8 @@ const Header = ({ cartData, userStore, globalStore }) => {
               Skin Care <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
             <Nav as="ul" className="mobile-sub-menu">
-              {menuOption0.map((item) => (
-                <Nav.Item as="li">
+              {menuOption0.map((item, i) => (
+                <Nav.Item as="li" key={i}>
                   <Link to="/category-product">
                     {item.subMenuOption0}
                   </Link>
@@ -293,8 +293,8 @@ const Header = ({ cartData, userStore, globalStore }) => {
               <i className="ri-arrow-drop-down-line ms-2"></i>
             </Link>
             <Nav as="ul" className="mobile-sub-menu">
-              {menuOption0.map((item) => (
-                <Nav.Item as="li">
+              {menuOption0.map((item, i) => (
+                <Nav.Item as="li" key={i}>
                   <Link to="/category-product">
                     {item.subMenuOption0}
                   </Link>

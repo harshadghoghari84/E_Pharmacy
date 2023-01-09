@@ -101,6 +101,9 @@ export default {
   }`,
   confirmPayment: gql` mutation ConfirmPayment($paymentId: String!, $total: String!, $currency: String!, $payerId: String!) {
     confirmPayment(paymentId: $paymentId, total: $total, currency: $currency, payerId: $payerId)
+  }`,
+  verifyEmail: gql`mutation VerifyEmail($emailToken: String) {
+    verifyEmail(emailToken: $emailToken)
   }`
 
 };

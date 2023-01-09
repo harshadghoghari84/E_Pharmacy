@@ -76,8 +76,8 @@ export default function Blog() {
             <section className="blog-section mt-5">
                 <Container>
                     <Row className="blog-content-row">
-                        {blogDetails.map((item) => 
-                        <Col md="6" xl="4">
+                        {blogDetails.map((item, i) => 
+                        <Col md="6" xl="4" key={i}>
                                 <div className="blog-box">
                                     <div className="blog-img">
                                         <Image src={item.blogImage} fluid alt="" className="w-100 h-100 img-cover"/>
