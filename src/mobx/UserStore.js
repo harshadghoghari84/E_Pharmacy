@@ -28,7 +28,7 @@ class UserStore {
   };
 
   setUser = (user) => {
-    // console.log("--user-->", user);
+    console.log("--user-->", user);
     this.user = user;
   };
 

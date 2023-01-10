@@ -40,7 +40,6 @@ const Login = ({ userStore,globalStore }) => {
     },
     validationSchema: loginSchema,
     onSubmit: ({ email, password }) => {
-      console.log("called submit",);
       userSignIn({
         variables: {
           email,

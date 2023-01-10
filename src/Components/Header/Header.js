@@ -41,7 +41,6 @@ const Header = ({ userStore, globalStore }) => {
 
   const user = toJS(userStore.user) || localStorage.getItem(constant.prfUserToken);
   const cartData = toJS(globalStore.cartData);
-  console.log("cartData",cartData);
 
   // const [viewCart, { data: cartData, loading: cartLoading, errors: cartDataError }] = useQuery(Query.viewCart, {
   //   fetchPolicy: "no-cache",
@@ -146,8 +145,8 @@ const Header = ({ userStore, globalStore }) => {
                       Skin Care <i className="ri-arrow-drop-down-line ms-2"></i>
                     </Link>
                     <Nav as="ul" className="sub-menu">
-                      {menuOption0.map((item) => (
-                        <Nav.Item as="li">
+                      {menuOption0.map((item, index) => (
+                        <Nav.Item as="li" key={index}>
                           <Link to="/category-product">
                             {item.subMenuOption0}
                           </Link>
