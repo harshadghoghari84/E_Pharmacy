@@ -26,10 +26,10 @@ import { inject, observer } from "mobx-react";
 import { CheckLogin, checkLogin } from "./utils/CheckLogin";
 import SuccessPayment from "./Pages/Checkout/SuccessPayment";
 import EmailVerify from "./Pages/Login/EmailVerify";
+import ForgotPassword from "./Pages/Login/ForgotPassword"
 
 const AppWrapper = ({ globalStore, userStore }) => {
 
-  
   let isLogin = CheckLogin()
 
   useEffect(() => {
@@ -37,48 +37,48 @@ const AppWrapper = ({ globalStore, userStore }) => {
   }, [userStore.user]);
 
   const { data } = useQuery(Query.viewCart);
-  
 
   useEffect(() => {
-    if(isLogin && data?.viewCart?.cartItems.length >= 0){
+    if (isLogin && data?.viewCart?.cartItems.length >= 0) {
       globalStore.setCartData(data?.viewCart?.cartItems)
     }
-  }, [data,isLogin]);
+  }, [data, isLogin]);
 
   return (
     <Router>
-        <Header />
-        <ScrollToTop />
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/register"} element={<Register />} />
-          <Route path={"/contact-us"} element={<ContactUs />} />
-          <Route path={"/faq"} element={<Faq />} />
-          <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
-          <Route path={"/terms-conditions"} element={<TermsConditions />} />
-          <Route path={"/about-us"} element={<AboutUs />} />
-          <Route path={"/blog"} element={<Blog />} />
-          <Route path={"/order-recieve"} element={<OrderRecieve />} />
-          <Route
-            path={"/category-product/:mainId/:subId"}
-            element={<CategoryProduct />}
-          />
-          <Route
-            path={"/product-details/:productId"}
-            element={<ProductDetails />}
-          />
-          <Route path={"/cart"} element={<Cart />} />
-          <Route path={"/my-account"} element={<MyAccount />} />
-          <Route
-            path={"/my-account-details"}
-            element={<MyAccountDetails />}
-          />
-          <Route path={"/checkout"} element={<Checkout />} />
-          <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
-          <Route path="/users/confirm/:token" element={<EmailVerify />} />
-        </Routes>
-        <Footer />
+      <Header />
+      <ScrollToTop />
+      <Routes>
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/register"} element={<Register />} />
+        <Route path={"/contact-us"} element={<ContactUs />} />
+        <Route path={"/faq"} element={<Faq />} />
+        <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
+        <Route path={"/terms-conditions"} element={<TermsConditions />} />
+        <Route path={"/about-us"} element={<AboutUs />} />
+        <Route path={"/blog"} element={<Blog />} />
+        <Route path={"/order-recieve"} element={<OrderRecieve />} />
+        <Route
+          path={"/category-product/:mainId/:subId"}
+          element={<CategoryProduct />}
+        />
+        <Route
+          path={"/product-details/:productId"}
+          element={<ProductDetails />}
+        />
+        <Route path={"/cart"} element={<Cart />} />
+        <Route path={"/my-account"} element={<MyAccount />} />
+        <Route
+          path={"/my-account-details"}
+          element={<MyAccountDetails />}
+        />
+        <Route path={"/checkout"} element={<Checkout />} />
+        <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
+        <Route path="/users/confirm/:token" element={<EmailVerify />} />
+        <Route path="/forgot/:token" element={<ForgotPassword />} />
+      </Routes>
+      <Footer />
     </Router>
   );
 };

@@ -100,7 +100,7 @@ export default {
     }
   }
   `,
-  
+
   updateCart: gql`mutation UpdateCart($updateCartId: Int!, $qty: Int) {
     updateCart(id: $updateCartId, qty: $qty)
   }`,
@@ -134,6 +134,14 @@ export default {
       mobile
       email
     }
+  }`,
+
+  forgotPassEmail: gql`mutation SendForgotPassEmail($email: String!) {
+    sendForgotPassEmail(email: $email)
+  }`,
+
+  forgotPassword: gql`mutation ForgotPassword($newPassword: String!, $verificationCode: String!) {
+    forgotPassword(newPassword: $newPassword, verificationCode: $verificationCode)
   }`
 
 };

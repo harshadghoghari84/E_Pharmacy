@@ -12,7 +12,6 @@ function MyAccountDetails({ userStore, globalStore }) {
 
     const userDetails = toJS(userStore?.user);
 
-    console.log("userDetails", userDetails);
     return (
         <>
             <section className="page-head-section">

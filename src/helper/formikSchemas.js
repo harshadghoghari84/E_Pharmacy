@@ -7,6 +7,19 @@ export const loginSchema = Yup.object().shape({
   password: Yup.string().required("password is required"),
 });
 
+export const forgotPassSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+});
+
+export const forgotPassConfirmSchema = Yup.object().shape({
+  password: Yup.string()
+    .required("Password is required"),
+  cnfPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+});
+
 export const signUpSchema = Yup.object().shape({
   fName: Yup.string().required("first Name is required"),
   lName: Yup.string().required("last name is required"),
