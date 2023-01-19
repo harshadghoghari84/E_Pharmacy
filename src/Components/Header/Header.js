@@ -55,6 +55,7 @@ const Header = ({ userStore, globalStore }) => {
   // // }, []);
 
   const onClickLogout = () => {
+    localStorage.clear()
     localStorage.removeItem(constant.prfUserToken);
     userStore.setUser(null);
   };

@@ -76,7 +76,7 @@ const AppWrapper = ({ globalStore, userStore }) => {
         <Route path={"/checkout"} element={<Checkout />} />
         <Route path={"/orderSuccessfull"} element={<SuccessPayment />} />
         <Route path="/users/confirm/:token" element={<EmailVerify />} />
-        <Route path="/forgot/:token" element={<ForgotPassword />} />
+        <Route path="/forgot/password/:token" element={<ForgotPassword />} />
       </Routes>
       <Footer />
     </Router>

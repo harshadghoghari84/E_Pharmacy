@@ -17,6 +17,7 @@ const Login = ({ userStore, globalStore }) => {
   const navigate = useNavigate();
 
   const [forgotPasswordFlag, setForgotPasswordFlag] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const [userSignIn, { loading }] = useMutation(Mutation.userSignIn, {
     errorPolicy: "all",
     fetchPolicy: "no-cache",
@@ -59,6 +60,7 @@ const Login = ({ userStore, globalStore }) => {
 
           if (data.userSignIn !== null) {
             localStorage.setItem(constant.prfUserToken, data.userSingIn.token);
+            localStorage.setItem(constant.loggedUserData, JSON.stringify(data.userSingIn.user));
             userStore.setUser(data.userSingIn.user);
             viewCart();
             userStore.loadUserBillingDetails();
@@ -98,6 +100,10 @@ const Login = ({ userStore, globalStore }) => {
     }
   });
 
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <>
       <section className="authentication-section">
@@ -122,7 +128,7 @@ const Login = ({ userStore, globalStore }) => {
               <CustomInput
                 formGroupClassName="form-group"
                 formLabel="Password"
-                formType="password"
+                formType={showPassword ? "text" : "password"}
                 customInputClassName="*"
                 placeholder="Password"
                 value={formik.values.password}
@@ -131,6 +137,8 @@ const Login = ({ userStore, globalStore }) => {
                   formik.errors.password && formik.touched.password && Boolean(formik.errors.password)
                 }
                 errorMsg={formik.errors.password}
+                isIcon={showPassword ? <i class="ri-eye-line"></i> : <i class="ri-eye-off-line"></i>}
+                onClickOfIcon={handleShowPassword}
               />
               <CustomButton
                 type="submit"

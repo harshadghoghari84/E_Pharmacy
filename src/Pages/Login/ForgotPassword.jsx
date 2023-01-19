@@ -1,6 +1,7 @@
 
 
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +19,8 @@ const ForgotPassword = () => {
         fetchPolicy: "no-cache",
         errorPolicy: "all",
     });
+    const [showPassword, setShowPassword] = useState(false)
+    const [showCnfPassword, setCnfShowPassword] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -52,7 +55,7 @@ const ForgotPassword = () => {
                             <CustomInput
                                 formGroupClassName="form-group"
                                 formLabel="Password"
-                                formType="password"
+                                formType={showPassword ? "text" : "password"}
                                 customInputClassName="*"
                                 placeholder="Password"
                                 value={formik.values.password}
@@ -61,11 +64,13 @@ const ForgotPassword = () => {
                                     formik.errors.password && formik.touched.password && Boolean(formik.errors.password)
                                 }
                                 errorMsg={formik.errors.password}
+                                isIcon={showPassword ? <i class="ri-eye-line"></i> : <i class="ri-eye-off-line"></i>}
+                                onClickOfIcon={() => setShowPassword(!showPassword)}
                             />
                             <CustomInput
                                 formGroupClassName="form-group"
                                 formLabel="Confirm Password"
-                                formType="password"
+                                formType={showCnfPassword ? "text" : "password"}
                                 customInputClassName="*"
                                 placeholder="Confirm Password"
                                 value={formik.values.cnfPassword}
@@ -74,6 +79,8 @@ const ForgotPassword = () => {
                                     formik.errors.cnfPassword && formik.touched.cnfPassword && Boolean(formik.errors.cnfPassword)
                                 }
                                 errorMsg={formik.errors.cnfPassword}
+                                isIcon={showCnfPassword ? <i class="ri-eye-line"></i> : <i class="ri-eye-off-line"></i>}
+                                onClickOfIcon={() => setCnfShowPassword(!showCnfPassword)}
                             />
                             <CustomButton
                                 type="submit"

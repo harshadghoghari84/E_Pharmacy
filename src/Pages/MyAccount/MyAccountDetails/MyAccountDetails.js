@@ -7,10 +7,19 @@ import CustomButton from "../../../Components/CustomButton/CustomButton";
 import CustomInput from "../../../Components/CustomInput/CustomInput";
 import product0 from "./../../../Assets/Images/products/product0.jpg";
 import "./MyAccountDetails.css";
+import constant from "../../../utils/constant";
 
 function MyAccountDetails({ userStore, globalStore }) {
 
-    const userDetails = toJS(userStore?.user);
+    const userDetails = toJS(userStore?.user) || JSON.parse(localStorage.getItem(constant.loggedUserData));
+
+    const onClickLogout = () => {
+        localStorage.clear()
+        localStorage.removeItem(constant.prfUserToken);
+        userStore.setUser(null);
+    };
+
+    console.log("userDetails", userDetails);
 
     return (
         <>
@@ -56,7 +65,11 @@ function MyAccountDetails({ userStore, globalStore }) {
                                 <Col md={9} className="mt-4 mt-sm-5 mt-md-0">
                                     <Tab.Content>
                                         <Tab.Pane eventKey="Dashboard">
-                                            <p>Hello <b>Test</b> (not <b>Test</b>? <Link to="/login" className="primary-color"><b>Log out</b></Link>)</p>
+                                            {userDetails ?
+                                                <p>Hello <b>{userDetails?.fName} {userDetails?.lName}</b> (not <b>{userDetails?.fName} {userDetails?.lName}</b>? <span to="/" className="primary-color cursor-pointer" onClick={onClickLogout}><b>Log out</b></span>)</p>
+                                                :
+                                                <p>Hello <b>not Login ?</b> <Link to="/login" className="primary-color cursor-pointer"><b>Login</b></Link></p>
+                                            }
                                             <p>From your account dashboard you can view your <Link to="#" className="primary-color">recent orders</Link>, manage your <Link to="#" className="primary-color">shipping and billing addresses</Link>, and <Link to="#" className="primary-color">edit your password and account details</Link>.</p>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="Orders">

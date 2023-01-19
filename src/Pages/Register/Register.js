@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
@@ -14,6 +14,7 @@ import constant from "../../utils/constant";
 export default function Register() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const [message, setMessage] = React.useState({ message: "", type: "" });
   const [userSignup, { loading }] = useMutation(Mutation.userSignup, {
     errorPolicy: "all",
@@ -66,7 +67,11 @@ export default function Register() {
   const handleClick = () => {
     setOpen(true);
   };
-  
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <>
       <section className="authentication-section">
@@ -130,8 +135,10 @@ export default function Register() {
                 errorMsg={formik.errors.password}
                 formGroupClassName="form-group"
                 formLabel="Password"
-                formType="password"
+                formType={showPassword ? "text" : "password"}
                 customInputClassName=""
+                isIcon={showPassword ? <i class="ri-eye-line"></i> : <i class="ri-eye-off-line"></i>}
+                onClickOfIcon={handleShowPassword}
               />
               <p>
                 Your personal data will be used to support your experience
