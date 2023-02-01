@@ -1,0 +1,111 @@
+.product-category-row{
+    display: flex;
+    grid-gap: 30px;
+}
+.product-category-left-col{
+    width: calc(100% - 400px);
+}
+.product-category-right-col{
+    width: 400px;
+    position: sticky;
+    top: 100px;
+    height: max-content;
+}
+.related-product-category-wrap{
+    border: 1px solid #ccc;
+    padding: 15px;
+    height: calc(100vh - 170px);
+    overflow-y: auto;
+}
+.related-product-category-img{
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ccc;
+}
+.related-product-category-details{
+    width: calc(100% - 70px);
+}
+.related-product-category-details p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.about-company-note{
+    margin-top: 100px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+    background-color: var(--white-color);
+    padding: 55px 35px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    transition: all 0.3s;
+}
+.about-company-note:hover{
+    background-color: var(--primary-color);
+}
+.about-company-note-ico{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: -30px;
+}
+.about-company-note:hover .about-company-note-ico{
+    background-color: var(--white-color);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.about-company-note i{
+    font-size: 35px;
+    color: var(--white-color);
+}
+.about-company-note:hover .about-company-note-ico i{
+    color: var(--primary-color);
+}
+.about-company-note h5{
+    font-weight: 600;
+}
+.about-company-note p{
+    text-transform: capitalize;
+    color:var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.about-company-note:hover h5,
+.about-company-note:hover p,
+.about-company-note:hover i{
+    color: var(--white-color);
+}
+/* responsive css */
+@media (max-width: 1799px){
+    .product-category-right-col{
+        width: 350px;
+    }
+    .product-category-left-col {
+        width: calc(100% - 350px);
+    }
+}
+@media (max-width: 1199px){
+    .product-category-row{
+        display: block;
+    }
+    .product-category-right-col {
+        width: 100%;
+        position: unset;
+    }
+    .related-product-category-wrap {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .product-category-left-col{
+        width: 100%;
+    }
+}

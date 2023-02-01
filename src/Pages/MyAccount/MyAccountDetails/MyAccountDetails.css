@@ -1,0 +1,47 @@
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: var(--primary-color);
+}
+.nav-pills .nav-link{
+    color: var(--primary-color);
+}
+.my-account-details-section .nav-pills{
+    position: sticky;
+    top: 100px;
+    height: max-content;
+}
+.my-acc-product-detail-grid{
+    gap: 40px 0;
+}
+.custom-border-end{
+    border-right: 1px solid #dee2e6;
+}
+/* responsive css */
+@media  (max-width: 1199px){
+    .nav-pills .nav-link {
+        font-size: 14px;
+    }
+}
+@media  (max-width: 767px){
+    .my-account-details-section .custom-border-end{
+        border: none;
+    }
+    .my-account-details-section .nav-pills{
+        flex-wrap: unset;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    }
+    .nav-pills .nav-link {
+       white-space: nowrap;
+    }
+    .my-account-details-section .accordion-button{
+        font-size: 14px;
+    }
+}
+@media  (max-width: 575px){
+    .my-account-details-section .accordion-button{
+        font-size: 12px;
+    }
+    .about-company-note{
+        margin-top: 70px;
+    }
+}
